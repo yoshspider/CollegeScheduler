@@ -27,7 +27,7 @@ public class ClassAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return itemsList.getItem(i);
     }
 
     @Override

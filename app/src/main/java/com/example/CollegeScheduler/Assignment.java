@@ -18,6 +18,7 @@ public class Assignment extends ListItem {
         this.monthDue = monthDue;
         setNameSort(classOfAssignment.getClassName() + "1" + assignmentName);
         setTimeSort(dayDue);
+        setColor(classOfAssignment.getColor());
     }
 
 //comment
@@ -52,11 +53,9 @@ public class Assignment extends ListItem {
         topTextView.setText(getAssignmentName());
         middleTextView.setText(getClassOfAssignment().getClassName());
         bottomLeftTextView.setText(Integer.toString(getMonthDue()));
-
         bottomRightTextView.setText(Integer.toString(getDayDue()));
-
-
         background.setBackgroundColor(getColor());
+
         view = drawButtons(view, inflater, i, adapter);
 
         return view;

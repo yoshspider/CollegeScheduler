@@ -72,7 +72,6 @@ public abstract class ListItem implements Comparable<ListItem>{
     @Override
     public int compareTo(ListItem o) {
         if (getSortingMethod() == 1) {
-            int value = nameSort.compareTo(o.getNameSort());
             return nameSort.compareTo(o.getNameSort());
         } else {
             return timeSort - o.getTimeSort();
