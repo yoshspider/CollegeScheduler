@@ -12,6 +12,8 @@ public abstract class ListItem implements Comparable<ListItem>{
     private static int currentID  = 0;
     private int ID;
     private static int sortingMethod;
+    private int timeSort;
+    private String nameSort;
     public ListItem() {
         ID = currentID;
         currentID++;
@@ -27,6 +29,22 @@ public abstract class ListItem implements Comparable<ListItem>{
 
     public static int getSortingMethod() {
         return sortingMethod;
+    }
+
+    public void setTimeSort(int timeSort) {
+        this.timeSort = timeSort;
+    }
+
+    public void setNameSort(String nameSort) {
+        this.nameSort = nameSort;
+    }
+
+    public int getTimeSort() {
+        return timeSort;
+    }
+
+    public String getNameSort() {
+        return nameSort;
     }
 
     public static void setSortingMethod(int sortingMethod) {
@@ -50,5 +68,14 @@ public abstract class ListItem implements Comparable<ListItem>{
             }
         });
         return view;
+    }
+    @Override
+    public int compareTo(ListItem o) {
+        if (getSortingMethod() == 1) {
+            int value = nameSort.compareTo(o.getNameSort());
+            return nameSort.compareTo(o.getNameSort());
+        } else {
+            return timeSort - o.getTimeSort();
+        }
     }
 }

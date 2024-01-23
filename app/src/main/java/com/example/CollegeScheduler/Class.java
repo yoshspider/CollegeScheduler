@@ -19,6 +19,8 @@ public class Class extends ListItem  {
         this.meetingDates = meetingDates;
         this.startTime = startTime;
         this.endTime = endTime;
+        setNameSort(className);
+        setTimeSort(startTime);
     }
 
 
@@ -40,22 +42,7 @@ public class Class extends ListItem  {
     }
 
 
-    @Override
-    public int compareTo(ListItem o) {
-        Class item = ((Class) o);
-        if (getSortingMethod() == 1) {
-            return className.compareTo(item.getClassName());
-        } else {
-            for (int i = 0; i < 5; i++) {
-                if(meetingDates[i] && !item.getMeetingDates()[i]) {
-                    return -1;
-                } else if(!meetingDates[i] && item.getMeetingDates()[i]) {
-                    return 1;
-                }
-            }
-            return startTime - item.getStartTime();
-        }
-    }
+
     public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = inflater.inflate(R.layout.activity_listview, null);
 

@@ -16,7 +16,8 @@ public class Assignment extends ListItem {
         this.classOfAssignment = classOfAssignment;
         this.dayDue = dayDue;
         this.monthDue = monthDue;
-
+        setNameSort(classOfAssignment.getClassName() + "1" + assignmentName);
+        setTimeSort(dayDue);
     }
 
 //comment
@@ -36,10 +37,6 @@ public class Assignment extends ListItem {
         return monthDue;
     }
 
-    @Override
-    public int compareTo(ListItem o) {
-        return 0;
-    }
 
     @Override
     public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
