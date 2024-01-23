@@ -9,7 +9,7 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 
     ListView simpleList;
-    CollegeObjectList<Class> classList = new CollegeObjectList<Class>();
+    CollegeObjectList<ListItem> classList = new CollegeObjectList<ListItem>();
 
 
     @Override
@@ -28,6 +28,11 @@ public class MainActivity extends Activity {
             public void onClick(View buttonView) {
                 classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900));
                 classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000));
+                Class pedro = new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430);
+                classList.addItem(pedro);
+                System.out.println("hi");
+               classList.addItem(new Assignment("Project 1",pedro, 2, 3 ));
+               System.out.println("hi");
                 classAdapter.updateValues();
             }
         });
