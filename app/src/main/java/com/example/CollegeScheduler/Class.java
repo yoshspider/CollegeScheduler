@@ -44,24 +44,13 @@ public class Class extends ListItem  {
 
 
     public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        view = inflater.inflate(R.layout.activity_listview, null);
+        view = super.drawScreen(view, viewGroup, inflater, i, adapter);
+
+        String[] values = {getClassName(), getProfessorName(), daysOfTheWeekConverter(getMeetingDates()),
+                (timeConverter(getStartTime()) + " - " + timeConverter(getEndTime()))};
 
 
-        TextView topTextView = view.findViewById(R.id.topTextView);
-        TextView middleTextView = view.findViewById(R.id.middleTextView);
-        TextView bottomLeftTextView = view.findViewById(R.id.bottomLeftTextView);
-        TextView bottomRightTextView = view.findViewById(R.id.bottomRightTextView);
-        View background = view.findViewById(R.id.backgroundView);
-
-        topTextView.setText(getClassName());
-        middleTextView.setText(getProfessorName());
-        bottomLeftTextView.setText(daysOfTheWeekConverter(getMeetingDates()));
-        String time = timeConverter(getStartTime()) + " - "
-                + timeConverter(getEndTime());
-        bottomRightTextView.setText(time);
-
-
-        background.setBackgroundColor(getColor());
+        view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
 
         return view;

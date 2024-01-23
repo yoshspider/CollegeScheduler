@@ -41,23 +41,11 @@ public class Assignment extends ListItem {
 
     @Override
     public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        view = inflater.inflate(R.layout.activity_listview, null);
-
-
-        TextView topTextView = view.findViewById(R.id.topTextView);
-        TextView middleTextView = view.findViewById(R.id.middleTextView);
-        TextView bottomLeftTextView = view.findViewById(R.id.bottomLeftTextView);
-        TextView bottomRightTextView = view.findViewById(R.id.bottomRightTextView);
-        View background = view.findViewById(R.id.backgroundView);
-
-        topTextView.setText(getAssignmentName());
-        middleTextView.setText(getClassOfAssignment().getClassName());
-        bottomLeftTextView.setText(Integer.toString(getMonthDue()));
-        bottomRightTextView.setText(Integer.toString(getDayDue()));
-        background.setBackgroundColor(getColor());
-
+        view = super.drawScreen(view, viewGroup, inflater, i, adapter);
+        String[] values = {getAssignmentName(), getClassOfAssignment().getClassName(), Integer.toString(getMonthDue()), Integer.toString(getDayDue())};
+        view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
-
         return view;
     }
+
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public abstract class ListItem implements Comparable<ListItem>{
     private static final int[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW};
@@ -57,7 +58,12 @@ public abstract class ListItem implements Comparable<ListItem>{
         String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
         return week.substring(0, week.length()-1);
     }
-    public abstract View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter);
+    public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
+        view = inflater.inflate(R.layout.activity_listview, null);
+        View background = view.findViewById(R.id.backgroundView);
+        background.setBackgroundColor(getColor());
+        return view;
+    }
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         Button button = view.findViewById(R.id.delete);
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,5 +82,18 @@ public abstract class ListItem implements Comparable<ListItem>{
         } else {
             return timeSort - o.getTimeSort();
         }
+    }
+
+    public View drawInformation(View view, String[] values) {
+        TextView topTextView = view.findViewById(R.id.topTextView);
+        TextView middleTextView = view.findViewById(R.id.middleTextView);
+        TextView bottomLeftTextView = view.findViewById(R.id.bottomLeftTextView);
+        TextView bottomRightTextView = view.findViewById(R.id.bottomRightTextView);
+
+        topTextView.setText(values[0]);
+        middleTextView.setText(values[1]);
+        bottomLeftTextView.setText(values[2]);
+        bottomRightTextView.setText(values[3]);
+        return view;
     }
 }
