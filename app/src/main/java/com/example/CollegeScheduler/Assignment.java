@@ -21,7 +21,6 @@ public class Assignment extends ListItem {
         setColor(classOfAssignment.getColor());
     }
 
-//comment
     public String getAssignmentName() {
         return assignmentName;
     }

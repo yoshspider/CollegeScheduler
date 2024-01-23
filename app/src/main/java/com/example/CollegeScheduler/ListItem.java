@@ -65,14 +65,9 @@ public abstract class ListItem implements Comparable<ListItem>{
         return view;
     }
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        Button button = view.findViewById(R.id.delete);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View buttonView) {
-                adapter.remove(i);
-            }
-        });
+        Button deleteButton = view.findViewById(R.id.delete);
+        Button modifyButton = view.findViewById(R.id.modify);
+        deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
         return view;
     }
     @Override

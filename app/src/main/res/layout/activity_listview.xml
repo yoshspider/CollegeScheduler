@@ -30,8 +30,7 @@
         android:id="@+id/delete"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/topTextView">
+        app:layout_constraintEnd_toEndOf="parent">
 
     </Button>
 
@@ -48,4 +47,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/bottomLeftTextView"
         app:layout_constraintTop_toBottomOf="@+id/middleTextView" />
+
+    <Button
+        android:id="@+id/modify"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintStart_toEndOf="@+id/middleTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
