@@ -52,7 +52,6 @@
         android:id="@+id/modify"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="Button"
         app:layout_constraintEnd_toStartOf="@+id/delete"
         app:layout_constraintStart_toEndOf="@+id/middleTextView"
         app:layout_constraintTop_toTopOf="parent" />

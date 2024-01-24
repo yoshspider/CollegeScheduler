@@ -10,6 +10,8 @@ public class Class extends ListItem  {
     private String className;
     private String professorName;
     private boolean[] meetingDates;
+
+    private int dayOfWeek;
     private int startTime;
     private int endTime;
 
@@ -20,7 +22,7 @@ public class Class extends ListItem  {
         this.startTime = startTime;
         this.endTime = endTime;
         setNameSort(className);
-        setTimeSort(startTime);
+        setClockTime(startTime, endTime);
     }
 
 
