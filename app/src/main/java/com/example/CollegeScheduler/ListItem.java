@@ -7,19 +7,39 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 public abstract class ListItem implements Comparable<ListItem>{
-    private static final int[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW};
+    private static final int[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.MAGENTA, Color.CYAN, Color.WHITE};
     private int color;
     private static int currentID  = 0;
     private int ID;
     private static int sortingMethod;
-    private int timeSort;
     private String nameSort;
+    private Calendar calanderDate;
     public ListItem() {
         ID = currentID;
         currentID++;
         color = colors[ID % colors.length];
         sortingMethod = 1;
+
+        calanderDate = Calendar.getInstance();
+    }
+    public ListItem(int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
+        this();
+        calanderDate.set(yearDue, monthDue, dayDue, hourDue, minuteDue);
+    }
+    public void setClockTime(int hour, int minute) {
+        calanderDate.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_MONTH, Calendar.DATE, hour, minute);
+    }
+    public void shiftDate(int dayOfWeek) {
+        while (calanderDate.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
+            calanderDate.add(Calendar.DATE, 1);
+        }
     }
     public int getColor() {
         return color;
@@ -32,20 +52,22 @@ public abstract class ListItem implements Comparable<ListItem>{
         return sortingMethod;
     }
 
-    public void setTimeSort(int timeSort) {
-        this.timeSort = timeSort;
-    }
-
     public void setNameSort(String nameSort) {
         this.nameSort = nameSort;
     }
 
-    public int getTimeSort() {
-        return timeSort;
-    }
-
     public String getNameSort() {
         return nameSort;
+    }
+
+    public String getTime() {
+        Date fullTime = calanderDate.getTime();
+        DateFormat format = new SimpleDateFormat("M/d/yyyy h:mm a");
+        return format.format(fullTime);
+
+    }
+    public Calendar getCalander() {
+        return calanderDate;
     }
 
     public static void setSortingMethod(int sortingMethod) {
@@ -75,7 +97,7 @@ public abstract class ListItem implements Comparable<ListItem>{
         if (getSortingMethod() == 1) {
             return nameSort.compareTo(o.getNameSort());
         } else {
-            return timeSort - o.getTimeSort();
+            return calanderDate.compareTo(o.getCalander());
         }
     }
 

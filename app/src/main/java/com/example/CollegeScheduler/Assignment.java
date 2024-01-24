@@ -3,22 +3,27 @@ package com.example.CollegeScheduler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import java.util.Date;
 
 public class Assignment extends ListItem {
     private String assignmentName;
     private Class classOfAssignment;
-    private int monthDue;
-    private int dayDue;
 
-    public Assignment(String assignmentName, Class classOfAssignment, int monthDue, int dayDue) {
+
+
+    public Assignment(String assignmentName, Class classOfAssignment, int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
+        super(yearDue, monthDue, dayDue, hourDue, minuteDue);
         this.assignmentName = assignmentName;
         this.classOfAssignment = classOfAssignment;
-        this.dayDue = dayDue;
-        this.monthDue = monthDue;
         setNameSort(classOfAssignment.getClassName() + "1" + assignmentName);
-        setTimeSort(dayDue);
         setColor(classOfAssignment.getColor());
+
+
     }
 
     public String getAssignmentName() {
@@ -29,19 +34,22 @@ public class Assignment extends ListItem {
         return classOfAssignment;
     }
 
-    public int getDayDue() {
-        return dayDue;
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
     }
 
-    public int getMonthDue() {
-        return monthDue;
+    public void setClassOfAssignment(Class classOfAssignment) {
+        this.classOfAssignment = classOfAssignment;
     }
 
 
     @Override
     public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = super.drawScreen(view, viewGroup, inflater, i, adapter);
-        String[] values = {getAssignmentName(), getClassOfAssignment().getClassName(), Integer.toString(getMonthDue()), Integer.toString(getDayDue())};
+        String date = getTime();
+        int splitIndex = date.indexOf(" ");
+        String[] values = {getAssignmentName(), getClassOfAssignment().getClassName(),
+                date.substring(0, splitIndex), date.substring(splitIndex + 1)};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
         return view;

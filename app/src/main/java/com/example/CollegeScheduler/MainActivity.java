@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
                 Class pedro = new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430);
                 classList.addItem(pedro);
                 System.out.println("hi");
-               classList.addItem(new Assignment("Project 1",pedro, 2, 3 ));
+               classList.addItem(new Assignment("Project 1",pedro, 2023, 3, 5, 5,30 ));
                System.out.println("hi");
                 classAdapter.updateValues();
             }
