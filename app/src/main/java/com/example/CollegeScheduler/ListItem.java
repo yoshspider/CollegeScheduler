@@ -21,43 +21,88 @@ public abstract class ListItem implements Comparable<ListItem>{
     private static int sortingMethod;
     private String nameSort;
     private Calendar calanderDate;
+
+    /**
+     * Default Constructor Assuming CalanderDate is Today
+     */
     public ListItem() {
         ID = currentID;
         currentID++;
         color = colors[ID % colors.length];
         sortingMethod = 1;
-
         calanderDate = Calendar.getInstance();
     }
+
+    /**
+     * Specialized Constructor for a Calander Date
+     * @param yearDue Year of Date
+     * @param monthDue Month of Date
+     * @param dayDue Day of Date
+     * @param hourDue Hour of Date
+     * @param minuteDue Minute of Date
+     */
     public ListItem(int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
         this();
         calanderDate.set(yearDue, monthDue, dayDue, hourDue, minuteDue);
     }
+
+    /**
+     * Creates Calander Object with given hour and minute
+     * @param hour new hour
+     * @param minute new minute
+     */
     public void setClockTime(int hour, int minute) {
         calanderDate.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_MONTH, Calendar.DATE, hour, minute);
     }
+
+    /**
+     * shift the Calender Day by a number of days
+     * @param dayOfWeek shift days
+     */
     public void shiftDate(int dayOfWeek) {
         while (calanderDate.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
             calanderDate.add(Calendar.DATE, 1);
         }
     }
+
+    /**
+     * Getter for Color
+     * @return the color of the ListItem object
+     */
     public int getColor() {
         return color;
     }
+
+    /**
+     * Setter for Color
+     * @param color new Color
+     */
     public void setColor(int color) {
         this.color = color;
     }
 
+    /**
+     * Getter for current Sorting Method
+     * @return the sortingMethod
+     */
     public static int getSortingMethod() {
         return sortingMethod;
     }
 
+    /**
+     * Setter for NameSort
+     * @param nameSort new NameSort 
+     */
     public void setNameSort(String nameSort) {
         this.nameSort = nameSort;
     }
 
     public String getNameSort() {
         return nameSort;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String getTime() {

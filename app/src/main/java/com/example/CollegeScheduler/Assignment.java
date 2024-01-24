@@ -14,8 +14,16 @@ public class Assignment extends ListItem {
     private String assignmentName;
     private Class classOfAssignment;
 
-
-
+    /**
+     * Base Constructor for Assignment
+     * @param assignmentName Name of Assignment
+     * @param classOfAssignment Associated Class Object of Assignment
+     * @param yearDue Year the Assignment is Due
+     * @param monthDue Month the Assignment is Due
+     * @param dayDue Day the Assignment is Due
+     * @param hourDue Hour the Assignment is Due
+     * @param minuteDue Minute the Assignment is Due
+     */
     public Assignment(String assignmentName, Class classOfAssignment, int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
         super(yearDue, monthDue, dayDue, hourDue, minuteDue);
         this.assignmentName = assignmentName;
@@ -26,23 +34,47 @@ public class Assignment extends ListItem {
 
     }
 
+    /**
+     * Getter for Assignment Name
+     * @return the name of the Assignment
+     */
     public String getAssignmentName() {
         return assignmentName;
     }
 
+    /**
+     * Getter for class of Assignment
+     * @return the class object of Assignment
+     */
     public Class getClassOfAssignment() {
         return classOfAssignment;
     }
 
+    /**
+     * Setter for Assignment Name
+     * @param assignmentName New Name for Assignment
+     */
     public void setAssignmentName(String assignmentName) {
         this.assignmentName = assignmentName;
     }
 
+    /**
+     * Setter for Class of Assignment
+     * @param classOfAssignment New Class Object for Assignment
+     */
     public void setClassOfAssignment(Class classOfAssignment) {
         this.classOfAssignment = classOfAssignment;
     }
 
-
+    /**
+     * Draw Instructions for Assignment
+     * @param view View of which the assignment will be draw
+     * @param viewGroup ViewGroup that View belongs to
+     * @param inflater LayoutInflater that clears View
+     * @param i Index of Assignment Object in
+     * @param adapter the ClassAdapter Object that the item is being drawn with
+     * @return the modified View object
+     */
     @Override
     public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = super.drawScreen(view, viewGroup, inflater, i, adapter);
