@@ -49,14 +49,16 @@ public class MainActivity extends Activity {
                 Class pedro = new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430);
                 classList.addItem(pedro);
                 Calendar ab = new GregorianCalendar(2003,3,5,5,30);
-               classList.addItem(new Assignment("Project 1",pedro, ab ));
-               Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
-               classList.addItem(new Exam( pedro, "Quiz 1", "quiz on bits and stuff", "IC 211", a));
+                classList.addItem(new Assignment("Project 1",pedro, ab ));
+                Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
+                classList.addItem(new Exam( pedro, "Quiz 1", "quiz on bits and stuff", "IC 211", a));
+
+                Calendar abcd = new GregorianCalendar(2024,1,25,6,30);
+                classList.addItem(new Task("Walk", abcd, pedro, false));
                 classAdapter.updateValues();
             }
         });
     }
-
     /**
      * this adds functionality to the sort buttons which will sort the data accordingly
      */

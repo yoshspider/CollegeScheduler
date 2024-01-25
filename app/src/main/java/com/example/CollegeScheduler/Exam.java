@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Exam extends ListItem{
+public class Exam extends ListItem {
     private Class theClass;
     private String examName;
     private String details;
@@ -70,3 +70,4 @@ public class Exam extends ListItem{
     public void setExamName(String examName) {
         this.examName = examName;
     }
+}
