@@ -32,9 +32,8 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button sort1 = findViewById((R.id.sort1));
+        Button sort1 = findViewById(R.id.sort1);
         sort1.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View buttonView) {
                 ListItem.setSortingMethod(1);
@@ -42,7 +41,8 @@ public class MainActivity extends Activity {
                 classAdapter.updateValues();
             }
         });
-        Button sort2 = findViewById((R.id.sort2));
+
+        Button sort2 = findViewById(R.id.sort2);
         sort2.setOnClickListener(new View.OnClickListener() {
 
             @Override

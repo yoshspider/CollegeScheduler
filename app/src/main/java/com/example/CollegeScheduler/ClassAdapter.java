@@ -42,9 +42,10 @@ public class ClassAdapter extends BaseAdapter {
         TextView middleTextView = view.findViewById(R.id.middleTextView);
         TextView bottomLeftTextView = view.findViewById(R.id.bottomLeftTextView);
         TextView bottomRightTextView = view.findViewById(R.id.bottomRightTextView);
-        Button button = view.findViewById(R.id.delete);
+        Button deleteButton = view.findViewById(R.id.delete);
+        Button modifyButton = view.findViewById(R.id.modify);
         View background = view.findViewById(R.id.backgroundView);
-        button.setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View buttonView) {
@@ -52,6 +53,14 @@ public class ClassAdapter extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
+
+        modifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         Class currentItem = itemsList.getItem(i);
         topTextView.setText(currentItem.getClassName());
         middleTextView.setText(currentItem.getProfessorName());
