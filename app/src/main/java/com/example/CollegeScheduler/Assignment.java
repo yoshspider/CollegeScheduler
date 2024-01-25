@@ -76,8 +76,8 @@ public class Assignment extends ListItem {
      * @return the modified View object
      */
     @Override
-    public View drawScreen(View view, ViewGroup viewGroup, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        view = super.drawScreen(view, viewGroup, inflater, i, adapter);
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
+        view = super.drawScreen(view, inflater, i, adapter);
         String date = getTime();
         int splitIndex = date.indexOf(" ");
         String[] values = {getAssignmentName(), getClassOfAssignment().getClassName(),

@@ -67,7 +67,7 @@ public class ClassAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-       return itemsList.getItem(i).drawScreen(view, viewGroup, inflater, i, this);
+       return itemsList.getItem(i).drawScreen(view, inflater, i, this);
     }
     /**
      * simple updater to notify ClassAdapter to redraw objects
@@ -77,7 +77,7 @@ public class ClassAdapter extends BaseAdapter {
     }
     /**
      * remove an index from the list and update drawing
-     * @param i
+     * @param i the index of the object removed
      */
     public void remove(int i) {
         itemsList.removeItem(i);
