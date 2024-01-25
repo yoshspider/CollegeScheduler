@@ -21,21 +21,21 @@ public abstract class ListItem implements Comparable<ListItem>{
     private int ID;
     private static int sortingMethod;
     private String nameSort;
-    private Calendar calanderDate;
+    private Calendar calendarDate;
 
     /**
-     * Default Constructor Assuming CalanderDate is Today
+     * Default Constructor Assuming CalendarDate is Today
      */
     public ListItem() {
         ID = currentID;
         currentID++;
         color = colors[ID % colors.length];
         sortingMethod = 1;
-        calanderDate = Calendar.getInstance();
+        calendarDate = Calendar.getInstance();
     }
 
     /**
-     * Specialized Constructor for a Calander Date
+     * Specialized Constructor for a Calendar Date
      * @param yearDue Year of Date
      * @param monthDue Month of Date
      * @param dayDue Day of Date
@@ -44,21 +44,21 @@ public abstract class ListItem implements Comparable<ListItem>{
      */
     public ListItem(int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
         this();
-        calanderDate.set(yearDue, monthDue, dayDue, hourDue, minuteDue);
+        calendarDate.set(yearDue, monthDue, dayDue, hourDue, minuteDue);
     }
 
     public ListItem(Calendar time) {
         this();
-        this.calanderDate = time;
+        this.calendarDate = time;
     }
 
     /**
-     * Creates Calander Object with given hour and minute
+     * Creates Calendar Object with given hour and minute
      * @param hour new hour
      * @param minute new minute
      */
     public void setClockTime(int hour, int minute) {
-        calanderDate.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_MONTH, Calendar.DATE, hour, minute);
+        calendarDate.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_MONTH, Calendar.DATE, hour, minute);
     }
 
     /**
@@ -66,8 +66,8 @@ public abstract class ListItem implements Comparable<ListItem>{
      * @param dayOfWeek shift days
      */
     public void shiftDate(int dayOfWeek) {
-        while (calanderDate.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
-            calanderDate.add(Calendar.DATE, 1);
+        while (calendarDate.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
+            calendarDate.add(Calendar.DATE, 1);
         }
     }
 
@@ -124,7 +124,7 @@ public abstract class ListItem implements Comparable<ListItem>{
      * @return a formatted String time based on calendar
      */
     public String getTime() {
-        Date fullTime = calanderDate.getTime();
+        Date fullTime = calendarDate.getTime();
         DateFormat format = new SimpleDateFormat("M/d/yyyy h:mm a");
         return format.format(fullTime);
 
@@ -134,8 +134,11 @@ public abstract class ListItem implements Comparable<ListItem>{
      * Getter for the Calendar object
      * @return the Calendar object that has the set time for ListItem
      */
-    public Calendar getCalander() {
-        return calanderDate;
+    public Calendar getCalendar() {
+        return calendarDate;
+    }
+    public void setCalendar(Calendar d) {
+        this.calendarDate = d;
     }
 
     /**
@@ -170,7 +173,7 @@ public abstract class ListItem implements Comparable<ListItem>{
         if (getSortingMethod() == 1) {
             return nameSort.compareTo(o.getNameSort());
         } else {
-            return calanderDate.compareTo(o.getCalander());
+            return calendarDate.compareTo(o.getCalendar());
         }
     }
 

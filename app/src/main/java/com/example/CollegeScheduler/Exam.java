@@ -12,10 +12,9 @@ public class Exam extends ListItem{
     private String examName;
     private String details;
     private String location;
-    private Calendar calendar;
 
     public Exam(Class theClass, String examName, String details, String location, Calendar calendar) {
-        this.calendar = calendar;
+        super.setCalendar(calendar);
         this.theClass = theClass;
         this.examName = examName;
         this.details = details;
@@ -72,11 +71,4 @@ public class Exam extends ListItem{
         this.examName = examName;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
 }
