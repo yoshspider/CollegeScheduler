@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         simpleList.setAdapter(classAdapter);
         addButtonFunctionality();
         sortButtonFunctionality();
-
+        
 
     }
 
