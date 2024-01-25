@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
                 Class pedro = new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430);
                 classList.addItem(pedro);
                 System.out.println("hi");
-                Calendar ab = new GregorianCalendar(2023,3,5,5,30);
+                Calendar ab = new GregorianCalendar(2003,3,5,5,30);
                classList.addItem(new Assignment("Project 1",pedro, ab ));
                System.out.println("hi");
                Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
