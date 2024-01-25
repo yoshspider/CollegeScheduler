@@ -24,8 +24,8 @@ public class Assignment extends ListItem {
      * @param hourDue Hour the Assignment is Due
      * @param minuteDue Minute the Assignment is Due
      */
-    public Assignment(String assignmentName, Class classOfAssignment, int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
-        super(yearDue, monthDue, dayDue, hourDue, minuteDue);
+    public Assignment(String assignmentName, Class classOfAssignment, Calendar time) {
+        super(time);
         this.assignmentName = assignmentName;
         this.classOfAssignment = classOfAssignment;
         setNameSort(classOfAssignment.getClassName() + "1" + assignmentName);

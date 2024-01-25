@@ -47,6 +47,11 @@ public abstract class ListItem implements Comparable<ListItem>{
         calanderDate.set(yearDue, monthDue, dayDue, hourDue, minuteDue);
     }
 
+    public ListItem(Calendar time) {
+        this();
+        this.calanderDate = time;
+    }
+
     /**
      * Creates Calander Object with given hour and minute
      * @param hour new hour
