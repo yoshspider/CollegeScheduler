@@ -7,8 +7,6 @@
     android:id="@+id/backgroundView"
     android:orientation="horizontal">
 
-
-
     <TextView
         android:id="@+id/topTextView"
         android:layout_width="300dp"

@@ -76,6 +76,10 @@ public class Exam extends ListItem{
         return calendar;
     }
 
+    /**
+     * Setter for Calendar Object
+     * @param calendar new Calendar object
+     */
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
     }

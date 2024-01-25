@@ -69,7 +69,6 @@ public class Assignment extends ListItem {
     /**
      * Draw Instructions for Assignment
      * @param view View of which the assignment will be draw
-     * @param viewGroup ViewGroup that View belongs to
      * @param inflater LayoutInflater that clears View
      * @param i Index of Assignment Object in
      * @param adapter the ClassAdapter Object that the item is being drawn with
