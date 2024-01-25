@@ -70,5 +70,3 @@ public class Exam extends ListItem{
     public void setExamName(String examName) {
         this.examName = examName;
     }
-
-}

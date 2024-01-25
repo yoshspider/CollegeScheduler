@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/taskAdd"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:ellipsize="none"
+        android:text="Add 2 Classes"
+        app:cornerRadius="40dp"></Button>
+
+    <ListView
+        android:id="@+id/taskSimpleViewList"
+        android:layout_width="fill_parent"
+        android:layout_height="600dp"
+        android:divider="@color/material_blue_grey_800"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/taskSort1"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Sort by Class Name"></Button>
+
+        <Button
+            android:id="@+id/taskSort2"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Sort by Class Time"></Button>
+
+    </LinearLayout>
+</LinearLayout>
