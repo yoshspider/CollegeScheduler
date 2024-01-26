@@ -13,7 +13,6 @@ public class ClassAdapter extends BaseAdapter {
     CollegeObjectList<ListItem> itemsList;
     LayoutInflater inflater;
 
-
     /**
      * Constructor for ClassAdapter Object
      * @param applicationContext context of App given by Main Activity
@@ -83,10 +82,5 @@ public class ClassAdapter extends BaseAdapter {
     public void remove(int i) {
         itemsList.removeItem(i);
         notifyDataSetChanged();
-    }
-
-    public void setItemsList(CollegeObjectList<ListItem> itemsList) {
-        this.itemsList = itemsList;
-        updateValues();
     }
 }

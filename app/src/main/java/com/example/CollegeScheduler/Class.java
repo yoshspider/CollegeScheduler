@@ -10,9 +10,9 @@ public class Class extends ListItem  {
     private String className;
     private String professorName;
     private boolean[] meetingDates;
+    private int dayOfWeek;
     private int startTime;
     private int endTime;
-    private String location;
 
     /**
      * Constructor for the class object
@@ -22,13 +22,12 @@ public class Class extends ListItem  {
      * @param startTime
      * @param endTime
      */
-    public Class(String className, String professorName, boolean[] meetingDates, int startTime, int endTime, String location) {
+    public Class(String className, String professorName, boolean[] meetingDates, int startTime, int endTime) {
         this.className = className;
         this.professorName = professorName;
         this.meetingDates = meetingDates;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.location = location;
         setNameSort(className);
         setClockTime(startTime, endTime);
     }
@@ -74,13 +73,10 @@ public class Class extends ListItem  {
         return endTime;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
     /**
      * draw method to show visual parts of the object
      * @param view view it will be drawn on
+     * @param viewGroup
      * @param inflater
      * @param i
      * @param adapter
@@ -88,20 +84,10 @@ public class Class extends ListItem  {
      */
     public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = super.drawScreen(view, inflater, i, adapter);
-        String[] values = {getClassName(), meetingString(), getProfessorName(), getLocation()};
+        String[] values = {getClassName(), getProfessorName(), daysOfTheWeekConverter(getMeetingDates()),
+                (timeConverter(getStartTime()) + " - " + timeConverter(getEndTime()))};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
         return view;
-    }
-    public String meetingString() {
-        return daysOfTheWeekConverter(getMeetingDates()) + " " + timeConverter(getStartTime())
-                + " - " + timeConverter(getEndTime());
-    }
-    public String timeConverter(int time) {
-        return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
-    }
-    public String daysOfTheWeekConverter(boolean[] days) {
-        String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
-        return week.substring(0, week.length()-1);
     }
 }

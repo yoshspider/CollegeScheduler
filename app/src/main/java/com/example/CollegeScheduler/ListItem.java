@@ -34,6 +34,19 @@ public abstract class ListItem implements Comparable<ListItem>{
         calendarDate = Calendar.getInstance();
     }
 
+    /**
+     * Specialized Constructor for a Calendar Date
+     * @param yearDue Year of Date
+     * @param monthDue Month of Date
+     * @param dayDue Day of Date
+     * @param hourDue Hour of Date
+     * @param minuteDue Minute of Date
+     */
+    public ListItem(int yearDue, int monthDue, int dayDue, int hourDue, int minuteDue) {
+        this();
+        calendarDate.set(yearDue, monthDue, dayDue, hourDue, minuteDue);
+    }
+
     public ListItem(Calendar time) {
         this();
         this.calendarDate = time;
@@ -136,7 +149,13 @@ public abstract class ListItem implements Comparable<ListItem>{
         ListItem.sortingMethod = sortingMethod;
     }
 
-
+    public String timeConverter(int time) {
+        return String.format("%01d:%02d", time/100, time%100)  + (time > 1200 ? " PM" : " AM");
+    }
+    public String daysOfTheWeekConverter(boolean[] days) {
+        String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
+        return week.substring(0, week.length()-1);
+    }
     public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = inflater.inflate(R.layout.activity_listview, null);
         View background = view.findViewById(R.id.backgroundView);
