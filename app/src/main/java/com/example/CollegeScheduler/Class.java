@@ -76,7 +76,6 @@ public class Class extends ListItem  {
     /**
      * draw method to show visual parts of the object
      * @param view view it will be drawn on
-     * @param viewGroup
      * @param inflater
      * @param i
      * @param adapter
