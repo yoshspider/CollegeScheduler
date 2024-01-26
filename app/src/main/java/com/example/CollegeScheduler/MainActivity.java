@@ -70,7 +70,6 @@ public class MainActivity extends Activity {
             }
         });
     }
-
     /**
      * this adds functionality to the sort buttons which will sort the data accordingly
      */
