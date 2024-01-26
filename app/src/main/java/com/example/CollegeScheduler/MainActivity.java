@@ -12,10 +12,9 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    ListView simpleList;
-    CollegeObjectList<ListItem> classList = new CollegeObjectList<ListItem>();
-    CollegeObjectList<ListItem> tasksList = new CollegeObjectList<ListItem>();
-    ClassAdapter classAdapter;
+    private final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
+    private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
+    private ClassAdapter classAdapter;
     boolean onClassView = true;
 
     /**
@@ -30,7 +29,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_classes);
-        simpleList = findViewById(R.id.simpleListView);
+        ListView simpleList = findViewById(R.id.simpleListView);
         classAdapter = new ClassAdapter(getApplicationContext(), classList);
         simpleList.setAdapter(classAdapter);
         addButtonFunctionality();
@@ -60,9 +59,9 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View buttonView) {
-                classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900));
-                classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000));
-                classList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430));
+                classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CLOUGH 302"));
+                classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "SKILES 272"));
+                classList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
                 Calendar ab = new GregorianCalendar(2003,3,5,5,30);
                tasksList.addItem(new Assignment("Project 1",(Class)classList.getItem(0), ab ));
                Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
