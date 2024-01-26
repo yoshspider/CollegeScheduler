@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
     CollegeObjectList<ListItem> classList = new CollegeObjectList<ListItem>();
     CollegeObjectList<ListItem> tasksList = new CollegeObjectList<ListItem>();
     ClassAdapter classAdapter;
+    boolean onClassView = true;
 
     /**
      * This method sets up all the functionality of CollegeObjectList, ClassAdapter,
@@ -40,7 +41,14 @@ public class MainActivity extends Activity {
     public void switchButtonFunctionality() {
         Button switchButton = findViewById(R.id.switchItems);
         switchButton.setOnClickListener(buttonView -> {
-            classAdapter.setItemsList(tasksList);
+            if(onClassView) {
+                classAdapter.setItemsList(tasksList);
+                switchButton.setText("Switch to List of Classes");
+            } else {
+                classAdapter.setItemsList(classList);
+                switchButton.setText("Switch to List of Tasks");
+            }
+            onClassView = !onClassView;
         });
     }
 
