@@ -15,11 +15,14 @@ public class Assignment extends ListItem {
     private Class classOfAssignment;
 
     /**
-     *
-     * Base constructor for assignment
-     * @param assignmentName name of assignment
-     * @param classOfAssignment class of assignment
-     * @param time time assignment is due
+     * Base Constructor for Assignment
+     * @param assignmentName Name of Assignment
+     * @param classOfAssignment Associated Class Object of Assignment
+     * @param yearDue Year the Assignment is Due
+     * @param monthDue Month the Assignment is Due
+     * @param dayDue Day the Assignment is Due
+     * @param hourDue Hour the Assignment is Due
+     * @param minuteDue Minute the Assignment is Due
      */
     public Assignment(String assignmentName, Class classOfAssignment, Calendar time) {
         super(time);
@@ -27,7 +30,10 @@ public class Assignment extends ListItem {
         this.classOfAssignment = classOfAssignment;
         setNameSort(classOfAssignment.getClassName() + "1" + assignmentName);
         setColor(classOfAssignment.getColor());
+
+
     }
+
     /**
      * Getter for Assignment Name
      * @return the name of the Assignment
