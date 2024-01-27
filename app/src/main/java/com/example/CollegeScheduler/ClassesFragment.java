@@ -5,11 +5,15 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.CollegeScheduler.databinding.FragmentClassesBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +23,7 @@ import android.widget.Button;
 public class ClassesFragment extends Fragment {
 
     public MainActivity classActivity;
-    //private ClassesFragment binding;
+    private FragmentClassesBinding binding;
 
     public ClassesFragment() {
         // Required empty public constructor
@@ -46,28 +50,26 @@ public class ClassesFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       // binding = FragmentFirstBinding.inflate(inflater, container, false);
-
-        //Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classes, container, false);
-
+        binding = FragmentClassesBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button button = view.findViewById(R.id.addplaceholder);
-        button.setOnClickListener(new View.OnClickListener() {
+        binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View buttonView) {
-                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900));
-                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000));
-                classActivity.classAdapter.updateValues();
+//                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900));
+//                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000));
+//                classActivity.classAdapter.updateValues();
+                System.out.println("test");
+                NavHostFragment.findNavController(ClassesFragment.this)
+                        .navigate(R.id.action_classesFragment_to_modifyFragment);
             }
         });
 
-        Button sort1 = view.findViewById(R.id.sort1);
-        sort1.setOnClickListener(new View.OnClickListener() {
+        binding.sort1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View buttonView) {
                 ListItem.setSortingMethod(1);
@@ -76,8 +78,7 @@ public class ClassesFragment extends Fragment {
             }
         });
 
-        Button sort2 = view.findViewById(R.id.sort2);
-        sort2.setOnClickListener(new View.OnClickListener() {
+        binding.sort2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View buttonView) {
@@ -86,5 +87,11 @@ public class ClassesFragment extends Fragment {
                 classActivity.classAdapter.updateValues();
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

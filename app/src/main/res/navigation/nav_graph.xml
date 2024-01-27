@@ -4,12 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/classesFragment">
+
     <fragment
         android:id="@+id/classesFragment"
         android:name="com.example.CollegeScheduler.ClassesFragment"
         android:label="ClassesFragment"
         tools:layout="@layout/fragment_classes"
 
-        />
+        >
+        <action
+            android:id="@+id/action_classesFragment_to_modifyFragment"
+            app:destination="@id/modifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyFragment"
+        android:name="com.example.CollegeScheduler.ClassesFragment"
+        android:label="ModifyFragment"
+        tools:layout="@layout/fragment_modify"
+
+        >
+        <action
+            android:id="@+id/action_modifyFragment_to_classesFragment"
+            app:destination="@id/classesFragment" />
+    </fragment>
 
 </navigation>
