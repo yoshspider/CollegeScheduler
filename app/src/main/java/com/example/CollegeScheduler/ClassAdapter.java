@@ -45,8 +45,8 @@ public class ClassAdapter extends BaseAdapter {
         Button deleteButton = view.findViewById(R.id.delete);
         Button modifyButton = view.findViewById(R.id.modify);
         View background = view.findViewById(R.id.backgroundView);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View buttonView) {
                 itemsList.removeItem(i);
@@ -72,12 +72,14 @@ public class ClassAdapter extends BaseAdapter {
         background.setBackgroundColor(currentItem.getColor());
         return view;
     }
+
     public void updateValues(){
         notifyDataSetChanged();
     }
     public String timeConverter(int time) {
         return String.format("%01d:%02d", time/100, time%100)  + (time > 1200 ? " PM" : " AM");
     }
+
     public String daysOfTheWeekConverter(boolean[] days) {
         String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
         return week.substring(0, week.length()-1);
