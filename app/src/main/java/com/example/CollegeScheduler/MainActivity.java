@@ -27,14 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //set up navigation
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-
-        //setSupportActionBar(binding.toolbar);
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
 
         setContentView(R.layout.fragment_classes);
         simpleList = findViewById(R.id.simpleListView);
@@ -43,12 +39,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//
-////        NavController navController = Navigation.findNavController(this, R.id.nav_host);
-//        return NavigationUI.navigateUp(navController, appBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
 
 }
