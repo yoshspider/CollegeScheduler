@@ -2,57 +2,52 @@ package com.example.CollegeScheduler;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-    ListView simpleList;
-    CollegeObjectList<Class> classList = new CollegeObjectList<Class>();
+import com.example.CollegeScheduler.databinding.ActivityMainBinding;
 
+public class MainActivity extends AppCompatActivity {
+    private AppBarConfiguration appBarConfiguration;
+    private ActivityMainBinding binding;
+    public ListView simpleList;
+    public CollegeObjectList<Class> classList = new CollegeObjectList<Class>();
+    public ClassAdapter classAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //set up navigation
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        //setSupportActionBar(binding.toolbar);
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
         setContentView(R.layout.fragment_classes);
         simpleList = findViewById(R.id.simpleListView);
-        ClassAdapter classAdapter = new ClassAdapter(getApplicationContext(), classList);
+        classAdapter = new ClassAdapter(getApplicationContext(), classList);
         simpleList.setAdapter(classAdapter);
 
-
-        Button button = findViewById(R.id.addplaceholder);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View buttonView) {
-                classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900));
-                classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000));
-                classAdapter.updateValues();
-            }
-        });
-
-        Button sort1 = findViewById(R.id.sort1);
-        sort1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View buttonView) {
-                ListItem.setSortingMethod(1);
-                classList.sort();
-                classAdapter.updateValues();
-            }
-        });
-
-        Button sort2 = findViewById(R.id.sort2);
-        sort2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View buttonView) {
-                ListItem.setSortingMethod(2);
-                classList.sort();
-                classAdapter.updateValues();
-            }
-        });
-
     }
+
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//
+////        NavController navController = Navigation.findNavController(this, R.id.nav_host);
+//        return NavigationUI.navigateUp(navController, appBarConfiguration)
+//                || super.onSupportNavigateUp();
+//    }
 
 }
