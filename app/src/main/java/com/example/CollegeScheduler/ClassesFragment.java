@@ -51,7 +51,8 @@ public class ClassesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentClassesBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        View classesLayout = inflater.inflate(R.layout.fragment_classes, container, false);
+        return classesLayout;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class ClassesFragment extends Fragment {
 
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View buttonView) {
+            public void onClick(View view) {
 //                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900));
 //                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000));
 //                classActivity.classAdapter.updateValues();
@@ -71,7 +72,7 @@ public class ClassesFragment extends Fragment {
 
         binding.sort1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View buttonView) {
+            public void onClick(View view) {
                 ListItem.setSortingMethod(1);
                 classActivity.classList.sort();
                 classActivity.classAdapter.updateValues();
@@ -81,7 +82,7 @@ public class ClassesFragment extends Fragment {
         binding.sort2.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View buttonView) {
+            public void onClick(View view) {
                 ListItem.setSortingMethod(2);
                 classActivity.classList.sort();
                 classActivity.classAdapter.updateValues();
