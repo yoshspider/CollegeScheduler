@@ -3,29 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/classesFragment">
+    app:startDestination="@id/FirstFragment">
 
     <fragment
-        android:id="@+id/classesFragment"
+        android:id="@+id/FirstFragment"
         android:name="com.example.CollegeScheduler.ClassesFragment"
-        android:label="ClassesFragment"
-        tools:layout="@layout/fragment_classes"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_classes">
 
-        >
         <action
-            android:id="@+id/action_classesFragment_to_modifyFragment"
-            app:destination="@id/modifyFragment" />
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
     </fragment>
     <fragment
-        android:id="@+id/modifyFragment"
-        android:name="com.example.CollegeScheduler.ClassesFragment"
-        android:label="ModifyFragment"
-        tools:layout="@layout/fragment_modify"
+        android:id="@+id/SecondFragment"
+        android:name="com.example.CollegeScheduler.AddFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_modify">
 
-        >
         <action
-            android:id="@+id/action_modifyFragment_to_classesFragment"
-            app:destination="@id/classesFragment" />
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
-
 </navigation>
