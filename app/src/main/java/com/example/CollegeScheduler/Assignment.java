@@ -1,38 +1,83 @@
 package com.example.CollegeScheduler;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import java.util.Date;
+
 public class Assignment extends ListItem {
     private String assignmentName;
     private Class classOfAssignment;
-    private int monthDue;
-    private int dayDue;
 
-    public Assignment(String assignmentName, Class classOfAssignment, int monthDue, int dayDue) {
+    /**
+     *
+     * Base constructor for assignment
+     * @param assignmentName name of assignment
+     * @param classOfAssignment class of assignment
+     * @param time time assignment is due
+     */
+    public Assignment(String assignmentName, Class classOfAssignment, Calendar time) {
+        super(time);
         this.assignmentName = assignmentName;
         this.classOfAssignment = classOfAssignment;
-        this.dayDue = dayDue;
-        this.monthDue = monthDue;
-
+        setNameSort(classOfAssignment.getClassName() + "1" + assignmentName);
+        setColor(classOfAssignment.getColor());
     }
-
-    //comment
+    /**
+     * Getter for Assignment Name
+     * @return the name of the Assignment
+     */
     public String getAssignmentName() {
         return assignmentName;
     }
 
+    /**
+     * Getter for class of Assignment
+     * @return the class object of Assignment
+     */
     public Class getClassOfAssignment() {
         return classOfAssignment;
     }
 
-    public int getDayDue() {
-        return dayDue;
+    /**
+     * Setter for Assignment Name
+     * @param assignmentName New Name for Assignment
+     */
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
     }
 
-    public int getMonthDue() {
-        return monthDue;
+    /**
+     * Setter for Class of Assignment
+     * @param classOfAssignment New Class Object for Assignment
+     */
+    public void setClassOfAssignment(Class classOfAssignment) {
+        this.classOfAssignment = classOfAssignment;
     }
 
+    /**
+     * Draw Instructions for Assignment
+     * @param view View of which the assignment will be draw
+     * @param inflater LayoutInflater that clears View
+     * @param i Index of Assignment Object in
+     * @param adapter the ClassAdapter Object that the item is being drawn with
+     * @return the modified View object
+     */
     @Override
-    public int compareTo(ListItem o) {
-        return ((Assignment)o).getClassOfAssignment().compareTo(classOfAssignment);
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
+        view = super.drawScreen(view, inflater, i, adapter);
+        String date = getTime();
+        int splitIndex = date.indexOf(" ");
+        String[] values = {getAssignmentName(), getClassOfAssignment().getClassName(),
+                date.substring(0, splitIndex), date.substring(splitIndex + 1)};
+        view = drawInformation(view, values);
+        view = drawButtons(view, inflater, i, adapter);
+        return view;
     }
+
 }
