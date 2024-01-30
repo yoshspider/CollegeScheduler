@@ -16,7 +16,7 @@
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:ellipsize="none"
-        android:text="Add 2 Classes"
+        android:text="Add Class"
         app:cornerRadius="40dp"/>
 
     <ListView
