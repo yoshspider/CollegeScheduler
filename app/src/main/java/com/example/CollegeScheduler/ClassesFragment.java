@@ -39,16 +39,15 @@ public class ClassesFragment extends Fragment {
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
-                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
-                classActivity.classAdapter.updateValues();
-                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CLOUGH 302"));
-                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "SKILES 272"));
-                classActivity.classList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
+                classActivity.getClassList().addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
+                classActivity.getClassList().addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
+                classActivity.getClassList().addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CLOUGH 302"));
+                classActivity.getClassList().addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "SKILES 272"));
+                classActivity.getClassList().addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
                 Calendar ab = new GregorianCalendar(2003,3,5,5,30);
-                classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab ));
+                classActivity.getTasksList().addItem(new Assignment("Project 1",(Class)classActivity.getClassList().getItem(0), ab ));
                 Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
-                classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
+                classActivity.getTasksList().addItem(new Exam((Class) classActivity.getClassList().getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(ClassesFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
@@ -77,15 +76,26 @@ public class ClassesFragment extends Fragment {
         binding.switchItems.setOnClickListener((View.OnClickListener) view13 -> {
             if(onClasses) {
                 classActivity.swapToTasks();
-                binding.switchItems.setText("Switch to Class List");
+                buttonNamesOfClass();
             } else {
                 classActivity.swapToClass();
-                binding.switchItems.setText("Switch to Task List");
+                buttonNamesOfTasks();
             }
             onClasses = !onClasses;
         });
     }
-
+    private void buttonNamesOfClass () {
+        binding.switchItems.setText("Switch to Class List");
+        binding.sort1.setText("Sort by Class of Task");
+        binding.sort2.setText("Sort by Time of Task");
+        binding.addplaceholder.setText("Add Task");
+    }
+    private void buttonNamesOfTasks () {
+        binding.switchItems.setText("Switch to Task List");
+        binding.sort1.setText("Sort by Class Name");
+        binding.sort2.setText("Sort by Class Time");
+        binding.addplaceholder.setText("Add Class");
+    }
         @Override
     public void onDestroyView() {
         super.onDestroyView();

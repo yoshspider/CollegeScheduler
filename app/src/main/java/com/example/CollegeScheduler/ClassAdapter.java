@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ClassAdapter extends BaseAdapter {
-    Context context;
-    CollegeObjectList<ListItem> itemsList;
-    LayoutInflater inflater;
+    private Context context;
+    private CollegeObjectList<ListItem> itemsList;
+    private LayoutInflater inflater;
 
 
     /**
