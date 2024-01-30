@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="3dp"
         android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/course_entry"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +23,7 @@
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="95dp"
         android:layout_marginBottom="50dp"
         android:ems="10"
@@ -46,55 +48,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_entry" />
 
+    <EditText
+        android:id="@+id/location_entry"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="95dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+
     <ToggleButton
         android:id="@+id/monday_toggle"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/friday_toggle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
 
     <ToggleButton
         android:id="@+id/tuesday_toggle"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/wednesday_toggle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/friday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
 
     <ToggleButton
         android:id="@+id/wednesday_toggle"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/thursday_toggle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tuesday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
 
     <ToggleButton
         android:id="@+id/thursday_toggle"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/wednesday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
 
     <ToggleButton
         android:id="@+id/friday_toggle"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/tuesday_toggle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/monday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
 
     <Button
         android:id="@+id/save_button"

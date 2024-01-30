@@ -14,12 +14,15 @@ import com.example.CollegeScheduler.databinding.FragmentModifyBinding;
 public class AddFragment extends Fragment {
 
     private FragmentModifyBinding binding;
+    private MainActivity classActivity;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+
+        classActivity = (MainActivity)getActivity();
 
         binding = FragmentModifyBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -40,6 +43,8 @@ public class AddFragment extends Fragment {
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
+                classActivity.classAdapter.updateValues();
                 NavHostFragment.findNavController(AddFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
