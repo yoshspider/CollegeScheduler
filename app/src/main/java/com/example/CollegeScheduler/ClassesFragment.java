@@ -40,6 +40,8 @@ public class ClassesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.simpleListView.setAdapter(classActivity.classAdapter);
 
+        binding.simpleListView.setAdapter(classActivity.classAdapter);
+
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
