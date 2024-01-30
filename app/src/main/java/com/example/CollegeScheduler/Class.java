@@ -93,13 +93,30 @@ public class Class extends ListItem  {
         view = drawButtons(view, inflater, i, adapter);
         return view;
     }
+
+    /**
+     * meeting string converter to give to view
+     * @return corrected string
+     */
     public String meetingString() {
         return daysOfTheWeekConverter(getMeetingDates()) + " " + timeConverter(getStartTime())
                 + " - " + timeConverter(getEndTime());
     }
+
+    /**
+     * converts time accordingly
+     * @param time integer time
+     * @return string version with am and pm
+     */
     public String timeConverter(int time) {
         return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
     }
+
+    /**
+     * days of the week converter, it takes the boolean array and changes it to a string for a view
+     * @param days boolean array of which days we visit
+     * @return corrected string
+     */
     public String daysOfTheWeekConverter(boolean[] days) {
         String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
         return week.substring(0, week.length()-1);

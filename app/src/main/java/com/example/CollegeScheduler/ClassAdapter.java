@@ -84,7 +84,10 @@ public class ClassAdapter extends BaseAdapter {
         itemsList.removeItem(i);
         notifyDataSetChanged();
     }
-
+    /**
+     * setter for items list
+     * @param itemsList new ItemsList
+     */
     public void setItemsList(CollegeObjectList<ListItem> itemsList) {
         this.itemsList = itemsList;
         updateValues();
