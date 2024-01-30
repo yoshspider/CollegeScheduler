@@ -57,22 +57,18 @@ public class ClassesFragment extends Fragment {
             }
         });
 
-        binding.sort1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListItem.setSortingMethod(1);
-                classActivity.classList.sort();
-                classActivity.classAdapter.updateValues();
-            }
+        binding.sort1.setOnClickListener((View.OnClickListener) view12 -> {
+            ListItem.setSortingMethod(1);
+            classActivity.classList.sort();
+            classActivity.tasksList.sort();
+            classActivity.classAdapter.updateValues();
         });
 
-        binding.sort2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListItem.setSortingMethod(2);
-                classActivity.classList.sort();
-                classActivity.classAdapter.updateValues();
-            }
+        binding.sort2.setOnClickListener((View.OnClickListener) view1 -> {
+            ListItem.setSortingMethod(2);
+            classActivity.classList.sort();
+            classActivity.tasksList.sort();
+            classActivity.classAdapter.updateValues();
         });
         binding.switchItems.setOnClickListener(new View.OnClickListener() {
             @Override

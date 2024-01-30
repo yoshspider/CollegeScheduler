@@ -22,7 +22,7 @@
     <ListView
         android:id="@+id/simpleListView"
         android:layout_width="fill_parent"
-        android:layout_height="550dp"
+        android:layout_height="500dp"
         android:divider="@color/material_blue_grey_800"
         android:dividerHeight="1dp"
         android:footerDividersEnabled="false" />
