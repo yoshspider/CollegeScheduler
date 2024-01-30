@@ -20,6 +20,7 @@ public class ClassesFragment extends Fragment {
 
     private FragmentClassesBinding binding;
     private MainActivity classActivity;
+    private boolean onClasses = true;
    // private MainActivity taskActivity;
 
     @Override
@@ -36,10 +37,7 @@ public class ClassesFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-         binding.simpleListView.setAdapter(classActivity.classAdapter);
-
-
+        binding.simpleListView.setAdapter(classActivity.classAdapter);
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +72,22 @@ public class ClassesFragment extends Fragment {
                 ListItem.setSortingMethod(2);
                 classActivity.classList.sort();
                 classActivity.classAdapter.updateValues();
+            }
+        });
+        binding.switchItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClasses) {
+                    classActivity.classAdapter.setItemsList(
+                            classActivity.tasksList
+                    );
+                } else {
+                    classActivity.classAdapter.setItemsList(
+                            classActivity.classList
+                    );
+                }
+                onClasses = !onClasses;
+
             }
         });
     }
