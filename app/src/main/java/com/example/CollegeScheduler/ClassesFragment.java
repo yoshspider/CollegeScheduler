@@ -21,8 +21,6 @@ public class ClassesFragment extends Fragment {
     private FragmentClassesBinding binding;
     private MainActivity classActivity;
     private boolean onClasses = true;
-   // private MainActivity taskActivity;
-
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -37,7 +35,7 @@ public class ClassesFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.simpleListView.setAdapter(classActivity.classAdapter);
+        binding.simpleListView.setAdapter(classActivity.getClassAdapter());
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,40 +49,40 @@ public class ClassesFragment extends Fragment {
                 classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab ));
                 Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
                 classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
-                classActivity.classAdapter.updateValues();
+                classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(ClassesFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
-
+        sortButtons();
+        switchButton();
+    }
+    private void sortButtons() {
         binding.sort1.setOnClickListener((View.OnClickListener) view12 -> {
             ListItem.setSortingMethod(1);
-            classActivity.classList.sort();
-            classActivity.tasksList.sort();
-            classActivity.classAdapter.updateValues();
+            sortItems();
         });
 
         binding.sort2.setOnClickListener((View.OnClickListener) view1 -> {
             ListItem.setSortingMethod(2);
-            classActivity.classList.sort();
-            classActivity.tasksList.sort();
-            classActivity.classAdapter.updateValues();
+            sortItems();
         });
-        binding.switchItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(onClasses) {
-                    classActivity.classAdapter.setItemsList(
-                            classActivity.tasksList
-                    );
-                } else {
-                    classActivity.classAdapter.setItemsList(
-                            classActivity.classList
-                    );
-                }
-                onClasses = !onClasses;
-
+    }
+    private void sortItems() {
+        classActivity.getClassList().sort();
+        classActivity.getTasksList().sort();
+        classActivity.getClassAdapter().updateValues();
+    }
+    private void switchButton() {
+        binding.switchItems.setOnClickListener((View.OnClickListener) view13 -> {
+            if(onClasses) {
+                classActivity.swapToTasks();
+                binding.switchItems.setText("Switch to Class List");
+            } else {
+                classActivity.swapToClass();
+                binding.switchItems.setText("Switch to Task List");
             }
+            onClasses = !onClasses;
         });
     }
 

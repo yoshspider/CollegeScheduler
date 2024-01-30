@@ -53,4 +53,26 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public ClassAdapter getClassAdapter() {
+        return classAdapter;
+    }
+
+    public ListView getSimpleList() {
+        return simpleList;
+    }
+
+    public CollegeObjectList<ListItem> getClassList() {
+        return classList;
+    }
+
+    public CollegeObjectList<ListItem> getTasksList() {
+        return tasksList;
+    }
+    public void swapToClass(){
+        getClassAdapter().setItemsList(getClassList());
+    }
+    public void swapToTasks() {
+        getClassAdapter().setItemsList(getTasksList());
+    }
 }
