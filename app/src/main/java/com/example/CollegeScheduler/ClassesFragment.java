@@ -20,24 +20,24 @@ public class ClassesFragment extends Fragment {
 
     private FragmentClassesBinding binding;
     private MainActivity classActivity;
-   // private MainActivity taskActivity;
-
+    private int currentPage = 0;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         classActivity = (MainActivity)getActivity();
         if(savedInstanceState == null) {
             binding = FragmentClassesBinding.inflate(inflater, container, false);
         }
 
-        return binding.getRoot();
+        binding = FragmentClassesBinding.inflate(inflater, container, false);
+
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         binding.simpleListView.setAdapter(classActivity.classAdapter);
 
         binding.simpleListView.setAdapter(classActivity.classAdapter);
@@ -64,26 +64,60 @@ public class ClassesFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
-
-        binding.sort1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListItem.setSortingMethod(1);
-                classActivity.classList.sort();
-                classActivity.classAdapter.updateValues();
-            }
+        sortButtons();
+        switchButton();
+    }
+    private void sortButtons() {
+        binding.sort1.setOnClickListener((View.OnClickListener) view12 -> {
+            ListItem.setSortingMethod(1);
+            sortItems();
         });
 
-        binding.sort2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListItem.setSortingMethod(2);
-                classActivity.classList.sort();
-                classActivity.classAdapter.updateValues();
+        binding.sort2.setOnClickListener((View.OnClickListener) view1 -> {
+            ListItem.setSortingMethod(2);
+            sortItems();
+        });
+    }
+    private void sortItems() {
+        classActivity.getClassList().sort();
+        classActivity.getTasksList().sort();
+        classActivity.getClassAdapter().updateValues();
+    }
+    private void switchButton() {
+        binding.switchItems.setOnClickListener((View.OnClickListener) view13 -> {
+            if(currentPage == 0) {
+                classActivity.swapToTasks();
+                buttonNamesOfClass();
+                currentPage++;
+            } else if (currentPage == 1){
+                classActivity.swapToCompletedTasks();
+                buttonNamesOfCompletedTasks();
+                currentPage++;
+            } else {
+                classActivity.swapToClass();
+                buttonNamesOfTasks();
+                currentPage = 0;
             }
         });
     }
-//
+    private void buttonNamesOfClass () {
+        binding.switchItems.setText("Switch to Completed Task List");
+        binding.sort1.setText("Sort by Class of Task");
+        binding.sort2.setText("Sort by Time of Task");
+        binding.addplaceholder.setText("Add Task");
+    }
+    private void buttonNamesOfTasks () {
+        binding.switchItems.setText("Switch to Task List");
+        binding.sort1.setText("Sort by Class Name");
+        binding.sort2.setText("Sort by Class Time");
+        binding.addplaceholder.setText("Add Class");
+    }
+    private void buttonNamesOfCompletedTasks () {
+        binding.switchItems.setText("Switch to Class List");
+        binding.sort1.setText("Sort by Task Name");
+        binding.sort2.setText("Sort by Task Time");
+        binding.addplaceholder.setText("Add Completed Task");
+    }
         @Override
     public void onDestroyView() {
         super.onDestroyView();

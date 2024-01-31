@@ -9,9 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ClassAdapter extends BaseAdapter {
-    Context context;
-    CollegeObjectList<ListItem> itemsList;
-    LayoutInflater inflater;
+    private Context context;
+    private CollegeObjectList<ListItem> itemsList;
+    private LayoutInflater inflater;
+
 
 
     /**
@@ -24,6 +25,7 @@ public class ClassAdapter extends BaseAdapter {
         this.context = applicationContext;
         this.itemsList = itemsList;
         inflater = (LayoutInflater.from(applicationContext));
+
     }
     /**
      * Getter for size of list
@@ -84,9 +86,18 @@ public class ClassAdapter extends BaseAdapter {
         itemsList.removeItem(i);
         notifyDataSetChanged();
     }
-
+    /**
+     * setter for items list
+     * @param itemsList new ItemsList
+     */
     public void setItemsList(CollegeObjectList<ListItem> itemsList) {
         this.itemsList = itemsList;
         updateValues();
     }
+
+    public void transferItem(int i) {
+        MainActivity.transferList.addItem(itemsList.removeItem(i));
+        updateValues();
+    }
+
 }

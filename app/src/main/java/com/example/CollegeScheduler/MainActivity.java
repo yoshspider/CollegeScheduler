@@ -24,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView simpleList;
 
     //make private with getters & setters?
-    public final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
-    public final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
-    public ClassAdapter classAdapter;
+    private final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
+    private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
+    public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
+    private ClassAdapter classAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,4 +55,46 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+    /**
+     * getter for classAdapter
+     * @return currentClassAdapter
+     */
+    public ClassAdapter getClassAdapter() {
+        return classAdapter;
+    }
+
+    /**
+     * getter for classList
+     * @return currentClassList
+     */
+    public CollegeObjectList<ListItem> getClassList() {
+        return classList;
+    }
+
+    /**
+     * getter for taskslist
+     * @return currentTasksList
+     */
+    public CollegeObjectList<ListItem> getTasksList() {
+        return tasksList;
+    }
+
+    /**
+     * switch the adapter's list to classList
+     */
+    public void swapToClass(){
+        getClassAdapter().setItemsList(getClassList());
+    }
+
+    /**
+     * switch the adapter's list to tasksList
+     */
+    public void swapToTasks() {
+        getClassAdapter().setItemsList(getTasksList());
+    }
+
+    public void swapToCompletedTasks() {
+        getClassAdapter().setItemsList(transferList);
+    }
+
 }

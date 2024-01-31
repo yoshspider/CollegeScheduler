@@ -34,8 +34,8 @@ public class CollegeObjectList<T extends Comparable<? super T>> {
      * remove the item at specific index
      * @param index index to remove item at
      */
-    public void removeItem(int index) {
-        itemList.remove(index);
+    public T removeItem(int index) {
+        return itemList.remove(index);
     }
 
     /**

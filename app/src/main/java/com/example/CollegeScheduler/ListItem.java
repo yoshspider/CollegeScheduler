@@ -136,19 +136,47 @@ public abstract class ListItem implements Comparable<ListItem>{
         ListItem.sortingMethod = sortingMethod;
     }
 
-
+    /**
+     * draw screen method called to draw all components of this list item
+     * @param view current view
+     * @param inflater inflater to reset
+     * @param i index of item
+     * @param adapter adapter to add items
+     * @return corrected view
+     */
     public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = inflater.inflate(R.layout.activity_listview, null);
         View background = view.findViewById(R.id.backgroundView);
         background.setBackgroundColor(getColor());
         return view;
     }
+
+    /**
+     * draws all the buttons and adds functionality
+     * @param view view of item
+     * @param inflater inflater to reset item
+     * @param i index of item in adaptter
+     * @param adapter adapter of list
+     * @return corrected view with buttons
+     */
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         ImageButton deleteButton = view.findViewById(R.id.delete);
         ImageButton modifyButton = view.findViewById(R.id.modify);
+        ImageButton checkCompleteButton = view.findViewById(R.id.checkCompleteButton);
         deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
+        if (! (this instanceof Class)) {
+            checkCompleteButton.setOnClickListener(buttonView -> adapter.transferItem(i));
+        } else {
+            checkCompleteButton.setVisibility(View.GONE);
+        }
         return view;
     }
+
+    /**
+     * compare method for sorting
+     * @param o the object to be compared.
+     * @return integer value to determine whether greater or lesser
+     */
     @Override
     public int compareTo(ListItem o) {
         if (getSortingMethod() == 1) {
@@ -158,6 +186,12 @@ public abstract class ListItem implements Comparable<ListItem>{
         }
     }
 
+    /**
+     * text information of ListItem
+     * @param view view to draw on
+     * @param values the items to draw
+     * @return corrected view with items
+     */
     public View drawInformation(View view, String[] values) {
         TextView topTextView = view.findViewById(R.id.topTextView);
         TextView middleTextView = view.findViewById(R.id.middleTextView);

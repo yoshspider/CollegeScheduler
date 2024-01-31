@@ -95,6 +95,11 @@ public class Class extends ListItem  {
         view = drawButtons(view, inflater, i, adapter);
         return view;
     }
+
+    /**
+     * meeting string converter to give to view
+     * @return corrected string
+     */
     public String meetingString() {
         return daysOfTheWeekConverter(getMeetingDates()) + " " + getStartTime()
                 + " - " + getEndTime();
