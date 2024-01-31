@@ -5,11 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/switchItems"
-        android:layout_width="400dp"
-        android:layout_height="40dp"
-        android:text="Switch to Task List" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/toClassButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Go to Classes" />
+
+        <Button
+            android:id="@+id/toTaskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Go to Tasks" />
+
+        <Button
+            android:id="@+id/toCompletedTaskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Go to Completed Tasks" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/addplaceholder"
@@ -22,7 +44,7 @@
     <ListView
         android:id="@+id/simpleListView"
         android:layout_width="fill_parent"
-        android:layout_height="499dp"
+        android:layout_height="400dp"
         android:divider="@color/material_blue_grey_800"
         android:dividerHeight="1dp"
         android:footerDividersEnabled="false">

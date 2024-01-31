@@ -96,42 +96,39 @@ public class ClassesFragment extends Fragment {
         classActivity.getClassAdapter().updateValues();
     }
     private void switchButton() {
-        binding.switchItems.setOnClickListener((View.OnClickListener) view13 -> {
-            if(currentPage == 0) {
-                classActivity.swapToTasks();
-                buttonNamesOfClass();
-                Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-                resetButton.setVisibility(View.VISIBLE);
-                currentPage++;
-            } else if (currentPage == 1){
-                classActivity.swapToCompletedTasks();
-                buttonNamesOfCompletedTasks();
-                Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-                resetButton.setVisibility(View.INVISIBLE);
-                currentPage++;
-            } else {
-                classActivity.swapToClass();
-                buttonNamesOfTasks();
-                Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-                resetButton.setVisibility(View.VISIBLE);
-                currentPage = 0;
-            }
+        binding.toClassButton.setOnClickListener((View.OnClickListener) view13 -> {
+            classActivity.swapToClass();
+            buttonNamesOfTasks();
+            Button resetButton=(Button) getView().findViewById(R.id.edit_content);
+            resetButton.setVisibility(View.VISIBLE);
+            currentPage = 0;
+        });
+        binding.toTaskButton.setOnClickListener((View.OnClickListener) view13 -> {
+            classActivity.swapToTasks();
+            buttonNamesOfClass();
+            Button resetButton=(Button) getView().findViewById(R.id.edit_content);
+            resetButton.setVisibility(View.VISIBLE);
+            currentPage = 1;
+        });
+        binding.toCompletedTaskButton.setOnClickListener((View.OnClickListener) view13 -> {
+            classActivity.swapToCompletedTasks();
+            buttonNamesOfCompletedTasks();
+            Button resetButton=(Button) getView().findViewById(R.id.edit_content);
+            resetButton.setVisibility(View.INVISIBLE);
+            currentPage = 2;
         });
     }
     private void buttonNamesOfClass () {
-        binding.switchItems.setText("Switch to Completed Task List");
         binding.sort1.setText("Sort by Class of Task");
         binding.sort2.setText("Sort by Time of Task");
         binding.addplaceholder.setText("Add Task");
     }
     private void buttonNamesOfTasks () {
-        binding.switchItems.setText("Switch to Task List");
         binding.sort1.setText("Sort by Class Name");
         binding.sort2.setText("Sort by Class Time");
         binding.addplaceholder.setText("Add Class");
     }
     private void buttonNamesOfCompletedTasks () {
-        binding.switchItems.setText("Switch to Class List");
         binding.sort1.setText("Sort by Class of Task");
         binding.sort2.setText("Sort by Time of Task");
         binding.addplaceholder.setText("Add Completed Task");

@@ -45,7 +45,7 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         //get the spinner from the xml.
         Spinner dropdown = getView().findViewById(R.id.spinner1);
         //create a list of items for the spinner.
-        String[] items = new String[]{"1", "2", "three"};
+        String[] items = new String[]{"1", "2", "3"};
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
