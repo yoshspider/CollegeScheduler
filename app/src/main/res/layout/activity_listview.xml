@@ -52,14 +52,13 @@
         android:layout_height="50dp"
         android:src="@android:drawable/ic_menu_edit"
         app:layout_constraintEnd_toStartOf="@+id/delete"
-        app:layout_constraintStart_toEndOf="@+id/checkCompleteButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/checkCompleteButton"
         android:layout_width="32dp"
         android:layout_height="50dp"
-        app:layout_constraintStart_toEndOf="@+id/middleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/modify"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/checkbox_on_background" />
 

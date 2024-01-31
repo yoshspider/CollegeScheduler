@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     //make private with getters & setters?
     private final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
     private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
+    public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
     private ClassAdapter classAdapter;
 
     @Override
@@ -90,4 +91,9 @@ public class MainActivity extends AppCompatActivity {
     public void swapToTasks() {
         getClassAdapter().setItemsList(getTasksList());
     }
+
+    public void swapToCompletedTasks() {
+        getClassAdapter().setItemsList(transferList);
+    }
+
 }

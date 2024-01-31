@@ -20,15 +20,13 @@ public class ClassesFragment extends Fragment {
 
     private FragmentClassesBinding binding;
     private MainActivity classActivity;
-    private boolean onClasses = true;
+    private int currentPage = 0;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         classActivity = (MainActivity)getActivity();
-
         binding = FragmentClassesBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -74,18 +72,23 @@ public class ClassesFragment extends Fragment {
     }
     private void switchButton() {
         binding.switchItems.setOnClickListener((View.OnClickListener) view13 -> {
-            if(onClasses) {
+            if(currentPage == 0) {
                 classActivity.swapToTasks();
                 buttonNamesOfClass();
+                currentPage++;
+            } else if (currentPage == 1){
+                classActivity.swapToCompletedTasks();
+                buttonNamesOfCompletedTasks();
+                currentPage++;
             } else {
                 classActivity.swapToClass();
                 buttonNamesOfTasks();
+                currentPage = 0;
             }
-            onClasses = !onClasses;
         });
     }
     private void buttonNamesOfClass () {
-        binding.switchItems.setText("Switch to Class List");
+        binding.switchItems.setText("Switch to Completed Task List");
         binding.sort1.setText("Sort by Class of Task");
         binding.sort2.setText("Sort by Time of Task");
         binding.addplaceholder.setText("Add Task");
@@ -95,6 +98,12 @@ public class ClassesFragment extends Fragment {
         binding.sort1.setText("Sort by Class Name");
         binding.sort2.setText("Sort by Class Time");
         binding.addplaceholder.setText("Add Class");
+    }
+    private void buttonNamesOfCompletedTasks () {
+        binding.switchItems.setText("Switch to Class List");
+        binding.sort1.setText("Sort by Task Name");
+        binding.sort2.setText("Sort by Task Time");
+        binding.addplaceholder.setText("Add Completed Task");
     }
         @Override
     public void onDestroyView() {

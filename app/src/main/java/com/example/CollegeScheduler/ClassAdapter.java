@@ -14,6 +14,7 @@ public class ClassAdapter extends BaseAdapter {
     private LayoutInflater inflater;
 
 
+
     /**
      * Constructor for ClassAdapter Object
      * @param applicationContext context of App given by Main Activity
@@ -24,6 +25,7 @@ public class ClassAdapter extends BaseAdapter {
         this.context = applicationContext;
         this.itemsList = itemsList;
         inflater = (LayoutInflater.from(applicationContext));
+
     }
     /**
      * Getter for size of list
@@ -92,4 +94,10 @@ public class ClassAdapter extends BaseAdapter {
         this.itemsList = itemsList;
         updateValues();
     }
+
+    public void transferItem(int i) {
+        MainActivity.transferList.addItem(itemsList.removeItem(i));
+        updateValues();
+    }
+
 }
