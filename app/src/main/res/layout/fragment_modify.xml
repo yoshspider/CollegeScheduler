@@ -17,7 +17,7 @@
         android:text="Back" />
 
     <EditText
-        android:id="@+id/section"
+        android:id="@+id/course_entry"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
@@ -26,18 +26,6 @@
         android:layout_marginBottom="0dp"
         android:ems="10"
         android:hint="Course"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/section"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:ems="10"
-        android:hint="Section"
         android:inputType="text" />
 
     <EditText
