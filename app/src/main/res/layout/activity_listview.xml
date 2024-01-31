@@ -21,6 +21,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/topTextView" />
 
     <ImageButton
@@ -36,6 +37,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/middleTextView" />
 
     <TextView
@@ -43,22 +45,15 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/bottomLeftTextView"
-
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/middleTextView" />
-
-    <ImageButton
-        android:id="@+id/modify"
-        android:layout_width="32dp"
-        android:layout_height="50dp"
-        android:src="@android:drawable/ic_menu_edit"
-        app:layout_constraintEnd_toStartOf="@+id/delete"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/checkCompleteButton"
         android:layout_width="32dp"
         android:layout_height="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/modify"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintStart_toEndOf="@+id/middleTextView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/checkbox_on_background" />
 

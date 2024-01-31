@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class ListItem implements Comparable<ListItem>{
-    private static final int[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.MAGENTA, Color.CYAN};
+    private static int[] colors;
     private int color;
     private static int currentID  = 0;
     private int ID;
@@ -28,10 +28,17 @@ public abstract class ListItem implements Comparable<ListItem>{
      */
     public ListItem() {
         ID = currentID;
+        if(currentID == 0) {
+            colors = new int[13];
+            for (int i = 0; i < 13; i++) {
+                colors[i] =  100*16777216 + 40 * i * 65536 + (255-i*40) * 256 + 150;
+            }
+        }
         currentID++;
         color = colors[ID % colors.length];
         sortingMethod = 1;
         calendarDate = Calendar.getInstance();
+
     }
 
     public ListItem(Calendar time) {
@@ -164,7 +171,7 @@ public abstract class ListItem implements Comparable<ListItem>{
      */
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         ImageButton deleteButton = view.findViewById(R.id.delete);
-        ImageButton modifyButton = view.findViewById(R.id.modify);
+      //  ImageButton modifyButton = view.findViewById(R.id.modify);
         ImageButton checkCompleteButton = view.findViewById(R.id.checkCompleteButton);
         deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
         if (! (this instanceof Class)) {
