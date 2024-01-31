@@ -119,7 +119,7 @@ public class AddFragment extends Fragment {
 //                }
 
 
-                classActivity.getClassList().addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, Integer.toString(intStartTime), Integer.toString(intEndTime), locationInput.getText().toString()));
+                classActivity.getClassList().addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, intStartTime, intEndTime, locationInput.getText().toString()));
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(AddFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
@@ -135,7 +135,7 @@ public class AddFragment extends Fragment {
         // Create a new instance of TimePickerDialog and show it
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 getContext(),
-                (view, hourOfDay, minute1) -> intStartTime = 100 * hour + minute1,
+                (view, hourOfDay, minuteOfDay) -> intStartTime = 100 * hourOfDay + minuteOfDay,
                 hour,
                 minute,
                 false);
@@ -151,7 +151,7 @@ public class AddFragment extends Fragment {
         // Create a new instance of TimePickerDialog and show it
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 getContext(),
-                (view, hourOfDay, minute1) -> intEndTime = 100 * hour + minute1,
+                (view, hourOfDay, minuteOfDay) -> intEndTime = 100 * hourOfDay + minuteOfDay,
                 hour,
                 minute,
                 false);

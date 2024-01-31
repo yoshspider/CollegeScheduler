@@ -12,8 +12,8 @@ public class Class extends ListItem  {
     private String className;
     private String professorName;
     private boolean[] meetingDates;
-    private String startTime;
-    private String endTime;
+    private int startTime;
+    private int endTime;
     private String location;
 
     /**
@@ -24,7 +24,7 @@ public class Class extends ListItem  {
      * @param startTime
      * @param endTime
      */
-    public Class(String className, String professorName, boolean[] meetingDates, String startTime, String endTime, String location) {
+    public Class(String className, String professorName, boolean[] meetingDates, int startTime, int endTime, String location) {
         this.className = className;
         this.professorName = professorName;
         this.meetingDates = meetingDates;
@@ -32,7 +32,7 @@ public class Class extends ListItem  {
         this.endTime = endTime;
         this.location = location;
         setNameSort(className);
-       // setClockTime(startTime, endTime);
+        setClockTime(startTime, endTime);
     }
 
 
@@ -64,7 +64,7 @@ public class Class extends ListItem  {
      * getter for the start time of the class
      * @return
      */
-    public String getStartTime() {
+    public int getStartTime() {
         return startTime;
     }
 
@@ -72,7 +72,7 @@ public class Class extends ListItem  {
      * getter for the end time of the class
      * @return
      */
-    public String getEndTime() {
+    public int getEndTime() {
         return endTime;
     }
 
@@ -101,8 +101,8 @@ public class Class extends ListItem  {
      * @return corrected string
      */
     public String meetingString() {
-        return daysOfTheWeekConverter(getMeetingDates()) + " " + getStartTime()
-                + " - " + getEndTime();
+        return daysOfTheWeekConverter(getMeetingDates()) + " " + timeConverter(getStartTime())
+                + " - " + timeConverter(getEndTime());
     }
 //    public String timeConverter(int time) {
 //        return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");

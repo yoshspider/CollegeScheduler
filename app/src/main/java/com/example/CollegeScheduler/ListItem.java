@@ -150,6 +150,9 @@ public abstract class ListItem implements Comparable<ListItem>{
         background.setBackgroundColor(getColor());
         return view;
     }
+    public String timeConverter(int time) {
+        return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
+    }
 
     /**
      * draws all the buttons and adds functionality
