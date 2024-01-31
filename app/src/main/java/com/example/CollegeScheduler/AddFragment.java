@@ -105,8 +105,8 @@ public class AddFragment extends Fragment {
                 }
 
 
-                classActivity.classList.addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, startFormatted, endFormatted, locationInput.getText().toString()));
-                classActivity.classAdapter.updateValues();
+                classActivity.getClassList().addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, startFormatted, endFormatted, locationInput.getText().toString()));
+                classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(AddFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }

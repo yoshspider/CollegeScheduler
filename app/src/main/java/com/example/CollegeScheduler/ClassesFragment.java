@@ -32,15 +32,15 @@ public class ClassesFragment extends Fragment {
         }
 
         binding = FragmentClassesBinding.inflate(inflater, container, false);
-
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.simpleListView.setAdapter(classActivity.classAdapter);
+        binding.simpleListView.setAdapter(classActivity.getClassAdapter());
 
-        binding.simpleListView.setAdapter(classActivity.classAdapter);
+        binding.simpleListView.setAdapter(classActivity.getClassAdapter());
 
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +114,8 @@ public class ClassesFragment extends Fragment {
     }
     private void buttonNamesOfCompletedTasks () {
         binding.switchItems.setText("Switch to Class List");
-        binding.sort1.setText("Sort by Task Name");
-        binding.sort2.setText("Sort by Task Time");
+        binding.sort1.setText("Sort by Class of Task");
+        binding.sort2.setText("Sort by Time of Task");
         binding.addplaceholder.setText("Add Completed Task");
     }
         @Override
