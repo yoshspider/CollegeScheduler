@@ -69,6 +69,14 @@ public class ClassesFragment extends Fragment {
         sortButtons();
         switchButton();
 
+        binding.editContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(ClassesFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_editClass);
+            }
+        });
+
 
     }
     private void sortButtons() {
@@ -92,14 +100,20 @@ public class ClassesFragment extends Fragment {
             if(currentPage == 0) {
                 classActivity.swapToTasks();
                 buttonNamesOfClass();
+                Button resetButton=(Button) getView().findViewById(R.id.edit_content);
+                resetButton.setVisibility(View.VISIBLE);
                 currentPage++;
             } else if (currentPage == 1){
                 classActivity.swapToCompletedTasks();
                 buttonNamesOfCompletedTasks();
+                Button resetButton=(Button) getView().findViewById(R.id.edit_content);
+                resetButton.setVisibility(View.INVISIBLE);
                 currentPage++;
             } else {
                 classActivity.swapToClass();
                 buttonNamesOfTasks();
+                Button resetButton=(Button) getView().findViewById(R.id.edit_content);
+                resetButton.setVisibility(View.VISIBLE);
                 currentPage = 0;
             }
         });

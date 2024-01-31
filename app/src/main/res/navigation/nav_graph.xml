@@ -14,6 +14,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_addAssignmentFragment"
+            app:destination="@id/addAssignmentFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_editClass"
+            app:destination="@id/editClass" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -23,6 +29,24 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAssignmentFragment"
+        android:name="com.example.CollegeScheduler.AddAssignmentFragment"
+        android:label="fragment_add_assignment"
+        tools:layout="@layout/fragment_add_assignment" >
+        <action
+            android:id="@+id/action_addAssignmentFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editClass"
+        android:name="com.example.CollegeScheduler.EditClass"
+        android:label="fragment_edit_class"
+        tools:layout="@layout/fragment_edit_class" >
+        <action
+            android:id="@+id/action_editClass_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

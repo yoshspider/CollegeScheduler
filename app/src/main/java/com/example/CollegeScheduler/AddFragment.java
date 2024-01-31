@@ -6,17 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.ToggleButton;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.content.Intent;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,11 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.CollegeScheduler.databinding.FragmentModifyBinding;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddFragment extends Fragment {
 
@@ -70,8 +56,8 @@ public class AddFragment extends Fragment {
 
         professorInput = (EditText)view.findViewById(R.id.professor_entry);
         locationInput = (EditText)view.findViewById(R.id.location_entry);
-        courseInput = (EditText)view.findViewById(R.id.course_entry);
-        courseSection = (EditText)view.findViewById(R.id.course_section);
+        courseInput = (EditText)view.findViewById(R.id.name_of_assignment);
+        courseSection = (EditText)view.findViewById(R.id.class_name);
         roomNumber = (EditText)view.findViewById(R.id.room_number);
         mon = (ToggleButton)view.findViewById(R.id.monday_toggle);
         tues = (ToggleButton)view.findViewById(R.id.tuesday_toggle);
