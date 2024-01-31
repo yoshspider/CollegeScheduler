@@ -29,9 +29,21 @@
         android:inputType="text" />
 
     <EditText
+        android:id="@+id/course_section"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:hint="Course Section"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/professor_entry"
         android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginStart="95dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -42,17 +54,28 @@
     <EditText
         android:id="@+id/location_entry"
         android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginStart="95dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="95dp"
         android:ems="10"
         android:hint="Location"
         android:inputType="text" />
+    <EditText
+        android:id="@+id/room_number"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:hint="Room Number"
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginStart="90dp"
         android:orientation="horizontal">
 
@@ -60,35 +83,35 @@
             android:id="@+id/monday_toggle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:checked="false" />
 
         <ToggleButton
             android:id="@+id/tuesday_toggle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:checked="false" />
 
         <ToggleButton
             android:id="@+id/wednesday_toggle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:checked="false" />
 
         <ToggleButton
             android:id="@+id/thursday_toggle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:checked="false" />
 
         <ToggleButton
             android:id="@+id/friday_toggle"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:checked="false" />
     </LinearLayout>
 

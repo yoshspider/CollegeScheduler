@@ -36,8 +36,10 @@ public class AddFragment extends Fragment {
     private MainActivity classActivity;
 
     private EditText courseInput;
+    private EditText courseSection;
     private EditText professorInput;
     private EditText locationInput;
+    private EditText roomNumber;
     private boolean[] daysOn;
 
     private ToggleButton mon;
@@ -69,6 +71,8 @@ public class AddFragment extends Fragment {
         professorInput = (EditText)view.findViewById(R.id.professor_entry);
         locationInput = (EditText)view.findViewById(R.id.location_entry);
         courseInput = (EditText)view.findViewById(R.id.course_entry);
+        courseSection = (EditText)view.findViewById(R.id.course_section);
+        roomNumber = (EditText)view.findViewById(R.id.room_number);
         mon = (ToggleButton)view.findViewById(R.id.monday_toggle);
         tues = (ToggleButton)view.findViewById(R.id.tuesday_toggle);
         wed = (ToggleButton)view.findViewById(R.id.wednesday_toggle);
@@ -119,7 +123,11 @@ public class AddFragment extends Fragment {
 //                }
 
 
-                classActivity.getClassList().addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, intStartTime, intEndTime, locationInput.getText().toString()));
+                classActivity.getClassList().addItem(new Class(courseInput.getText().toString() + " " + courseSection.getText().toString(),
+                        professorInput.getText().toString(),
+                        daysOn, intStartTime, intEndTime,
+                        locationInput.getText().toString() + " " + roomNumber.getText().toString()));
+
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(AddFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
