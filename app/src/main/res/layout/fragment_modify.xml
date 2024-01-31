@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/modifyFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/back_button"
@@ -13,187 +14,108 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="3dp"
-        android:text="Back"
-        app:layout_constraintBottom_toTopOf="@+id/course_entry"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Back" />
 
     <EditText
         android:id="@+id/course_entry"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Course"
-        app:layout_constraintBottom_toTopOf="@+id/professor_entry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/professor_entry"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Professor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_entry" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/location_entry"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="95dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/professor_entry" />
+        android:inputType="text" />
 
-    <ToggleButton
-        android:id="@+id/monday_toggle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:checked="false"
-        app:layout_constraintEnd_toStartOf="@+id/friday_toggle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginStart="90dp"
+        android:orientation="horizontal">
 
-    <ToggleButton
-        android:id="@+id/tuesday_toggle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:checked="false"
-        app:layout_constraintEnd_toStartOf="@+id/wednesday_toggle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/friday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
+        <ToggleButton
+            android:id="@+id/monday_toggle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:checked="false" />
 
-    <ToggleButton
-        android:id="@+id/wednesday_toggle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:checked="false"
-        app:layout_constraintEnd_toStartOf="@+id/thursday_toggle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tuesday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
+        <ToggleButton
+            android:id="@+id/tuesday_toggle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:checked="false" />
 
-    <ToggleButton
-        android:id="@+id/thursday_toggle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:checked="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/wednesday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
+        <ToggleButton
+            android:id="@+id/wednesday_toggle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:checked="false" />
 
-    <ToggleButton
-        android:id="@+id/friday_toggle"
-        android:layout_width="50dp"
+        <ToggleButton
+            android:id="@+id/thursday_toggle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:checked="false" />
+
+        <ToggleButton
+            android:id="@+id/friday_toggle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:checked="false" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/startTime"
+        android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:checked="false"
-        app:layout_constraintEnd_toStartOf="@+id/tuesday_toggle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/monday_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/location_entry" />
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="25dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/endTime"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="25dp"
+        android:text="Button" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="16dp"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/time_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="start_entry,end_entry,start_text,end_text"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/start_entry"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/end_entry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/start_text"
-        app:layout_constraintTop_toBottomOf="@+id/tuesday_toggle" />
-
-    <EditText
-        android:id="@+id/end_entry"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/save_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/end_text"
-        app:layout_constraintTop_toBottomOf="@+id/start_entry" />
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="0dp"
+        android:text="Save" />
 
-    <TextView
-        android:id="@+id/start_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="55dp"
-        android:text="Start Time:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/start_entry"
-        app:layout_constraintEnd_toStartOf="@+id/start_entry"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monday_toggle" />
-
-    <TextView
-        android:id="@+id/end_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
-        android:text="End Time:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/end_entry"
-        app:layout_constraintEnd_toStartOf="@+id/end_entry"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_text"
-        app:layout_constraintVertical_bias="0.75" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

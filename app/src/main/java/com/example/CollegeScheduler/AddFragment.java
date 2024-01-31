@@ -1,10 +1,12 @@
 package com.example.CollegeScheduler;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.ToggleButton;
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.example.CollegeScheduler.databinding.FragmentModifyBinding;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AddFragment extends Fragment {
@@ -35,8 +38,6 @@ public class AddFragment extends Fragment {
     private EditText courseInput;
     private EditText professorInput;
     private EditText locationInput;
-    private EditText startTime;
-    private EditText endTime;
     private boolean[] daysOn;
 
     private ToggleButton mon;
@@ -45,6 +46,8 @@ public class AddFragment extends Fragment {
     private ToggleButton thurs;
     private ToggleButton fri;
 
+    private int intStartTime;
+    private int intEndTime;
 
 
 
@@ -66,8 +69,6 @@ public class AddFragment extends Fragment {
         professorInput = (EditText)view.findViewById(R.id.professor_entry);
         locationInput = (EditText)view.findViewById(R.id.location_entry);
         courseInput = (EditText)view.findViewById(R.id.course_entry);
-        startTime = (EditText)view.findViewById(R.id.start_entry);
-        endTime = (EditText)view.findViewById(R.id.end_entry);
         mon = (ToggleButton)view.findViewById(R.id.monday_toggle);
         tues = (ToggleButton)view.findViewById(R.id.tuesday_toggle);
         wed = (ToggleButton)view.findViewById(R.id.wednesday_toggle);
@@ -82,6 +83,19 @@ public class AddFragment extends Fragment {
             }
         });
 
+        binding.startTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showStartTimePickerDialog();
+            }
+        });
+        binding.endTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEndTimePickerDialog();
+            }
+        });
+
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,24 +107,56 @@ public class AddFragment extends Fragment {
                         fri.isChecked()
                 };
 
-                //parse time
-                DateFormat formatter = new SimpleDateFormat("hh:mm");
-                String startFormatted;
-                String endFormatted;
-                try {
-                    startFormatted = formatter.format(formatter.parse(startTime.getText().toString()));
-                    endFormatted = formatter.format(formatter.parse(endTime.getText().toString()));
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
+//                //parse time
+//                DateFormat formatter = new SimpleDateFormat("hh:mm");
+//                String startFormatted;
+//                String endFormatted;
+//                try {
+//                    startFormatted = formatter.format(formatter.parse(startTime.getText().toString()));
+//                    endFormatted = formatter.format(formatter.parse(endTime.getText().toString()));
+//                } catch (ParseException e) {
+//                    throw new RuntimeException(e);
+//                }
 
 
-                classActivity.getClassList().addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, startFormatted, endFormatted, locationInput.getText().toString()));
+                classActivity.getClassList().addItem(new Class(courseInput.getText().toString(), professorInput.getText().toString(), daysOn, Integer.toString(intStartTime), Integer.toString(intEndTime), locationInput.getText().toString()));
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(AddFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
+    }
+    public void showStartTimePickerDialog() {
+        // Get the current time
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        // Create a new instance of TimePickerDialog and show it
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getContext(),
+                (view, hourOfDay, minute1) -> intStartTime = 100 * hour + minute1,
+                hour,
+                minute,
+                false);
+
+        timePickerDialog.show();
+    }
+    public void showEndTimePickerDialog() {
+        // Get the current time
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        // Create a new instance of TimePickerDialog and show it
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getContext(),
+                (view, hourOfDay, minute1) -> intEndTime = 100 * hour + minute1,
+                hour,
+                minute,
+                false);
+
+        timePickerDialog.show();
     }
 
     @Override

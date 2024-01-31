@@ -1,11 +1,13 @@
 package com.example.CollegeScheduler;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,20 +47,20 @@ public class ClassesFragment extends Fragment {
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
-//                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
-//                classActivity.classAdapter.updateValues();
-//                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CLOUGH 302"));
-//                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "SKILES 272"));
-//                classActivity.classList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
-//
-//
-//                Calendar ab = new GregorianCalendar(2003,3,5,5,30);
-//                classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab ));
-//                Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
-//                classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
-//
-//                classActivity.classAdapter.updateValues();
+               classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, "700", "900", "CULC 250"));
+                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, "800", "1000", "CULC 250"));
+                classActivity.classAdapter.updateValues();
+                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, "700", "900", "CLOUGH 302"));
+                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, "800", "1000", "SKILES 272"));
+                classActivity.classList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, "1230","1430", "HOWEY A419"));
+
+
+                Calendar ab = new GregorianCalendar(2003,3,5,5,30);
+                classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab ));
+                Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
+                classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
+
+                classActivity.classAdapter.updateValues();
 
                 NavHostFragment.findNavController(ClassesFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
@@ -66,6 +68,8 @@ public class ClassesFragment extends Fragment {
         });
         sortButtons();
         switchButton();
+
+
     }
     private void sortButtons() {
         binding.sort1.setOnClickListener((View.OnClickListener) view12 -> {
@@ -123,5 +127,6 @@ public class ClassesFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
 }

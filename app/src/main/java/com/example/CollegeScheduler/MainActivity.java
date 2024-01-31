@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView simpleList;
 
     //make private with getters & setters?
-    private final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
-    private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
+    public final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
+    public final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
     public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
-    private ClassAdapter classAdapter;
+    public ClassAdapter classAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
