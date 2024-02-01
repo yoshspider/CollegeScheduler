@@ -61,9 +61,13 @@ public class ClassesFragment extends Fragment {
                 classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
 
                 classActivity.classAdapter.updateValues();
-
-                NavHostFragment.findNavController(ClassesFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                if (currentPage == 0) {
+                    NavHostFragment.findNavController(ClassesFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                } else {
+                    NavHostFragment.findNavController(ClassesFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_addAssignmentFragment);
+                }
             }
         });
         sortButtons();
@@ -114,7 +118,7 @@ public class ClassesFragment extends Fragment {
             classActivity.swapToCompletedTasks();
             buttonNamesOfCompletedTasks();
             Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-            resetButton.setVisibility(View.INVISIBLE);
+            //resetButton.setVisibility(View.INVISIBLE);
             currentPage = 2;
         });
     }

@@ -4,88 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/modifyFragmentOver"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AddAssignmentFragment">
 
-    <LinearLayout
-        android:id="@+id/modifyFragment"
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="3dp"
+        android:text="Back" />
+
+    <TextView
+        android:id="@+id/selectClass"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:text="\n Select a class" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/selectClass"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="50dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:text="\n Priority of Task" />
 
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="3dp"
-            android:text="Back" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10" />
 
-        <EditText
-            android:id="@+id/name_of_assignment"
-            android:layout_width="250dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:ems="10"
-            android:hint="Name of Assignment"
-            android:inputType="text" />
+    <EditText
+        android:id="@+id/name_of_assignment"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:hint="Name of Assignment"
+        android:inputType="text" />
 
-        <TextView
-            android:id="@+id/selectClass"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:ems="10"
-            android:text="\n Select a class" />
+    <EditText
+        android:id="@+id/class_name"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:hint="Class Name"
+        android:inputType="text" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="250dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:ems="10"/>
+    <Button
+        android:id="@+id/endTime"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="25dp"
+        android:text="Due Date" />
 
-        <EditText
-            android:id="@+id/class_name"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:ems="10"
-            android:hint="Class Name"
-            android:inputType="text" />
-
-        <Button
-            android:id="@+id/endTime"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="25dp"
-            android:text="Due Date" />
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="131dp"
-            android:layout_marginBottom="0dp"
-            android:text="Save" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="0dp"
+        android:text="Save" />
 
 </LinearLayout>

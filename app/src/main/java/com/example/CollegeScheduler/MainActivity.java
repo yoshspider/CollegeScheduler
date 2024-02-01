@@ -37,11 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
         simpleList = findViewById(R.id.simpleListView);
         classAdapter = new ClassAdapter(getApplicationContext(), classList);
         simpleList.setAdapter(classAdapter);
