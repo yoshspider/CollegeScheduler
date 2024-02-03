@@ -111,4 +111,9 @@ public class Class extends ListItem  {
         String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
         return week.substring(0, week.length()-1);
     }
+
+    @Override
+    public String toString() {
+        return className;
+    }
 }

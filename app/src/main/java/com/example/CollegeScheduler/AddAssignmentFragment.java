@@ -1,5 +1,6 @@
 package com.example.CollegeScheduler;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
@@ -12,12 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.ToggleButton;
 
 import com.example.CollegeScheduler.databinding.FragmentAddAssignmentBinding;
-import com.example.CollegeScheduler.databinding.FragmentModifyBinding;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -29,10 +29,13 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
 
     private EditText name_of_assignment;
     private EditText class_name;
-
-    private int intDueDate;
-
-    Class theClass;
+    private Calendar calendarDueDate;
+    private Class theClass;
+    private int endHour;
+    private int endMinute;
+    private int endYear;
+    private int endMonth;
+    private int endDay;
 
 
 
@@ -51,75 +54,64 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        name_of_assignment = (EditText)view.findViewById(R.id.name_of_assignment);
-        //get the spinner from the xml.
-        Spinner dropdown = getView().findViewById(R.id.spinner);
-        //create a list of items for the spinner.
-        String[] items = new String[]{"1", "2", "three"};
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
+        name_of_assignment = view.findViewById(R.id.name_of_assignment);
+        Spinner dropdown = getView().findViewById(R.id.classSpinnerAssignment);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, classActivity.getClassList().names());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
-        binding.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(AddAssignmentFragment.this)
-                        .navigate(R.id.action_addAssignmentFragment_to_FirstFragment);
-            }
-        });
-        binding.endTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEndTimePickerDialog();
-            }
-        });
+        binding.backButton.setOnClickListener((View.OnClickListener) view1 -> NavHostFragment.findNavController(AddAssignmentFragment.this)
+                .navigate(R.id.action_addAssignmentFragment_to_FirstFragment));
+        binding.timePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showEndTimePickerDialog());
+        binding.datePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showDatePickerDialog());
 
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                //parse time
-//                DateFormat formatter = new SimpleDateFormat("hh:mm");
-//                String startFormatted;
-//                String endFormatted;
-//                try {
-//                    startFormatted = formatter.format(formatter.parse(startTime.getText().toString()));
-//                    endFormatted = formatter.format(formatter.parse(endTime.getText().toString()));
-//                } catch (ParseException e) {
-//                    throw new RuntimeException(e);
-//                }
-
-
-                classActivity.getClassList().addItem(new Assignment(name_of_assignment.getText().toString(),
+                calendarDueDate = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
+                classActivity.getTasksList().addItem(new Assignment(name_of_assignment.getText().toString(),
                         theClass,
-                        new GregorianCalendar()));
-
+                        calendarDueDate));
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(AddAssignmentFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                        .navigate(R.id.action_addAssignmentFragment_to_FirstFragment);
             }
         });
     }
     public void showEndTimePickerDialog() {
-        // Get the current time
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
-
-        // Create a new instance of TimePickerDialog and show it
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                getContext(),
-                (view, hourOfDay, minuteOfDay) -> intDueDate = 100 * hourOfDay + minuteOfDay,
-                hour,
-                minute,
-                false);
-
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                (view, hourOfDay, minuteOfDay) -> {endHour = hourOfDay; endMinute = minuteOfDay;},
+                hour, minute, false);
         timePickerDialog.show();
     }
 
+    public void showDatePickerDialog() {
+        // Get the current date
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+
+        // Create a new instance of DatePickerDialog and show it
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        endYear = year;
+                        endMonth = month;
+                        endDay = dayOfMonth;
+                    }
+                },
+                year,
+                month,
+                dayOfMonth);
+
+        datePickerDialog.show();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -129,7 +121,7 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        
+        theClass = (Class) classActivity.getClassList().getItem(position);
     }
 
     @Override

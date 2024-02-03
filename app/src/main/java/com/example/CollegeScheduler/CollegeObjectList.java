@@ -49,6 +49,14 @@ public class CollegeObjectList<T extends Comparable<? super T>> {
         Collections.sort(itemList);
     }
 
+    public String[] names() {
+        String[] list = new String[itemList.size()];
+        for (int i = 0; i < list.length; i++) {
+            list[i] = itemList.get(i).toString();
+        }
+        return list;
+    }
+
 
 
 }

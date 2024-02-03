@@ -18,7 +18,7 @@
         android:text="Back" />
 
     <TextView
-        android:id="@+id/selectClass"
+        android:id="@+id/selectClassAssignment"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="95dp"
@@ -26,10 +26,10 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:ems="10"
-        android:text="\n Select a class" />
+        android:text="\n Class of Assignment" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/classSpinnerAssignment"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
@@ -39,8 +39,8 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/selectClass"
-        android:layout_width="match_parent"
+        android:id="@+id/selectPriorityAssignment"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="95dp"
         android:layout_marginTop="0dp"
@@ -50,8 +50,8 @@
         android:text="\n Priority of Task" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
+        android:id="@+id/prioritySpinnerAssignment"
+        android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"
         android:layout_marginTop="0dp"
@@ -71,25 +71,23 @@
         android:hint="Name of Assignment"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/class_name"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:ems="10"
-        android:hint="Class Name"
-        android:inputType="text" />
+    <Button
+        android:id="@+id/datePickerButtonAssignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="30dp"
+        android:onClick="showDatePickerDialog"
+        android:text="Pick Date" />
 
     <Button
-        android:id="@+id/endTime"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:id="@+id/timePickerButtonAssignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick Time"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="25dp"
-        android:text="Due Date" />
+        android:layout_marginTop="30dp"
+        android:onClick="showTimePickerDialog"/>
 
     <Button
         android:id="@+id/save_button"
