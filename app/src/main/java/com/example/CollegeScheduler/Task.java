@@ -7,16 +7,16 @@ import java.util.Calendar;
 
 public class Task extends ListItem{
     private String name;
-    private Class theClass;
-    private boolean complete;
+    private Class classOfTask;
+    private int priority;
 
-    public Task (String name, Calendar dueDate, Class theClass, boolean complete) {
+    public Task (String name, Calendar dueDate, Class classOfTask, int priority) {
         super(dueDate);
         this.name = name;
-        this.theClass = theClass;
-        this.complete = complete;
-        setColor(this.theClass.getColor());
-        setNameSort(this.theClass.getClassName() + "1" + name);
+        this.classOfTask = classOfTask;
+        setColor(this.classOfTask.getColor());
+        setNameSort(this.classOfTask.getClassName() + "1" + name);
+        this.priority = priority;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class Task extends ListItem{
         view = super.drawScreen(view, inflater, i, adapter);
         String date = super.getTime();
         int splitIndex = date.indexOf(" ");
-        String[] values = {getName(), getTheClass().getClassName(),
-                date.substring(0, splitIndex), date.substring(splitIndex + 1)};
+        String[] values = {getName(), date,
+                getTheClass().getClassName(), getPriorities()[priority]};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
         return view;
@@ -41,18 +41,11 @@ public class Task extends ListItem{
     }
 
     public Class getTheClass() {
-        return theClass;
+        return classOfTask;
     }
 
     public void setTheClass(Class theClass) {
-        this.theClass = theClass;
+        this.classOfTask = theClass;
     }
 
-    public boolean isComplete() {
-        return complete;
-    }
-
-    public void setComplete(boolean complete) {
-        this.complete = complete;
-    }
 }

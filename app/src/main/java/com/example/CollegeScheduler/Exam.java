@@ -12,8 +12,9 @@ public class Exam extends ListItem {
     private String examName;
     private String details;
     private String location;
+    private int priority;
 
-    public Exam(Class theClass, String examName, String details, String location, Calendar calendar) {
+    public Exam(Class theClass, String examName, String details, String location, Calendar calendar, int priority) {
         super.setCalendar(calendar);
         this.theClass = theClass;
         this.examName = examName;
@@ -21,6 +22,7 @@ public class Exam extends ListItem {
         this.location = location;
         setColor(this.theClass.getColor());
         setNameSort(this.theClass.getClassName() + "1" + examName);
+        this.priority = priority;
     }
 
 
