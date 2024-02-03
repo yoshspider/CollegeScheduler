@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -22,11 +21,12 @@ import com.example.CollegeScheduler.databinding.FragmentAddAssignmentBinding;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class AddAssignmentFragment extends Fragment {
+public class AddTaskFragment extends Fragment {
 
     private FragmentAddAssignmentBinding binding;
     private MainActivity classActivity;
     private EditText name_of_assignment;
+    private EditText location_of_assignment;
     private Calendar calendarDueDate;
     private Class theClass;
     private int endHour;
@@ -35,6 +35,7 @@ public class AddAssignmentFragment extends Fragment {
     private int endMonth;
     private int endDay;
     private int priority;
+    private int type;
     private final Calendar c = Calendar.getInstance();
     @Override
     public View onCreateView(
@@ -48,34 +49,39 @@ public class AddAssignmentFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         adapterSetUp(view);
-        buttonSetUp();
+        buttonSetUp(view);
         binding.saveButton.setOnClickListener(view12 -> {
             calendarDueDate = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
-            Assignment newAssignment = new Assignment(name_of_assignment.getText().toString(), theClass, calendarDueDate, priority);
-            classActivity.getTasksList().addItem(newAssignment);
+            Task newTask = new Task(type, name_of_assignment.getText().toString(), calendarDueDate, theClass, priority, location_of_assignment.getText().toString());
+            classActivity.getTasksList().addItem(newTask);
             classActivity.getClassAdapter().updateValues();
-            NavHostFragment.findNavController(AddAssignmentFragment.this)
+            NavHostFragment.findNavController(AddTaskFragment.this)
                     .navigate(R.id.action_addAssignmentFragment_to_FirstFragment);
         });
     }
-    public void buttonSetUp() {
-        binding.backButton.setOnClickListener((View.OnClickListener) view1 -> NavHostFragment.findNavController(AddAssignmentFragment.this)
+    public void buttonSetUp(View view) {
+        name_of_assignment = view.findViewById(R.id.name_of_task);
+        location_of_assignment = view.findViewById(R.id.location_of_task);
+        binding.backButton.setOnClickListener(view1 -> NavHostFragment.findNavController(AddTaskFragment.this)
                 .navigate(R.id.action_addAssignmentFragment_to_FirstFragment));
-        binding.timePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showEndTimePickerDialog());
-        binding.datePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showDatePickerDialog());
+        binding.timePickerButtonTask.setOnClickListener(v -> showEndTimePickerDialog());
+        binding.datePickerButtonTask.setOnClickListener(v -> showDatePickerDialog());
     }
     public void adapterSetUp(View view) {
-        name_of_assignment = view.findViewById(R.id.name_of_assignment);
-        Spinner dropdownClass = getView().findViewById(R.id.classSpinnerAssignment);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, classActivity.getClassList().names());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdownClass.setAdapter(adapter);
+        Spinner dropdownType = getView().findViewById(R.id.taskTypeSpinner);
+        adapterParts(dropdownType, Task.types);
+        dropdownType.setOnItemSelectedListener(new AdapterTypeSelector());
+        Spinner dropdownClass = getView().findViewById(R.id.classSpinnerTask);
+        adapterParts(dropdownClass, classActivity.getClassList().names());
         dropdownClass.setOnItemSelectedListener(new AdapterClassSelector());
-        Spinner dropdownPriority = getView().findViewById(R.id.prioritySpinnerAssignment);
-        ArrayAdapter<String> adapterPriority = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, ListItem.getPriorities());
-        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdownPriority.setAdapter(adapterPriority);
+        Spinner dropdownPriority = getView().findViewById(R.id.prioritySpinnerTask);
+        adapterParts(dropdownPriority, Task.priorities);
         dropdownPriority.setOnItemSelectedListener(new AdapterPrioritySelector());
+    }
+    private void adapterParts(Spinner spinner, String[] items) {
+        ArrayAdapter<String> adapterPriority = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
+        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterPriority);
     }
     public void showEndTimePickerDialog() {
         int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -123,6 +129,17 @@ public class AddAssignmentFragment extends Fragment {
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             priority = 0;
+        }
+    }
+    private class AdapterTypeSelector implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            type = position;
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            type = 0;
         }
     }
 }

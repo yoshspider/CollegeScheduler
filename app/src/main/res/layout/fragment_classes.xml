@@ -7,27 +7,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/toClassButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:text="Go to Classes" />
 
         <Button
             android:id="@+id/toTaskButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:text="Go to Tasks" />
 
         <Button
             android:id="@+id/toCompletedTaskButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:text="Go to Completed Tasks" />
 
@@ -64,7 +64,7 @@
 
         <Button
             android:id="@+id/sort2"
-            android:layout_width="212dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="Sort by Class Time" />
 
@@ -73,7 +73,7 @@
     <Button
         android:id="@+id/edit_content"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:text="Edit a class" />
 

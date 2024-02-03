@@ -24,50 +24,31 @@ public class ClassesFragment extends Fragment {
     private MainActivity classActivity;
     private int currentPage = 0;
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         classActivity = (MainActivity)getActivity();
         if(savedInstanceState == null) {
             binding = FragmentClassesBinding.inflate(inflater, container, false);
         }
-
         binding = FragmentClassesBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.simpleListView.setAdapter(classActivity.getClassAdapter());
-
         binding.simpleListView.setAdapter(classActivity.getClassAdapter());
-
         binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
+
+                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
                 classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
-                classActivity.classAdapter.updateValues();
-                classActivity.classList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CLOUGH 302"));
-                classActivity.classList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "SKILES 272"));
                 classActivity.classList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
-
-
-                Calendar ab = new GregorianCalendar(2003,3,5,5,30);
-                classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab, 0));
-                Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
-                classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a, 0));
-
                 classActivity.classAdapter.updateValues();
                 if (currentPage == 0) {
                     NavHostFragment.findNavController(ClassesFragment.this)
                             .navigate(R.id.action_FirstFragment_to_SecondFragment);
                 } else {
-                    if (classActivity.getClassList().size() == 0) {
-                        classActivity.getClassList().addItem(new Class());
-                    }
                     NavHostFragment.findNavController(ClassesFragment.this)
                             .navigate(R.id.action_FirstFragment_to_addAssignmentFragment);
                 }
@@ -75,15 +56,9 @@ public class ClassesFragment extends Fragment {
         });
         sortButtons();
         switchButton();
-
-        binding.editContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(ClassesFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_editClass);
-            }
-        });
-
+        binding.editContent.setOnClickListener(view1 -> NavHostFragment.findNavController(ClassesFragment.this)
+                .navigate(R.id.action_FirstFragment_to_editClass));
+        setCurrentPage(0);
 
     }
     private void sortButtons() {
@@ -105,24 +80,15 @@ public class ClassesFragment extends Fragment {
     private void switchButton() {
         binding.toClassButton.setOnClickListener((View.OnClickListener) view13 -> {
             classActivity.swapToClass();
-            buttonNamesOfTasks();
-            Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-            resetButton.setVisibility(View.VISIBLE);
-            currentPage = 0;
+            setCurrentPage(0);
         });
         binding.toTaskButton.setOnClickListener((View.OnClickListener) view13 -> {
             classActivity.swapToTasks();
-            buttonNamesOfClass();
-            Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-            resetButton.setVisibility(View.VISIBLE);
-            currentPage = 1;
+            setCurrentPage(1);
         });
         binding.toCompletedTaskButton.setOnClickListener((View.OnClickListener) view13 -> {
             classActivity.swapToCompletedTasks();
-            buttonNamesOfCompletedTasks();
-            Button resetButton=(Button) getView().findViewById(R.id.edit_content);
-            //resetButton.setVisibility(View.INVISIBLE);
-            currentPage = 2;
+            setCurrentPage(2);
         });
     }
     private void buttonNamesOfClass () {
@@ -146,5 +112,14 @@ public class ClassesFragment extends Fragment {
         binding = null;
     }
 
-
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+        if (currentPage == 0) {
+            buttonNamesOfTasks();
+        } else if (currentPage == 1) {
+            buttonNamesOfClass();
+        } else {
+            buttonNamesOfCompletedTasks();
+        }
+    }
 }

@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/addAssignmentFragment"
-        android:name="com.example.CollegeScheduler.AddAssignmentFragment"
+        android:name="com.example.CollegeScheduler.AddTaskFragment"
         android:label="fragment_add_assignment"
         tools:layout="@layout/fragment_add_assignment" >
         <action

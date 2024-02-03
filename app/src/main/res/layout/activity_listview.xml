@@ -26,7 +26,7 @@
 
     <ImageButton
         android:id="@+id/delete"
-        android:layout_width="32dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@android:drawable/ic_menu_delete"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
 
     <ImageButton
         android:id="@+id/checkCompleteButton"
-        android:layout_width="32dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintEnd_toStartOf="@+id/delete"
         app:layout_constraintStart_toEndOf="@+id/middleTextView"

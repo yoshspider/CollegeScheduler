@@ -17,7 +17,7 @@
         android:text="Back" />
 
     <EditText
-        android:id="@+id/name_of_assignment"
+        android:id="@+id/name_of_task"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="95dp"

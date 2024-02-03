@@ -23,7 +23,7 @@ public abstract class ListItem implements Comparable<ListItem>{
     private String nameSort;
     private Calendar calendarDate;
 
-    private static String[] priorities = {"High", "Medium", "Low"};
+
 
     /**
      * Default Constructor Assuming CalendarDate is Today
@@ -31,8 +31,8 @@ public abstract class ListItem implements Comparable<ListItem>{
     public ListItem() {
         ID = currentID;
         if(currentID == 0) {
-            colors = new int[13];
-            for (int i = 0; i < 13; i++) {
+            colors = new int[20];
+            for (int i = 0; i < 20; i++) {
                 colors[i] =  100*16777216 + 40 * i * 65536 + (255-i*40) * 256 + 150;
             }
         }
@@ -173,13 +173,8 @@ public abstract class ListItem implements Comparable<ListItem>{
      */
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         ImageButton deleteButton = view.findViewById(R.id.delete);
-        ImageButton checkCompleteButton = view.findViewById(R.id.checkCompleteButton);
         deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
-        if (! (this instanceof Class)) {
-            checkCompleteButton.setOnClickListener(buttonView -> adapter.transferItem(i));
-        } else {
-            checkCompleteButton.setVisibility(View.GONE);
-        }
+
         return view;
     }
 
@@ -216,7 +211,4 @@ public abstract class ListItem implements Comparable<ListItem>{
         return view;
     }
 
-    public static String[] getPriorities() {
-        return priorities;
-    }
 }

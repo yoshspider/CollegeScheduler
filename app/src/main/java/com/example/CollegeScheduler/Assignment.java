@@ -75,7 +75,7 @@ public class Assignment extends ListItem {
         String date = getTime();
         int splitIndex = date.indexOf(" ");
         String[] values = {getAssignmentName(), date,
-                getClassOfAssignment().getClassName(), getPriorities()[priority]};
+                getClassOfAssignment().getClassName(), "k"};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
         return view;

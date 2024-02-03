@@ -56,7 +56,7 @@ public class AddFragment extends Fragment {
 
         professorInput = (EditText)view.findViewById(R.id.professor_entry);
         locationInput = (EditText)view.findViewById(R.id.location_entry);
-        courseInput = (EditText)view.findViewById(R.id.name_of_assignment);
+        courseInput = (EditText)view.findViewById(R.id.name_of_task);
         courseSection = (EditText)view.findViewById(R.id.class_name);
         roomNumber = (EditText)view.findViewById(R.id.room_number);
         mon = (ToggleButton)view.findViewById(R.id.monday_toggle);
