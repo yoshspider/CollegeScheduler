@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
     public ClassAdapter classAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

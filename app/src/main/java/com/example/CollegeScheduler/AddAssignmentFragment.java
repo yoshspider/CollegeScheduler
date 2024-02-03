@@ -22,7 +22,7 @@ import com.example.CollegeScheduler.databinding.FragmentAddAssignmentBinding;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class AddAssignmentFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AddAssignmentFragment extends Fragment {
 
     private FragmentAddAssignmentBinding binding;
     private MainActivity classActivity;
@@ -34,6 +34,7 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
     private int endYear;
     private int endMonth;
     private int endDay;
+    private int priority;
     private final Calendar c = Calendar.getInstance();
     @Override
     public View onCreateView(
@@ -50,7 +51,7 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
         buttonSetUp();
         binding.saveButton.setOnClickListener(view12 -> {
             calendarDueDate = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
-            Assignment newAssignment = new Assignment(name_of_assignment.getText().toString(), theClass, calendarDueDate);
+            Assignment newAssignment = new Assignment(name_of_assignment.getText().toString(), theClass, calendarDueDate, priority);
             classActivity.getTasksList().addItem(newAssignment);
             classActivity.getClassAdapter().updateValues();
             NavHostFragment.findNavController(AddAssignmentFragment.this)
@@ -65,11 +66,16 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
     }
     public void adapterSetUp(View view) {
         name_of_assignment = view.findViewById(R.id.name_of_assignment);
-        Spinner dropdown = getView().findViewById(R.id.classSpinnerAssignment);
+        Spinner dropdownClass = getView().findViewById(R.id.classSpinnerAssignment);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, classActivity.getClassList().names());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdown.setAdapter(adapter);
-        dropdown.setOnItemSelectedListener(this);
+        dropdownClass.setAdapter(adapter);
+        dropdownClass.setOnItemSelectedListener(new AdapterClassSelector());
+        Spinner dropdownPriority = getView().findViewById(R.id.prioritySpinnerAssignment);
+        ArrayAdapter<String> adapterPriority = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, ListItem.getPriorities());
+        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdownPriority.setAdapter(adapterPriority);
+        dropdownPriority.setOnItemSelectedListener(new AdapterPrioritySelector());
     }
     public void showEndTimePickerDialog() {
         int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -97,13 +103,26 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
         super.onDestroyView();
         binding = null;
     }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        theClass = (Class) classActivity.getClassList().getItem(position);
-    }
+    private class AdapterClassSelector implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            theClass = (Class) classActivity.getClassList().getItem(position);
+        }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        theClass (Class) classActivity.getClassList().getItem(0);
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            theClass = (Class) classActivity.getClassList().getItem(0);
+        }
+    }
+    private class AdapterPrioritySelector implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            priority = position;
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            priority = 0;
+        }
     }
 }

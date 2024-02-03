@@ -56,7 +56,7 @@ public class ClassesFragment extends Fragment {
 
 
                 Calendar ab = new GregorianCalendar(2003,3,5,5,30);
-                classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab ));
+                classActivity.tasksList.addItem(new Assignment("Project 1",(Class)classActivity.classList.getItem(0), ab, 0));
                 Calendar a = new GregorianCalendar(2023, 1, 25, 6, 30);
                 classActivity.tasksList.addItem(new Exam((Class) classActivity.classList.getItem(1) , "Quiz 1", "quiz on bits and stuff", "IC 211", a));
 

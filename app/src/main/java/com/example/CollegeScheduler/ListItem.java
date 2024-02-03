@@ -23,6 +23,8 @@ public abstract class ListItem implements Comparable<ListItem>{
     private String nameSort;
     private Calendar calendarDate;
 
+    private static String[] priorities = {"High", "Medium", "Low"};
+
     /**
      * Default Constructor Assuming CalendarDate is Today
      */
@@ -212,5 +214,9 @@ public abstract class ListItem implements Comparable<ListItem>{
         bottomLeftTextView.setText(values[2]);
         bottomRightTextView.setText(values[3]);
         return view;
+    }
+
+    public static String[] getPriorities() {
+        return priorities;
     }
 }

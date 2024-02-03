@@ -13,6 +13,7 @@ import java.util.Date;
 public class Assignment extends ListItem {
     private String assignmentName;
     private Class classOfAssignment;
+    private int priority;
 
     /**
      *
@@ -21,7 +22,7 @@ public class Assignment extends ListItem {
      * @param classOfAssignment class of assignment
      * @param time time assignment is due
      */
-    public Assignment(String assignmentName, Class classOfAssignment, Calendar time) {
+    public Assignment(String assignmentName, Class classOfAssignment, Calendar time, int priortiy) {
         super(time);
         this.assignmentName = assignmentName;
         this.classOfAssignment = classOfAssignment;
@@ -73,8 +74,8 @@ public class Assignment extends ListItem {
         view = super.drawScreen(view, inflater, i, adapter);
         String date = getTime();
         int splitIndex = date.indexOf(" ");
-        String[] values = {getAssignmentName(), getClassOfAssignment().getClassName(),
-                date.substring(0, splitIndex), date.substring(splitIndex + 1)};
+        String[] values = {getAssignmentName(), date,
+                getClassOfAssignment().getClassName(), getPriorities()[priority]};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
         return view;
