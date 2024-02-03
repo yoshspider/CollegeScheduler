@@ -137,12 +137,9 @@ public class AddFragment extends Fragment {
         timePickerDialog.show();
     }
     public void showEndTimePickerDialog() {
-        // Get the current time
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
-
-        // Create a new instance of TimePickerDialog and show it
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 getContext(),
                 (view, hourOfDay, minuteOfDay) -> intEndTime = 100 * hourOfDay + minuteOfDay,

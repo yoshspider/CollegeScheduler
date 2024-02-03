@@ -65,6 +65,9 @@ public class ClassesFragment extends Fragment {
                     NavHostFragment.findNavController(ClassesFragment.this)
                             .navigate(R.id.action_FirstFragment_to_SecondFragment);
                 } else {
+                    if (classActivity.getClassList().size() == 0) {
+                        classActivity.getClassList().addItem(new Class());
+                    }
                     NavHostFragment.findNavController(ClassesFragment.this)
                             .navigate(R.id.action_FirstFragment_to_addAssignmentFragment);
                 }

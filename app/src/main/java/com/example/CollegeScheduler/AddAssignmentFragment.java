@@ -26,9 +26,7 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
 
     private FragmentAddAssignmentBinding binding;
     private MainActivity classActivity;
-
     private EditText name_of_assignment;
-    private EditText class_name;
     private Calendar calendarDueDate;
     private Class theClass;
     private int endHour;
@@ -36,50 +34,44 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
     private int endYear;
     private int endMonth;
     private int endDay;
-
-
-
+    private final Calendar c = Calendar.getInstance();
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         classActivity = (MainActivity)getActivity();
-
         binding = FragmentAddAssignmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        adapterSetUp(view);
+        buttonSetUp();
+        binding.saveButton.setOnClickListener(view12 -> {
+            calendarDueDate = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
+            Assignment newAssignment = new Assignment(name_of_assignment.getText().toString(), theClass, calendarDueDate);
+            classActivity.getTasksList().addItem(newAssignment);
+            classActivity.getClassAdapter().updateValues();
+            NavHostFragment.findNavController(AddAssignmentFragment.this)
+                    .navigate(R.id.action_addAssignmentFragment_to_FirstFragment);
+        });
+    }
+    public void buttonSetUp() {
+        binding.backButton.setOnClickListener((View.OnClickListener) view1 -> NavHostFragment.findNavController(AddAssignmentFragment.this)
+                .navigate(R.id.action_addAssignmentFragment_to_FirstFragment));
+        binding.timePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showEndTimePickerDialog());
+        binding.datePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showDatePickerDialog());
+    }
+    public void adapterSetUp(View view) {
         name_of_assignment = view.findViewById(R.id.name_of_assignment);
         Spinner dropdown = getView().findViewById(R.id.classSpinnerAssignment);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, classActivity.getClassList().names());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
-        binding.backButton.setOnClickListener((View.OnClickListener) view1 -> NavHostFragment.findNavController(AddAssignmentFragment.this)
-                .navigate(R.id.action_addAssignmentFragment_to_FirstFragment));
-        binding.timePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showEndTimePickerDialog());
-        binding.datePickerButtonAssignment.setOnClickListener((View.OnClickListener) v -> showDatePickerDialog());
-
-        binding.saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendarDueDate = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
-                classActivity.getTasksList().addItem(new Assignment(name_of_assignment.getText().toString(),
-                        theClass,
-                        calendarDueDate));
-                classActivity.getClassAdapter().updateValues();
-                NavHostFragment.findNavController(AddAssignmentFragment.this)
-                        .navigate(R.id.action_addAssignmentFragment_to_FirstFragment);
-            }
-        });
     }
     public void showEndTimePickerDialog() {
-        final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
@@ -89,27 +81,15 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
     }
 
     public void showDatePickerDialog() {
-        // Get the current date
-        final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-
-        // Create a new instance of DatePickerDialog and show it
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(),
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        endYear = year;
-                        endMonth = month;
-                        endDay = dayOfMonth;
-                    }
-                },
-                year,
-                month,
-                dayOfMonth);
-
+                getContext(), (view, year1, month1, dayOfMonth1) -> {
+                    endYear = year1;
+                    endMonth = month1;
+                    endDay = dayOfMonth1;
+                }, year, month, dayOfMonth);
         datePickerDialog.show();
     }
     @Override
@@ -117,8 +97,6 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
         super.onDestroyView();
         binding = null;
     }
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         theClass = (Class) classActivity.getClassList().getItem(position);
@@ -126,6 +104,6 @@ public class AddAssignmentFragment extends Fragment implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        theClass (Class) classActivity.getClassList().getItem(0);
     }
 }
