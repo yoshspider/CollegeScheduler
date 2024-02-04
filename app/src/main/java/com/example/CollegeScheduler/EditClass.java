@@ -1,6 +1,7 @@
 package com.example.CollegeScheduler;
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -13,13 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class EditClass extends Fragment implements AdapterView.OnItemSelectedListener{
@@ -32,6 +36,22 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
     private FragmentEditClassBinding binding;
     private MainActivity classActivity;
     Context thiscontext;
+    private EditText course_name;
+    private EditText professor_name;
+    private EditText location;
+    private ToggleButton monday_toggle;
+    private ToggleButton tuesday_toggle;
+    private ToggleButton wednesday_toggle;
+    private ToggleButton thursday_toggle;
+    private ToggleButton friday_toggle;
+    private int intStartTime;
+    private int intEndTime;
+
+    private Class itemChanged;
+    private int itemIndex;
+
+    private boolean[] daysOn;
+    private ArrayList<Class> list_of_classes;
 
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -39,6 +59,8 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
     ) {
 
         classActivity = (MainActivity)getActivity();
+        CollegeObjectList<ListItem> a = classActivity.classList;
+
         thiscontext = container.getContext();
         binding = FragmentEditClassBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -53,7 +75,8 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
 
         //Create a list of Class objects. Based on this list, create a list of strings w/ names of classes
         // Use this list as input for the spinner. When selecting item, get index of item
-        ArrayList<Class> list_of_classes = new ArrayList<>();
+        list_of_classes = new ArrayList<>(); //GET DATA AND INSERT INTO THIS LIST
+
         list_of_classes.add(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
         list_of_classes.add(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
         list_of_classes.add(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
@@ -74,12 +97,48 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                @Override
                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                   System.out.println(position);
-                   Class item_changed = list_of_classes.get(position);
-                   final EditText course_name = (EditText) getView().findViewById(R.id.course_entry);
+                   itemIndex = position;
+
+                   itemChanged = list_of_classes.get(position);
+                   course_name = (EditText) getView().findViewById(R.id.course_entry);
+                   professor_name = (EditText) getView().findViewById(R.id.professor_entry);
+                   location = (EditText) getView().findViewById(R.id.location_entry);
+                   monday_toggle = (ToggleButton) getView().findViewById(R.id.monday_toggle);
+                   tuesday_toggle = (ToggleButton) getView().findViewById(R.id.tuesday_toggle);
+                   wednesday_toggle = (ToggleButton) getView().findViewById(R.id.wednesday_toggle);
+                   thursday_toggle = (ToggleButton) getView().findViewById(R.id.thursday_toggle);
+                   friday_toggle = (ToggleButton) getView().findViewById(R.id.friday_toggle);
+
+                   final Button startTime = (Button) getView().findViewById(R.id.startTime);
+                   final Button endTime = (Button) getView().findViewById(R.id.endTime);
+
 
                    //course_name.setHint(item_changed.getClassName());
-                   course_name.setText(item_changed.getClassName());
+                   course_name.setText(itemChanged.getClassName());
+                   professor_name.setText(itemChanged.getProfessorName());
+                   location.setText(itemChanged.getLocation());
+                   monday_toggle.setChecked(itemChanged.getMeetingDates()[0]);
+                   tuesday_toggle.setChecked(itemChanged.getMeetingDates()[1]);
+                   wednesday_toggle.setChecked(itemChanged.getMeetingDates()[2]);
+                   thursday_toggle.setChecked(itemChanged.getMeetingDates()[3]);
+                   friday_toggle.setChecked(itemChanged.getMeetingDates()[4]);
+
+                   setIntStartTime(itemChanged.getStartTime());
+                   setIntEndTime(itemChanged.getEndTime());
+                   startTime.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           showStartTimePickerDialog();
+                       }
+                   });
+                   endTime.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           showEndTimePickerDialog();
+                       }
+                   });
+
+
                }
 
                @Override
@@ -96,6 +155,38 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
             }
         });
 
+    }
+
+    public void showStartTimePickerDialog() {
+        // Get the current time
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        // Create a new instance of TimePickerDialog and show it
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getContext(),
+                (view, hourOfDay, minuteOfDay) -> intStartTime = 100 * hourOfDay + minuteOfDay,
+                hour,
+                minute,
+                false);
+        timePickerDialog.updateTime(getIntStartTime()/100,getIntStartTime() % 60 );
+
+        timePickerDialog.show();
+    }
+
+    public void showEndTimePickerDialog() {
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getContext(),
+                (view, hourOfDay, minuteOfDay) -> intEndTime = 100 * hourOfDay + minuteOfDay,
+                hour,
+                minute,
+                false);
+        timePickerDialog.updateTime(getIntStartTime()/100,getIntStartTime() % 60 );
+        timePickerDialog.show();
     }
 
     @Override
@@ -126,4 +217,19 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         binding = null;
     }
 
+    public int getIntStartTime() {
+        return intStartTime;
+    }
+
+    public void setIntStartTime(int intStartTime) {
+        this.intStartTime = intStartTime;
+    }
+
+    public int getIntEndTime() {
+        return intEndTime;
+    }
+
+    public void setIntEndTime(int intEndTime) {
+        this.intEndTime = intEndTime;
+    }
 }

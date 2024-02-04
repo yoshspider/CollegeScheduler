@@ -47,12 +47,18 @@ public class Class extends ListItem  {
         return className;
     }
 
+    public void setClassName(String className) {
+        this.className = className;
+    }
     /**
      * getter for the name of the professor
      * @return name of the professor
      */
     public String getProfessorName() {
         return professorName;
+    }
+    public void setProfessorName(String professorName) {
+        this.professorName = professorName;
     }
 
     /**
@@ -63,6 +69,9 @@ public class Class extends ListItem  {
         return meetingDates;
     }
 
+    public void setMeetingDates(boolean[] meetingDates) {
+        this.meetingDates = meetingDates;
+    }
     /**
      * getter for the start time of the class
      * @return
@@ -70,7 +79,9 @@ public class Class extends ListItem  {
     public int getStartTime() {
         return startTime;
     }
-
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
     /**
      * getter for the end time of the class
      * @return
@@ -78,9 +89,14 @@ public class Class extends ListItem  {
     public int getEndTime() {
         return endTime;
     }
-
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
     public String getLocation() {
         return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     /**

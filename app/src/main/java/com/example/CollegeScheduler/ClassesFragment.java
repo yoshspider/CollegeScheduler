@@ -21,7 +21,10 @@ import com.example.CollegeScheduler.databinding.FragmentClassesBinding;
 public class ClassesFragment extends Fragment {
 
     private FragmentClassesBinding binding;
-    private MainActivity classActivity;
+    public MainActivity classActivity;
+    public MainActivity getClassActivity(){
+        return classActivity;
+    }
     private int currentPage = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

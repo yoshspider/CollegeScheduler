@@ -110,7 +110,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="160dp"
         android:layout_marginTop="25dp"
-        android:text="Button" />
+        android:text="Start Time" />
 
     <Button
         android:id="@+id/endTime"
@@ -118,7 +118,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="160dp"
         android:layout_marginTop="25dp"
-        android:text="Button" />
+        android:text="End Time" />
 
     <Button
         android:id="@+id/save_button"
