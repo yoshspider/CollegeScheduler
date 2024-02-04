@@ -17,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
@@ -51,7 +50,7 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
     private int itemIndex;
 
     private boolean[] daysOn;
-    private ArrayList<Class> list_of_classes;
+    CollegeObjectList<ListItem> list_of_classes;
 
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -59,7 +58,7 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
     ) {
 
         classActivity = (MainActivity)getActivity();
-        CollegeObjectList<ListItem> a = classActivity.classList;
+        list_of_classes = classActivity.classList;
 
         thiscontext = container.getContext();
         binding = FragmentEditClassBinding.inflate(inflater, container, false);
@@ -75,15 +74,16 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
 
         //Create a list of Class objects. Based on this list, create a list of strings w/ names of classes
         // Use this list as input for the spinner. When selecting item, get index of item
-        list_of_classes = new ArrayList<>(); //GET DATA AND INSERT INTO THIS LIST
 
-        list_of_classes.add(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
-        list_of_classes.add(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
-        list_of_classes.add(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
+        //list_of_classes.add(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
+        //list_of_classes.add(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
+        //list_of_classes.add(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
 
         ArrayList<String> list_of_class_names = new ArrayList<>();
-        for (Class classObject : list_of_classes) {
-            list_of_class_names.add(classObject.toString());
+        for (int i = 0 ; i < list_of_classes.size() ; i++) {
+            ListItem tmp = list_of_classes.getItem(i);
+            System.out.println(list_of_classes.getItem(i).getClass());
+            list_of_class_names.add(list_of_classes.getItem(i).toString());
         }
 
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
@@ -99,8 +99,8 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                    itemIndex = position;
 
-                   itemChanged = list_of_classes.get(position);
-                   course_name = (EditText) getView().findViewById(R.id.course_entry);
+                   itemChanged = (Class) list_of_classes.getItem(position);
+                   course_name = (EditText) getView().findViewById(R.id.course);
                    professor_name = (EditText) getView().findViewById(R.id.professor_entry);
                    location = (EditText) getView().findViewById(R.id.location_entry);
                    monday_toggle = (ToggleButton) getView().findViewById(R.id.monday_toggle);
@@ -113,7 +113,6 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                    final Button endTime = (Button) getView().findViewById(R.id.endTime);
 
 
-                   //course_name.setHint(item_changed.getClassName());
                    course_name.setText(itemChanged.getClassName());
                    professor_name.setText(itemChanged.getProfessorName());
                    location.setText(itemChanged.getLocation());
@@ -150,6 +149,42 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NavHostFragment.findNavController(EditClass.this)
+                        .navigate(R.id.action_editClass_to_FirstFragment);
+            }
+        });
+
+        binding.saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                daysOn = new boolean[]{
+                        monday_toggle.isChecked(),
+                        tuesday_toggle.isChecked(),
+                        wednesday_toggle.isChecked(),
+                        thursday_toggle.isChecked(),
+                        friday_toggle.isChecked()
+                };
+
+//                //parse time
+//                DateFormat formatter = new SimpleDateFormat("hh:mm");
+//                String startFormatted;
+//                String endFormatted;
+//                try {
+//                    startFormatted = formatter.format(formatter.parse(startTime.getText().toString()));
+//                    endFormatted = formatter.format(formatter.parse(endTime.getText().toString()));
+//                } catch (ParseException e) {
+//                    throw new RuntimeException(e);
+//                }
+
+
+                ((Class) classActivity.getClassList().getItem(itemIndex)).setClassName(course_name.getText().toString());
+                ((Class) classActivity.getClassList().getItem(itemIndex)).setProfessorName(professor_name.getText().toString());
+                ((Class) classActivity.getClassList().getItem(itemIndex)).setMeetingDates(daysOn);
+                ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intStartTime);
+                ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intEndTime);
+                ((Class) classActivity.getClassList().getItem(itemIndex)).setLocation(location.getText().toString());
+
+                classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(EditClass.this)
                         .navigate(R.id.action_editClass_to_FirstFragment);
             }
