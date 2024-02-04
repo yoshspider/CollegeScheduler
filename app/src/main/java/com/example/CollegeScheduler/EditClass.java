@@ -14,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
+
+import java.util.ArrayList;
 
 
 public class EditClass extends Fragment implements AdapterView.OnItemSelectedListener{
@@ -45,14 +48,32 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         //get the spinner from the xml.
         Spinner dropdown = getView().findViewById(R.id.spinner1);
         //create a list of items for the spinner.
-        String[] items = new String[]{"1", "2", "3"};
+        ArrayList<String> list = new ArrayList<>();
+        list.add("0000");
+        list.add("0001");
+        list.add("0010");
+        list.add("0011");
+
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
         //set the spinners adapter to the previously created one.
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+               @Override
+               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                   String item = dropdown.getItemAtPosition(position).toString();
+                   System.out.println(item);
+               }
+
+               @Override
+               public void onNothingSelected(AdapterView<?> parent) {
+
+               }
+           });
 
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
