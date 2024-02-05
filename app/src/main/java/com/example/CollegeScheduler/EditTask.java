@@ -65,8 +65,8 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
     ) {
 
         classActivity = (MainActivity)getActivity();
-        list_of_tasks = classActivity.tasksList;
-        list_of_classes = classActivity.classList;
+        list_of_tasks = classActivity.getTasksList();
+        list_of_classes = classActivity.getClassList();
 
         thiscontext = container.getContext();
         binding = FragmentEditTaskBinding.inflate(inflater, container, false);

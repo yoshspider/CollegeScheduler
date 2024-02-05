@@ -58,7 +58,7 @@ public class ClassesFragment extends Fragment {
                         //classActivity.tasksList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
                         //classActivity.tasksList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
                         //classActivity.tasksList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
-                        classActivity.classAdapter.updateValues();
+                        classActivity.getClassAdapter().updateValues();
                         if (binding.editContent.getText().equals("Edit Class")) {
                             NavHostFragment.findNavController(ClassesFragment.this)
                                     .navigate(R.id.action_FirstFragment_to_editClass);
