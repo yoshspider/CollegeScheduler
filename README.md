@@ -11,3 +11,5 @@ Functionality:
 - Add tasks to complete
 - Mark tasks, assignments, and exams as completed
 - Sort your tasks and classes by time or name
+
+Authors: Yash A, Rishi B, Abby M
