@@ -40,6 +40,10 @@ public abstract class ListItem implements Comparable<ListItem> {
 
     }
 
+    /**
+     * Sets up list item with correct time
+     * @param time time as calendar object
+     */
     public ListItem(Calendar time) {
         this();
         this.calendarDate = time;
@@ -172,12 +176,18 @@ public abstract class ListItem implements Comparable<ListItem> {
         background.setBackgroundColor(getColor());
         return view;
     }
+
+    /**
+     * Convert time to correct format for display on screen
+     * @param time time in integer format
+     * @return time as formatted string
+     */
     public String timeConverter(int time) {
         return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
     }
 
     /**
-     * draws all the buttons and adds functionality
+     * Draws all the buttons and adds functionality
      * @param view view of item
      * @param inflater inflater to reset item
      * @param i index of item in adaptter
@@ -192,7 +202,7 @@ public abstract class ListItem implements Comparable<ListItem> {
     }
 
     /**
-     * compare method for sorting
+     * Compare method for sorting
      * @param o the object to be compared.
      * @return integer value to determine whether greater or lesser
      */
@@ -208,7 +218,7 @@ public abstract class ListItem implements Comparable<ListItem> {
     }
 
     /**
-     * text information of ListItem
+     * Text information of ListItem
      * @param view view to draw on
      * @param values the items to draw
      * @return corrected view with items
