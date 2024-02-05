@@ -61,9 +61,11 @@ public class ClassesFragment extends Fragment {
         if(classActivity.getIsTaskList()) {
             setCurrentPage(1);
             buttonNamesOfTasks();
+            classActivity.getClassAdapter().setFilter(-1);
         } else if (classActivity.getIsCompletedList()) {
             setCurrentPage(2);
             buttonNamesOfCompletedTasks();
+            classActivity.getClassAdapter().setFilter(-1);
         }
 
         binding.addClass.setOnClickListener(new View.OnClickListener() {
@@ -138,10 +140,12 @@ public class ClassesFragment extends Fragment {
         binding.toTaskButton.setOnClickListener((View.OnClickListener) view13 -> {
             classActivity.swapToTasks();
             setCurrentPage(1);
+            classActivity.getClassAdapter().setFilter(-1);
         });
         binding.toCompletedTaskButton.setOnClickListener((View.OnClickListener) view13 -> {
             classActivity.swapToCompletedTasks();
             setCurrentPage(2);
+            classActivity.getClassAdapter().setFilter(-1);
         });
     }
     private void buttonNamesOfTasks () {
