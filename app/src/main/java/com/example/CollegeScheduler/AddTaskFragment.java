@@ -73,6 +73,7 @@ public class AddTaskFragment extends Fragment {
             classActivity.getClassAdapter().updateValues();
             NavHostFragment.findNavController(AddTaskFragment.this)
                     .navigate(R.id.action_addAssignmentFragment_to_FirstFragment);
+            classActivity.swapToTasks();
         });
     }
 

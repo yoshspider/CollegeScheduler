@@ -30,13 +30,22 @@ public class ClassesFragment extends Fragment {
             binding = FragmentClassesBinding.inflate(inflater, container, false);
         }
         binding = FragmentClassesBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.simpleListView.setAdapter(classActivity.getClassAdapter());
-        binding.simpleListView.setAdapter(classActivity.getClassAdapter());
+
+        if(classActivity.getIsTaskList()) {
+            setCurrentPage(1);
+            buttonNamesOfTasks();
+        } else if (classActivity.getIsCompletedList()) {
+            setCurrentPage(2);
+            buttonNamesOfCompletedTasks();
+        }
+
         binding.addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +63,6 @@ public class ClassesFragment extends Fragment {
         binding.editContent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        //classActivity.tasksList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
-                        //classActivity.tasksList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
-                        //classActivity.tasksList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
                         classActivity.getClassAdapter().updateValues();
                         if (binding.editContent.getText().equals("Edit Class")) {
                             NavHostFragment.findNavController(ClassesFragment.this)
@@ -68,7 +73,7 @@ public class ClassesFragment extends Fragment {
                         }
                     }
                 });
-        setCurrentPage(0);
+        //setCurrentPage(0);
 
     }
     private void sortButtons() {

@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
     public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
     private ClassAdapter classAdapter;
+    private boolean isTaskList;
+    private boolean isCompletedList;
 
 
     @Override
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void swapToClass(){
         getClassAdapter().setItemsList(getClassList());
+        isTaskList = false;
+        isCompletedList = false;
     }
 
     /**
@@ -87,10 +91,22 @@ public class MainActivity extends AppCompatActivity {
      */
     public void swapToTasks() {
         getClassAdapter().setItemsList(getTasksList());
+        isTaskList = true;
+        isCompletedList = false;
     }
 
     public void swapToCompletedTasks() {
         getClassAdapter().setItemsList(transferList);
+        isTaskList = false;
+        isCompletedList = true;
+    }
+
+    public boolean getIsTaskList() {
+        return isTaskList;
+    }
+
+    public boolean getIsCompletedList() {
+        return isCompletedList;
     }
 
 }
