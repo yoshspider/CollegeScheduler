@@ -37,7 +37,7 @@ public class ClassesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.simpleListView.setAdapter(classActivity.getClassAdapter());
         binding.simpleListView.setAdapter(classActivity.getClassAdapter());
-        binding.addplaceholder.setOnClickListener(new View.OnClickListener() {
+        binding.addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (currentPage == 0) {
@@ -81,6 +81,10 @@ public class ClassesFragment extends Fragment {
             ListItem.setSortingMethod(2);
             sortItems();
         });
+        binding.sort3.setOnClickListener((View.OnClickListener) view1 -> {
+            ListItem.setSortingMethod(3);
+            sortItems();
+        });
     }
     private void sortItems() {
         classActivity.getClassList().sort();
@@ -101,22 +105,25 @@ public class ClassesFragment extends Fragment {
             setCurrentPage(2);
         });
     }
-    private void buttonNamesOfClass () {
-        binding.sort1.setText("Sort by Class of Task");
-        binding.sort2.setText("Sort by Time of Task");
-        binding.addplaceholder.setText("Add Task");
+    private void buttonNamesOfTasks () {
+        binding.sort1.setText("Sort by Task Class");
+        binding.sort2.setText("Sort by Task Time");
+        binding.sort3.setVisibility(View.VISIBLE);
+        binding.addClass.setText("Add Task");
         binding.editContent.setText("Edit Task");
     }
-    private void buttonNamesOfTasks () {
+    private void buttonNamesOfClass () {
         binding.sort1.setText("Sort by Class Name");
         binding.sort2.setText("Sort by Class Time");
-        binding.addplaceholder.setText("Add Class");
+        binding.sort3.setVisibility(View.GONE);
+        binding.addClass.setText("Add Class");
         binding.editContent.setText("Edit Class");
     }
     private void buttonNamesOfCompletedTasks () {
-        binding.sort1.setText("Sort by Class of Task");
-        binding.sort2.setText("Sort by Time of Task");
-        binding.addplaceholder.setText("Add Completed Task");
+        binding.sort1.setText("Sort by Task Class");
+        binding.sort2.setText("Sort by Task Time");
+        binding.sort3.setVisibility(View.VISIBLE);
+        binding.addClass.setText("Add Completed Task");
     }
         @Override
     public void onDestroyView() {
@@ -127,9 +134,9 @@ public class ClassesFragment extends Fragment {
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
         if (currentPage == 0) {
-            buttonNamesOfTasks();
-        } else if (currentPage == 1) {
             buttonNamesOfClass();
+        } else if (currentPage == 1) {
+            buttonNamesOfTasks();
         } else {
             buttonNamesOfCompletedTasks();
         }

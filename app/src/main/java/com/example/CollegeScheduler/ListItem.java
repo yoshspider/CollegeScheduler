@@ -21,6 +21,7 @@ public abstract class ListItem implements Comparable<ListItem>{
     private int ID;
     private static int sortingMethod;
     private String nameSort;
+    private int priority;
     private Calendar calendarDate;
 
 
@@ -108,6 +109,22 @@ public abstract class ListItem implements Comparable<ListItem>{
     }
 
     /**
+     * Setter for priority
+     * @param priority new priority value
+     */
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    /**
+     * Getter for priority
+     * @return current priority value
+     */
+    public int getPriority() {
+        return priority;
+    }
+
+    /**
      * getter for ID
      * @return the id of ListItem object
      */
@@ -187,8 +204,10 @@ public abstract class ListItem implements Comparable<ListItem>{
     public int compareTo(ListItem o) {
         if (getSortingMethod() == 1) {
             return nameSort.compareTo(o.getNameSort());
-        } else {
+        } else if(getSortingMethod() == 2) {
             return calendarDate.compareTo(o.getCalendar());
+        } else {
+            return Integer.compare(priority, o.getPriority());
         }
     }
 

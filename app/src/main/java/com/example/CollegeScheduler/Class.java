@@ -27,6 +27,7 @@ public class Class extends ListItem  {
         this.endTime = endTime;
         this.location = location;
         setNameSort(className);
+        setPriority(0);
         setClockTime(startTime, endTime);
     }
     public Class() {

@@ -24,6 +24,7 @@ public class Task extends ListItem{
         this.priority = priority;
         this.type = type;
         this.location = location;
+        setPriority(priority);
     }
 
     @Override

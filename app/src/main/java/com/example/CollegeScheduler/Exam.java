@@ -32,6 +32,7 @@ public class Exam extends ListItem {
         setColor(this.theClass.getColor());
         setNameSort(this.theClass.getClassName() + "1" + examName);
         this.priority = priority;
+        setPriority(priority);
     }
 
 
