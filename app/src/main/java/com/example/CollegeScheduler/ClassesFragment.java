@@ -98,12 +98,13 @@ public class ClassesFragment extends Fragment {
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                classActivity.getClassAdapter().setFilter(selectedItemView.toString());
+                classActivity.getClassAdapter().setFilter(position - 1);
+                classActivity.getClassAdapter().updateValues();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                classActivity.getClassAdapter().setFilter(-1);
             }
 
         });

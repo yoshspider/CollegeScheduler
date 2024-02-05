@@ -2,6 +2,7 @@ package com.example.CollegeScheduler;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 public class Class extends ListItem  {
     private String className;
@@ -107,7 +108,7 @@ public class Class extends ListItem  {
      * @param adapter adapter passed in from activity
      * @return view that was customized and inflated
      */
-    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter, String filter) {
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter, int filter) {
         view = super.drawScreen(view, inflater, i, adapter, filter);
         String[] values = {getClassName(), meetingString(), getProfessorName(), getLocation()};
         view = drawInformation(view, values);

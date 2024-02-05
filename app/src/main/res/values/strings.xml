@@ -52,9 +52,9 @@
 
     <string-array name="filter_options">
         <item>All</item>
-        <item>Task</item>
-        <item>Exam</item>
         <item>Assignment</item>
+        <item>Exam</item>
+        <item>Task</item>
     </string-array>
 
 </resources>

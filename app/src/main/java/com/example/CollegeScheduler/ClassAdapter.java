@@ -10,7 +10,7 @@ public class ClassAdapter extends BaseAdapter {
     private Context context;
     private CollegeObjectList<ListItem> itemsList;
     private LayoutInflater inflater;
-    private String filter;
+    private int filter;
 
 
     /**
@@ -23,7 +23,7 @@ public class ClassAdapter extends BaseAdapter {
         this.context = applicationContext;
         this.itemsList = itemsList;
         inflater = (LayoutInflater.from(applicationContext));
-        this.filter = "All";
+        this.filter = -1;
     }
     /**
      * Getter for size of list
@@ -58,7 +58,7 @@ public class ClassAdapter extends BaseAdapter {
      * Setter for filter value
      * @param filter new value to filter by
      */
-    public void setFilter(String filter) {
+    public void setFilter(int filter) {
         this.filter = filter;
 
     }
@@ -78,7 +78,8 @@ public class ClassAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        return itemsList.getItem(i).drawScreen(view, inflater, i, this, filter);
+        view = itemsList.getItem(i).drawScreen(view, inflater, i, this, filter);
+        return view;
     }
     /**
      * simple updater to notify ClassAdapter to redraw objects
