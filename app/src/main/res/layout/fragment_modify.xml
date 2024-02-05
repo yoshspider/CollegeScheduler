@@ -74,8 +74,56 @@
         android:inputType="text" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/monday_text"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Mon" />
+
+        <TextView
+            android:id="@+id/tuesday_text"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Tue" />
+
+        <TextView
+            android:id="@+id/wednesday_text"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Wed" />
+
+        <TextView
+            android:id="@+id/thursday_text"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Thu" />
+
+        <TextView
+            android:id="@+id/friday_text"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Fri" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
         android:orientation="horizontal">
 
