@@ -49,4 +49,12 @@
     <string name="add_2_classes">Add 2 Classes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="filter_options">
+        <item>All</item>
+        <item>Assignment</item>
+        <item>Exam</item>
+        <item>Task</item>
+    </string-array>
+
 </resources>

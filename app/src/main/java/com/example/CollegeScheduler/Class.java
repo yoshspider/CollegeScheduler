@@ -2,6 +2,7 @@ package com.example.CollegeScheduler;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 public class Class extends ListItem  {
     private String className;
