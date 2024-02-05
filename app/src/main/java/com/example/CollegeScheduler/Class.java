@@ -31,7 +31,7 @@ public class Class extends ListItem  {
         setClockTime(startTime, endTime);
     }
     public Class() {
-        this("Default Class", "John Doe", new boolean[]{true, false, true, false, true}, 930, 1030, "BUIDLING 100");
+        this("", "John Doe", new boolean[]{true, false, true, false, true}, 930, 1030, "BUIDLING 100");
     }
 
 

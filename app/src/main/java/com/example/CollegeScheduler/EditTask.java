@@ -87,6 +87,7 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
         for (int i = 0 ; i < list_of_classes.size() ; i++) {
             list_of_class_names_from_list_of_classes.add( ((Class)list_of_classes.getItem(i)).getClassName() );
         }
+        list_of_class_names_from_list_of_classes.add(0, "");
         //System.out.println(list_of_names_tasks);
         //System.out.println(list_of_names_classes);
 
@@ -114,7 +115,11 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
         name_of_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                associatedClass = (Class) classActivity.getClassList().getItem(position);
+                if (position == 0) {
+                    associatedClass = new Class();
+                } else {
+                    associatedClass = (Class) classActivity.getClassList().getItem(position-1);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -179,6 +184,11 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
 
                 ((Task)list_of_tasks.getItem(itemIndex)).setName(name.getText().toString());
                 ((Task)list_of_tasks.getItem(itemIndex)).setLocation(location.getText().toString());
+                ((Task)list_of_tasks.getItem(itemIndex)).setTheClass(associatedClass);
+                ((Task)list_of_tasks.getItem(itemIndex)).setPriority(priority);
+                ((Task)list_of_tasks.getItem(itemIndex)).setType(type);
+                Calendar calendar = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
+                ((Task)list_of_tasks.getItem(itemIndex)).setCalendar(calendar);
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(EditTask.this)
                         .navigate(R.id.action_editTask_to_FirstFragment);

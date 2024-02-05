@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.example.CollegeScheduler.databinding.FragmentAddAssignmentBinding;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -99,7 +101,15 @@ public class AddTaskFragment extends Fragment {
         adapterParts(dropdownType, Task.types);
         dropdownType.setOnItemSelectedListener(new AdapterTypeSelector());
         Spinner dropdownClass = view.findViewById(R.id.classSpinnerTask);
-        adapterParts(dropdownClass, classActivity.getClassList().names());
+
+        //adding an empty class object to front
+        String[] list_of_names = new String[classActivity.getClassList().size() + 1];
+        list_of_names[0] = "";
+        for (int i = 1 ; i < classActivity.getClassList().size() ; i++) {
+            list_of_names[i] = ((Class)classActivity.getClassList().getItem(i)).getClassName();
+        }
+
+        adapterParts(dropdownClass, list_of_names);
         dropdownClass.setOnItemSelectedListener(new AdapterClassSelector());
         Spinner dropdownPriority = view.findViewById(R.id.prioritySpinnerTask);
         adapterParts(dropdownPriority, Task.priorities);
@@ -165,7 +175,11 @@ public class AddTaskFragment extends Fragment {
          */
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            theClass = (Class) classActivity.getClassList().getItem(position);
+            if (position == 0) {
+                theClass = new Class();
+            } else {
+                theClass = (Class) classActivity.getClassList().getItem(position-1);
+            }
         }
 
         /**
