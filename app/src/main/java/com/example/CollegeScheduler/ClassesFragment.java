@@ -89,10 +89,12 @@ public class ClassesFragment extends Fragment {
             @Override
                     public void onClick(View view) {
                         classActivity.getClassAdapter().updateValues();
+                        System.out.println(binding.editContent.getText());
                         if (binding.editContent.getText().equals("Edit Class")) {
+                            System.out.println("here!");
                             NavHostFragment.findNavController(ClassesFragment.this)
                                     .navigate(R.id.action_FirstFragment_to_editClass);
-                        } else {
+                        } else if (binding.editContent.getText().equals("Edit Task")){
                             NavHostFragment.findNavController(ClassesFragment.this)
                                     .navigate(R.id.action_FirstFragment_to_editTask);
                         }
