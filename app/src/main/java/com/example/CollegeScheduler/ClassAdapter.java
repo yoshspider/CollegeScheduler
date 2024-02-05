@@ -93,6 +93,10 @@ public class ClassAdapter extends BaseAdapter {
         updateValues();
     }
 
+    /**
+     * removes item located at index i
+     * @param i
+     */
     public void transferItem(int i) {
         MainActivity.transferList.addItem(itemsList.removeItem(i));
         updateValues();

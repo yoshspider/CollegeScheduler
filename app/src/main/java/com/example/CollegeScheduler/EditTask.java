@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -264,5 +265,50 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
         super.onDestroyView();
         binding = null;
     }
+
+    //TODO: give this a better name?
+    /**
+     *
+     * @param spinner
+     * @param items
+     */
+    private void adapterParts(Spinner spinner, String[] items) {
+        ArrayAdapter<String> adapterPriority = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
+        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterPriority);
+    }
+
+    private class AdapterTypeSelector implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            type = position;
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {}
+    }
+
+    private class AdapterClassNameSelector implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (position == 0) {
+                associatedClass = new Class();
+            } else {
+                associatedClass = (Class) classActivity.getClassList().getItem(position-1);
+            }
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {}
+    }
+
+    private class AdapterPrioritySelector implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            priority = position;
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {}
+    }
+
+
 
 }

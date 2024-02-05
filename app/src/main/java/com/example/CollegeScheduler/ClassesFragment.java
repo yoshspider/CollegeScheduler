@@ -18,6 +18,9 @@ import java.util.GregorianCalendar;
 
 import com.example.CollegeScheduler.databinding.FragmentClassesBinding;
 
+/**
+ * Home page for scheduler
+ */
 public class ClassesFragment extends Fragment {
 
     private FragmentClassesBinding binding;
