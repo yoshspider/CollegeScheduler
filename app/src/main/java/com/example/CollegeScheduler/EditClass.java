@@ -58,7 +58,7 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
     ) {
 
         classActivity = (MainActivity)getActivity();
-        list_of_classes = classActivity.classList;
+        list_of_classes = classActivity.getClassList();
 
         thiscontext = container.getContext();
         binding = FragmentEditClassBinding.inflate(inflater, container, false);
@@ -235,7 +235,7 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                 // Whatever you want to happen when the second item gets selected
                 break;
             case 2:
-                // Whatever you want to happen when the thrid item gets selected
+                // Whatever you want to happen when the third item gets selected
                 break;
 
         }

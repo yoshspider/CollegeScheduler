@@ -2,11 +2,6 @@ package com.example.CollegeScheduler;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.Date;
 
 public class Class extends ListItem  {
     private String className;
@@ -18,11 +13,11 @@ public class Class extends ListItem  {
 
     /**
      * Constructor for the class object
-     * @param className
-     * @param professorName
-     * @param meetingDates
-     * @param startTime
-     * @param endTime
+     * @param className name of the class
+     * @param professorName name of the professor
+     * @param meetingDates days of the week the class meets as a 5 element boolean array
+     * @param startTime integer start time
+     * @param endTime integer end time
      */
     public Class(String className, String professorName, boolean[] meetingDates, int startTime, int endTime, String location) {
         this.className = className;
@@ -40,7 +35,7 @@ public class Class extends ListItem  {
 
 
     /**
-     * getter for name of class
+     * Getter for name of class
      * @return the name of the class
      */
     public String getClassName() {
@@ -51,7 +46,7 @@ public class Class extends ListItem  {
         this.className = className;
     }
     /**
-     * getter for the name of the professor
+     * Getter for the name of the professor
      * @return name of the professor
      */
     public String getProfessorName() {
@@ -62,19 +57,23 @@ public class Class extends ListItem  {
     }
 
     /**
-     * getter for the meeting dates
-     * @return 5 length boolean array of which days we meet
+     * Getter for the meeting dates
+     * @return 5 element boolean array of which days the class meets
      */
     public boolean[] getMeetingDates() {
         return meetingDates;
     }
 
+    /**
+     * Setter for meeting date array
+     * @param meetingDates 5 element boolean array corresponding to weekdays when class meets
+     */
     public void setMeetingDates(boolean[] meetingDates) {
         this.meetingDates = meetingDates;
     }
     /**
-     * getter for the start time of the class
-     * @return
+     * Getter for the start time of the class
+     * @return start time as an int
      */
     public int getStartTime() {
         return startTime;
@@ -83,8 +82,8 @@ public class Class extends ListItem  {
         this.startTime = startTime;
     }
     /**
-     * getter for the end time of the class
-     * @return
+     * Getter for the end time of the class
+     * @return end time as an int
      */
     public int getEndTime() {
         return endTime;
@@ -100,12 +99,12 @@ public class Class extends ListItem  {
     }
 
     /**
-     * draw method to show visual parts of the object
-     * @param view view it will be drawn on
-     * @param inflater
-     * @param i
-     * @param adapter
-     * @return
+     * Draw method to show visual parts of the object
+     * @param view view associated with list of classes
+     * @param inflater inflater to display view
+     * @param i iterator variable for drawing list item buttons
+     * @param adapter adapter passed in from activity
+     * @return view that was customized and inflated
      */
     public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = super.drawScreen(view, inflater, i, adapter);
@@ -116,21 +115,28 @@ public class Class extends ListItem  {
     }
 
     /**
-     * meeting string converter to give to view
+     * Meeting string converter to give to view
      * @return corrected string
      */
     public String meetingString() {
         return daysOfTheWeekConverter(getMeetingDates()) + " " + timeConverter(getStartTime())
                 + " - " + timeConverter(getEndTime());
     }
-//    public String timeConverter(int time) {
-//        return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
-//    }
+
+    /**
+     * Convert boolean to abbreviations for days of the week
+     * @param days boolean array corresponding to the class's meeting days
+     * @return string representing abbreviations of selected days
+     */
     public String daysOfTheWeekConverter(boolean[] days) {
         String week = (days[0] ? "M/":"") + (days[1] ? "T/":"") + (days[2] ? "W/":"") + (days[3] ? "TR/":"") + (days[4] ? "F/":"");
         return week.substring(0, week.length()-1);
     }
 
+    /**
+     * Return class name when toString() method called
+     * @return name of class
+     */
     @Override
     public String toString() {
         return className;

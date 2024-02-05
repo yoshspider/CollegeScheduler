@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView simpleList;
 
     //make private with getters & setters?
-    public final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
-    public final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
+    private final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
+    private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
     public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
-    public ClassAdapter classAdapter;
+    private ClassAdapter classAdapter;
 
 
     @Override
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
         simpleList = findViewById(R.id.simpleListView);
         classAdapter = new ClassAdapter(getApplicationContext(), classList);
         simpleList.setAdapter(classAdapter);

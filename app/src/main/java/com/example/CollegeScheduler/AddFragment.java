@@ -20,7 +20,6 @@ public class AddFragment extends Fragment {
 
     private FragmentModifyBinding binding;
     private MainActivity classActivity;
-
     private EditText courseInput;
     private EditText courseSection;
     private EditText professorInput;
@@ -37,8 +36,18 @@ public class AddFragment extends Fragment {
     private int intStartTime;
     private int intEndTime;
 
-
-
+    /**
+     * Initial view setup
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return inflated view associated with fragment
+     */
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -51,21 +60,40 @@ public class AddFragment extends Fragment {
         return binding.getRoot();
     }
 
+    /**
+     * Helper method to initialize fields to store input data
+     * @param view view that holds input fields
+     */
+    private void initInputs(View view) {
+        this.professorInput = (EditText)view.findViewById(R.id.professor_entry);
+        this.locationInput = (EditText)view.findViewById(R.id.location_entry);
+        this.courseInput = (EditText)view.findViewById(R.id.name_of_task);
+        this.courseSection = (EditText)view.findViewById(R.id.class_name);
+        this.roomNumber = (EditText)view.findViewById(R.id.room_number);
+        this.mon = (ToggleButton)view.findViewById(R.id.monday_toggle);
+        this.tues = (ToggleButton)view.findViewById(R.id.tuesday_toggle);
+        this.wed = (ToggleButton)view.findViewById(R.id.wednesday_toggle);
+        this.thurs = (ToggleButton)view.findViewById(R.id.thursday_toggle);
+        this.fri = (ToggleButton)view.findViewById(R.id.friday_toggle);
+    }
+
+    /**
+     *
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        professorInput = (EditText)view.findViewById(R.id.professor_entry);
-        locationInput = (EditText)view.findViewById(R.id.location_entry);
-        courseInput = (EditText)view.findViewById(R.id.name_of_task);
-        courseSection = (EditText)view.findViewById(R.id.class_name);
-        roomNumber = (EditText)view.findViewById(R.id.room_number);
-        mon = (ToggleButton)view.findViewById(R.id.monday_toggle);
-        tues = (ToggleButton)view.findViewById(R.id.tuesday_toggle);
-        wed = (ToggleButton)view.findViewById(R.id.wednesday_toggle);
-        thurs = (ToggleButton)view.findViewById(R.id.thursday_toggle);
-        fri = (ToggleButton)view.findViewById(R.id.friday_toggle);
+        initInputs(view);
 
         binding.backButton.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Navigates from add screen to class screen
+             * @param view The view that was clicked.
+             */
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(AddFragment.this)
@@ -73,13 +101,23 @@ public class AddFragment extends Fragment {
             }
         });
 
+
         binding.startTime.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows user to select start time
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 showStartTimePickerDialog();
             }
         });
+
         binding.endTime.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows user to select end time
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 showEndTimePickerDialog();
@@ -87,6 +125,10 @@ public class AddFragment extends Fragment {
         });
 
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Updates class list with user-inputted data
+             * @param view The view that was clicked.
+             */
             @Override
             public void onClick(View view) {
                 daysOn = new boolean[]{
@@ -96,18 +138,6 @@ public class AddFragment extends Fragment {
                         thurs.isChecked(),
                         fri.isChecked()
                 };
-
-//                //parse time
-//                DateFormat formatter = new SimpleDateFormat("hh:mm");
-//                String startFormatted;
-//                String endFormatted;
-//                try {
-//                    startFormatted = formatter.format(formatter.parse(startTime.getText().toString()));
-//                    endFormatted = formatter.format(formatter.parse(endTime.getText().toString()));
-//                } catch (ParseException e) {
-//                    throw new RuntimeException(e);
-//                }
-
 
                 classActivity.getClassList().addItem(new Class(courseInput.getText().toString() + " " + courseSection.getText().toString(),
                         professorInput.getText().toString(),
@@ -120,6 +150,10 @@ public class AddFragment extends Fragment {
             }
         });
     }
+
+    /**
+     * Shows time picker widgets to update start time
+     */
     public void showStartTimePickerDialog() {
         // Get the current time
         final Calendar c = Calendar.getInstance();
@@ -133,23 +167,32 @@ public class AddFragment extends Fragment {
                 hour,
                 minute,
                 false);
-
         timePickerDialog.show();
     }
+
+    /**
+     * Shows time picker widgets to update end time
+     * Requires separate method due to lambda invocation
+     */
     public void showEndTimePickerDialog() {
+        // Get the current time
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
+
+        // Create a new instance of TimePickerDialog and show it
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 getContext(),
                 (view, hourOfDay, minuteOfDay) -> intEndTime = 100 * hourOfDay + minuteOfDay,
                 hour,
                 minute,
                 false);
-
         timePickerDialog.show();
     }
 
+    /**
+     * Removes unneeded binding reference when view destroyed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();

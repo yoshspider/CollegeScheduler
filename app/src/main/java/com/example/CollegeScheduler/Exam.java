@@ -14,6 +14,15 @@ public class Exam extends ListItem {
     private String location;
     private int priority;
 
+    /**
+     * Constructor for Exam class
+     * @param theClass class associated with exam
+     * @param examName exam name
+     * @param details notes regarding exam
+     * @param location location where exam is held
+     * @param calendar calendar to store date
+     * @param priority user assigned priority
+     */
     public Exam(Class theClass, String examName, String details, String location, Calendar calendar, int priority) {
         super.setCalendar(calendar);
         this.theClass = theClass;

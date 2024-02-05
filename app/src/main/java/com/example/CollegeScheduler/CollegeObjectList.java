@@ -22,7 +22,7 @@ public class CollegeObjectList<T extends Comparable<? super T>> {
     }
 
     /**
-     * get the item at specific index
+     * Get the item at specific index
      * @param index index to be get item at
      * @return
      */
@@ -31,7 +31,7 @@ public class CollegeObjectList<T extends Comparable<? super T>> {
     }
 
     /**
-     * remove the item at specific index
+     * Remove the item at specific index
      * @param index index to remove item at
      */
     public T removeItem(int index) {
@@ -39,16 +39,24 @@ public class CollegeObjectList<T extends Comparable<? super T>> {
     }
 
     /**
-     * size of list
-     * @return itemList.size
+     * Size of list
+     * @return list size
      */
     public int size() {
         return itemList.size();
     }
+
+    /**
+     * Sorts list of items
+     */
     public void sort(){
         Collections.sort(itemList);
     }
 
+    /**
+     * Iterates through list to extract item names
+     * @return String array of names
+     */
     public String[] names() {
         String[] list = new String[itemList.size()];
         for (int i = 0; i < list.length; i++) {

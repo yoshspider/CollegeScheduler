@@ -2,13 +2,7 @@ package com.example.CollegeScheduler;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import java.util.Date;
 
 public class Assignment extends ListItem {
     private String assignmentName;
