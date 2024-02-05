@@ -15,10 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.ToggleButton;
 
 import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
 import com.example.CollegeScheduler.databinding.FragmentEditTaskBinding;
@@ -28,7 +26,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-public class editTask extends Fragment implements AdapterView.OnItemSelectedListener{
+public class EditTask extends Fragment implements AdapterView.OnItemSelectedListener{
     private Context a;
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -170,7 +168,7 @@ public class editTask extends Fragment implements AdapterView.OnItemSelectedList
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(editTask.this)
+                NavHostFragment.findNavController(EditTask.this)
                         .navigate(R.id.action_editTask_to_FirstFragment);
             }
         });
@@ -182,7 +180,7 @@ public class editTask extends Fragment implements AdapterView.OnItemSelectedList
                 ((Task)list_of_tasks.getItem(itemIndex)).setName(name.getText().toString());
                 ((Task)list_of_tasks.getItem(itemIndex)).setLocation(location.getText().toString());
                 classActivity.getClassAdapter().updateValues();
-                NavHostFragment.findNavController(editTask.this)
+                NavHostFragment.findNavController(EditTask.this)
                         .navigate(R.id.action_editTask_to_FirstFragment);
             }
         });

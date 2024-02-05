@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTask"
-        android:name="com.example.CollegeScheduler.editTask"
+        android:name="com.example.CollegeScheduler.EditTask"
         android:label="fragment_edit_task"
         tools:layout="@layout/fragment_edit_task" >
         <action
