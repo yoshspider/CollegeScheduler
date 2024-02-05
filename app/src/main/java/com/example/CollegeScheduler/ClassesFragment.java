@@ -51,8 +51,23 @@ public class ClassesFragment extends Fragment {
         });
         sortButtons();
         switchButton();
-        binding.editContent.setOnClickListener(view1 -> NavHostFragment.findNavController(ClassesFragment.this)
-                .navigate(R.id.action_FirstFragment_to_editClass));
+        binding.editContent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        //classActivity.tasksList.addItem(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
+                        //classActivity.tasksList.addItem(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
+                        //classActivity.tasksList.addItem(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
+                        classActivity.classAdapter.updateValues();
+                        if (binding.editContent.getText().equals("Edit Class")) {
+                            NavHostFragment.findNavController(ClassesFragment.this)
+                                    .navigate(R.id.action_FirstFragment_to_editClass);
+                        } else {
+                            NavHostFragment.findNavController(ClassesFragment.this)
+                                    .navigate(R.id.action_FirstFragment_to_editTask);
+                        }
+                    }
+                });
         setCurrentPage(0);
 
     }
@@ -90,11 +105,13 @@ public class ClassesFragment extends Fragment {
         binding.sort1.setText("Sort by Class of Task");
         binding.sort2.setText("Sort by Time of Task");
         binding.addplaceholder.setText("Add Task");
+        binding.editContent.setText("Edit Task");
     }
     private void buttonNamesOfTasks () {
         binding.sort1.setText("Sort by Class Name");
         binding.sort2.setText("Sort by Class Time");
         binding.addplaceholder.setText("Add Class");
+        binding.editContent.setText("Edit Class");
     }
     private void buttonNamesOfCompletedTasks () {
         binding.sort1.setText("Sort by Class of Task");

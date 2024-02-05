@@ -53,6 +53,9 @@ public class Task extends ListItem{
         }
 
     }
+    public String getOnlyName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -66,4 +69,36 @@ public class Task extends ListItem{
         this.classOfTask = theClass;
     }
 
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String loc) {
+        this.location = loc;
+    }
+
+    public int getType() {
+        return this.type;
+    }
+    public String getTypeVerbose() {
+        if (this.priority == 0) return "High";
+        else if (this.priority == 1) return "Medium";
+        else if (this.priority == 2) return "Low";
+        return "";
+    }
+    public void setType(int type) {
+        this.type = type;
+    }
+    public int getPriority() {
+        return priority;
+    }
+    public String getPriorityVerbose() {
+        if (this.priority == 0) return "Assignment";
+        else if (this.priority == 1) return "Exam";
+        else if (this.priority == 2) return "Task";
+        return "";
+    }
+    public void setPriority(int priority){
+        this.priority = priority;
+    }
 }

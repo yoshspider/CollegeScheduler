@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_editClass"
             app:destination="@id/editClass" />
+        <action
+            android:id="@+id/action_FirstFragment_to_editTask"
+            app:destination="@id/editTask" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -47,6 +50,15 @@
         tools:layout="@layout/fragment_edit_class" >
         <action
             android:id="@+id/action_editClass_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTask"
+        android:name="com.example.CollegeScheduler.editTask"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit_task" >
+        <action
+            android:id="@+id/action_editTask_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
