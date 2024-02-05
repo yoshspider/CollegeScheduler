@@ -114,6 +114,7 @@ public class ClassesFragment extends Fragment {
         binding.sort1.setText("Sort by Task Class");
         binding.sort2.setText("Sort by Task Time");
         binding.sort3.setVisibility(View.VISIBLE);
+        binding.addClass.setVisibility(View.VISIBLE);
         binding.addClass.setText("Add Task");
         binding.editContent.setText("Edit Task");
     }
@@ -121,6 +122,7 @@ public class ClassesFragment extends Fragment {
         binding.sort1.setText("Sort by Class Name");
         binding.sort2.setText("Sort by Class Time");
         binding.sort3.setVisibility(View.GONE);
+        binding.addClass.setVisibility(View.VISIBLE);
         binding.addClass.setText("Add Class");
         binding.editContent.setText("Edit Class");
     }
@@ -128,7 +130,7 @@ public class ClassesFragment extends Fragment {
         binding.sort1.setText("Sort by Task Class");
         binding.sort2.setText("Sort by Task Time");
         binding.sort3.setVisibility(View.VISIBLE);
-        binding.addClass.setText("Add Completed Task");
+        binding.addClass.setVisibility(View.GONE);
     }
         @Override
     public void onDestroyView() {
