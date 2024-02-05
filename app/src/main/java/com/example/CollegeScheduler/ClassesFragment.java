@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,7 @@ public class ClassesFragment extends Fragment {
     private FragmentClassesBinding binding;
     private MainActivity classActivity;
     private int currentPage = 0;
+    private Spinner filterSpinner;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         classActivity = (MainActivity)getActivity();
@@ -37,9 +41,22 @@ public class ClassesFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void setUpFilter(View view) {
+        filterSpinner = (Spinner) view.findViewById(R.id.filter_classes);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                classActivity.getApplicationContext(),
+                R.array.filter_options,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterSpinner.setAdapter(adapter);
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.simpleListView.setAdapter(classActivity.getClassAdapter());
+
+        setUpFilter(view);
 
         if(classActivity.getIsTaskList()) {
             setCurrentPage(1);
@@ -76,7 +93,20 @@ public class ClassesFragment extends Fragment {
                         }
                     }
                 });
-        //setCurrentPage(0);
+
+
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                classActivity.getClassAdapter().setFilter(selectedItemView.toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
     }
     private void sortButtons() {
@@ -116,24 +146,30 @@ public class ClassesFragment extends Fragment {
     private void buttonNamesOfTasks () {
         binding.sort1.setText("Sort by Task Class");
         binding.sort2.setText("Sort by Task Time");
-        binding.sort3.setVisibility(View.VISIBLE);
-        binding.addClass.setVisibility(View.VISIBLE);
         binding.addClass.setText("Add Task");
         binding.editContent.setText("Edit Task");
+        binding.sort3.setVisibility(View.VISIBLE);
+        binding.addClass.setVisibility(View.VISIBLE);
+        binding.editContent.setVisibility(View.VISIBLE);
+        binding.filterClasses.setVisibility(View.VISIBLE);
     }
     private void buttonNamesOfClass () {
         binding.sort1.setText("Sort by Class Name");
         binding.sort2.setText("Sort by Class Time");
-        binding.sort3.setVisibility(View.GONE);
-        binding.addClass.setVisibility(View.VISIBLE);
         binding.addClass.setText("Add Class");
         binding.editContent.setText("Edit Class");
+        binding.sort3.setVisibility(View.GONE);
+        binding.addClass.setVisibility(View.VISIBLE);
+        binding.editContent.setVisibility(View.VISIBLE);
+        binding.filterClasses.setVisibility(View.GONE);
     }
     private void buttonNamesOfCompletedTasks () {
         binding.sort1.setText("Sort by Task Class");
         binding.sort2.setText("Sort by Task Time");
         binding.sort3.setVisibility(View.VISIBLE);
         binding.addClass.setVisibility(View.GONE);
+        binding.editContent.setVisibility(View.GONE);
+        binding.filterClasses.setVisibility(View.GONE);
     }
         @Override
     public void onDestroyView() {

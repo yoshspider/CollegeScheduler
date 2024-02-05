@@ -166,7 +166,7 @@ public abstract class ListItem implements Comparable<ListItem> {
      * @param adapter adapter to add items
      * @return corrected view
      */
-    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter,  String filter) {
         view = inflater.inflate(R.layout.activity_listview, null);
         View background = view.findViewById(R.id.backgroundView);
         background.setBackgroundColor(getColor());

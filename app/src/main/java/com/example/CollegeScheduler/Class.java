@@ -107,8 +107,8 @@ public class Class extends ListItem  {
      * @param adapter adapter passed in from activity
      * @return view that was customized and inflated
      */
-    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        view = super.drawScreen(view, inflater, i, adapter);
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter, String filter) {
+        view = super.drawScreen(view, inflater, i, adapter, filter);
         String[] values = {getClassName(), meetingString(), getProfessorName(), getLocation()};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);

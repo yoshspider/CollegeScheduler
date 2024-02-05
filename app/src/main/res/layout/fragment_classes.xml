@@ -80,18 +80,22 @@
 
     </LinearLayout>
 
-    <Button
+    <Spinner
         android:id="@+id/filter_classes"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="Filter classes" />
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:visibility="gone"
+        />
 
     <Button
         android:id="@+id/edit_content"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:layout_weight="1"
+        android:visibility="visible"
         android:text="Edit a class" />
 
 </LinearLayout>

@@ -49,12 +49,14 @@ public class Task extends ListItem{
      * @return view updated with task information
      */
     @Override
-    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        view = super.drawScreen(view, inflater, i, adapter);
-        String date = getTime();
-        String[] values = {getName(), classOfTask + " " + types[type], date, priorities[priority] + " Priority"};
-        view = drawInformation(view, values);
-        view = drawButtons(view, inflater, i, adapter);
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter, String filter) {
+        view = super.drawScreen(view, inflater, i, adapter, filter);
+        if(filter.equals(type) || filter.equals("All")) {
+            String date = getTime();
+            String[] values = {getName(), classOfTask + " " + types[type], date, priorities[priority] + " Priority"};
+            view = drawInformation(view, values);
+            view = drawButtons(view, inflater, i, adapter);
+        }
         return view;
     }
 
