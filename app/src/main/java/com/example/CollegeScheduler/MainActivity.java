@@ -31,7 +31,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean isTaskList;
     private boolean isCompletedList;
 
-
+    /**
+     * Inflate layout and initialize UI elements
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +51,6 @@ public class MainActivity extends AppCompatActivity {
         simpleList.setAdapter(classAdapter);
     }
 
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
     /**
      * getter for classAdapter
      * @return currentClassAdapter
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * switch the adapter's list to classList
+     * Switch the adapter's list to classList
      */
     public void swapToClass(){
         getClassAdapter().setItemsList(getClassList());
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * switch the adapter's list to tasksList
+     * Switch the adapter's list to tasksList
      */
     public void swapToTasks() {
         getClassAdapter().setItemsList(getTasksList());
@@ -95,16 +93,27 @@ public class MainActivity extends AppCompatActivity {
         isCompletedList = false;
     }
 
+    /**
+     * Switch the adapter's list to completed tasks
+     */
     public void swapToCompletedTasks() {
         getClassAdapter().setItemsList(transferList);
         isTaskList = false;
         isCompletedList = true;
     }
 
+    /**
+     * Check if screen is on tasks list for updating button visibility/labels
+     * @return true if tasks list is shown
+     */
     public boolean getIsTaskList() {
         return isTaskList;
     }
 
+    /**
+     * Check if screen is on completed tasks list for updating button visibility/labels
+     * @return true if completed tasks list is shown
+     */
     public boolean getIsCompletedList() {
         return isCompletedList;
     }
