@@ -2,6 +2,7 @@ package com.example.CollegeScheduler;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -150,6 +151,11 @@ public abstract class ListItem implements Comparable<ListItem> {
     public Calendar getCalendar() {
         return calendarDate;
     }
+
+    /**
+     * setter for calendar object
+     * @param d new calender
+     */
     public void setCalendar(Calendar d) {
         this.calendarDate = d;
     }
@@ -234,6 +240,15 @@ public abstract class ListItem implements Comparable<ListItem> {
         bottomLeftTextView.setText(values[2]);
         bottomRightTextView.setText(values[3]);
         return view;
+    }
+
+    /**
+     * filters out data for any adapter
+     * @param filter the tool to decide whether item shouldnt be filtered
+     * @return whether the item shouldnt be filtered
+     */
+    public boolean filterValue(int filter) {
+        return true;
     }
 
 }

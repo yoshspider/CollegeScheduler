@@ -39,7 +39,6 @@ public class Task extends ListItem{
         this.location = location;
         setPriority(priority);
     }
-
     /**
      * instructions to draw the element of a task
      * @param view current view
@@ -56,6 +55,7 @@ public class Task extends ListItem{
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
         return view;
+
     }
 
     /**
@@ -165,5 +165,15 @@ public class Task extends ListItem{
      */
     public void setPriority(int priority){
         this.priority = priority;
+    }
+
+    /**
+     * filters out data for any adapter
+     * @param filter the tool to decide whether item shouldnt be filtered
+     * @return whether the item shouldnt be filtered
+     */
+    @Override
+    public boolean filterValue(int filter) {
+        return (filter == type || filter == -1);
     }
 }
