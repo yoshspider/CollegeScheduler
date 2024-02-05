@@ -6,13 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClassAdapter extends BaseAdapter {
     private Context context;
     private CollegeObjectList<ListItem> itemsList;
     private LayoutInflater inflater;
     private int filter;
-
-
+    private ArrayList<Boolean> visible;
     /**
      * Constructor for ClassAdapter Object
      * @param applicationContext context of App given by Main Activity
@@ -24,6 +26,10 @@ public class ClassAdapter extends BaseAdapter {
         this.itemsList = itemsList;
         inflater = (LayoutInflater.from(applicationContext));
         this.filter = -1;
+        visible = new ArrayList<Boolean>(itemsList.size());
+        for (int i = 0; i < itemsList.size(); i++) {
+            visible.add(true);
+        }
     }
     /**
      * Getter for size of list
@@ -31,7 +37,13 @@ public class ClassAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return itemsList.size();
+        int sum = 0;
+        for (int i = 0; i < visible.size(); i++) {
+            if(visible.get(i)) {
+                sum++;
+            }
+        }
+        return sum;
     }
     /**
      *
@@ -42,7 +54,16 @@ public class ClassAdapter extends BaseAdapter {
      */
     @Override
     public Object getItem(int i) {
-        return itemsList.getItem(i);
+        int index = -1;
+        int numTrue = 0;
+        while (numTrue <= i) {
+            index++;
+            if (visible.get(index)) {
+                numTrue++;
+            }
+
+        }
+        return itemsList.getItem(index);
     }
     /**
      * getter for the id of associated List Item
@@ -60,7 +81,9 @@ public class ClassAdapter extends BaseAdapter {
      */
     public void setFilter(int filter) {
         this.filter = filter;
-
+        for (int i = 0; i < visible.size(); i++) {
+            visible.set(i, itemsList.getItem(i).filterValue(filter));
+        }
     }
 
     /**
@@ -78,13 +101,19 @@ public class ClassAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = itemsList.getItem(i).drawScreen(view, inflater, i, this, filter);
+        view = ((ListItem) getItem(i)).drawScreen(view, inflater, i, this);
         return view;
     }
     /**
      * simple updater to notify ClassAdapter to redraw objects
      */
     public void updateValues(){
+
+        visible = new ArrayList<Boolean>(itemsList.size());
+        for (int i = 0; i < itemsList.size(); i++) {
+            visible.add(true);
+        }
+        setFilter(filter);
         notifyDataSetChanged();
     }
     /**
@@ -93,7 +122,7 @@ public class ClassAdapter extends BaseAdapter {
      */
     public void remove(int i) {
         itemsList.removeItem(i);
-        notifyDataSetChanged();
+        updateValues();
     }
     /**
      * setter for items list

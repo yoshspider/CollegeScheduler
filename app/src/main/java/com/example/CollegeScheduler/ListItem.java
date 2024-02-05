@@ -147,6 +147,11 @@ public abstract class ListItem implements Comparable<ListItem> {
     public Calendar getCalendar() {
         return calendarDate;
     }
+
+    /**
+     * setter for calendar object
+     * @param d new calender
+     */
     public void setCalendar(Calendar d) {
         this.calendarDate = d;
     }
@@ -167,10 +172,10 @@ public abstract class ListItem implements Comparable<ListItem> {
      * @param adapter adapter to add items
      * @return corrected view
      */
-    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter, int filter) {
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         view = inflater.inflate(R.layout.activity_listview, null);
         View background = view.findViewById(R.id.backgroundView);
-        //background.setBackgroundColor(getColor());
+        background.setBackgroundColor(getColor());
         return view;
     }
     public String timeConverter(int time) {
@@ -225,6 +230,15 @@ public abstract class ListItem implements Comparable<ListItem> {
         bottomLeftTextView.setText(values[2]);
         bottomRightTextView.setText(values[3]);
         return view;
+    }
+
+    /**
+     * filters out data for any adapter
+     * @param filter the tool to decide whether item shouldnt be filtered
+     * @return whether the item shouldnt be filtered
+     */
+    public boolean filterValue(int filter) {
+        return true;
     }
 
 }

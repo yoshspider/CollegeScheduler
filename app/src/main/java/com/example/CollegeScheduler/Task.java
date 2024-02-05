@@ -39,7 +39,6 @@ public class Task extends ListItem{
         this.location = location;
         setPriority(priority);
     }
-    //TODO need to fix so it actually disappears and doesnt leave a space
     /**
      * instructions to draw the element of a task
      * @param view current view
@@ -49,17 +48,12 @@ public class Task extends ListItem{
      * @return view updated with task information
      */
     @Override
-    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter, int filter) {
-        view = super.drawScreen(view, inflater, i, adapter, filter);
+    public View drawScreen(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
+        view = super.drawScreen(view, inflater, i, adapter);
         String date = getTime();
         String[] values = {getName(), classOfTask + " " + types[type], date, priorities[priority] + " Priority"};
         view = drawInformation(view, values);
         view = drawButtons(view, inflater, i, adapter);
-        if(filter == type || filter == -1) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.INVISIBLE);
-        }
         return view;
 
     }
@@ -171,5 +165,15 @@ public class Task extends ListItem{
      */
     public void setPriority(int priority){
         this.priority = priority;
+    }
+
+    /**
+     * filters out data for any adapter
+     * @param filter the tool to decide whether item shouldnt be filtered
+     * @return whether the item shouldnt be filtered
+     */
+    @Override
+    public boolean filterValue(int filter) {
+        return (filter == type || filter == -1);
     }
 }
