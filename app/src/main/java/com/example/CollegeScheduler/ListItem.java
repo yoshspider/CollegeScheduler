@@ -1,10 +1,7 @@
 package com.example.CollegeScheduler;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -12,9 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-public abstract class ListItem implements Comparable<ListItem>{
+public abstract class ListItem implements Comparable<ListItem> {
     private static int[] colors;
     private int color;
     private static int currentID  = 0;

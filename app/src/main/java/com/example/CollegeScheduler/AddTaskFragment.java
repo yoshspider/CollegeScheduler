@@ -104,9 +104,9 @@ public class AddTaskFragment extends Fragment {
 
         //adding an empty class object to front
         String[] list_of_names = new String[classActivity.getClassList().size() + 1];
-        list_of_names[0] = "";
-        for (int i = 1 ; i < classActivity.getClassList().size() ; i++) {
-            list_of_names[i] = ((Class)classActivity.getClassList().getItem(i)).getClassName();
+        list_of_names[0] = "No Associated Class";
+        for (int i = 1 ; i < list_of_names.length ; i++) {
+            list_of_names[i] = ((Class)classActivity.getClassList().getItem(i-1)).getClassName();
         }
 
         adapterParts(dropdownClass, list_of_names);
