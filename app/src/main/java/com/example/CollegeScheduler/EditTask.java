@@ -204,14 +204,14 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
             }
         });
 
-        binding.datePickerButtonTask.setOnClickListener(new View.OnClickListener() {
+        binding.timesPickerButtonTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showEndTimePickerDialog();
             }
         });
 
-        binding.timePickerButtonTask.setOnClickListener(new View.OnClickListener() {
+        binding.datesPickerButtonTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
@@ -226,10 +226,12 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
         int minute = c.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
                 (view, hourOfDay, minuteOfDay) -> {endHour = hourOfDay; endMinute = minuteOfDay;},
-                hour, minute, false);
-        timePickerDialog.updateTime(((GregorianCalendar) toChange.getCalendar()).get(Calendar.HOUR_OF_DAY), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MINUTE));
+                ((GregorianCalendar) toChange.getCalendar()).get(Calendar.HOUR_OF_DAY), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MINUTE), false);
+        //timePickerDialog.updateTime(((GregorianCalendar) toChange.getCalendar()).get(Calendar.HOUR_OF_DAY), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MINUTE));
         timePickerDialog.show();
     }
+
+
 
     public void showDatePickerDialog() {
         int year = c.get(Calendar.YEAR);
@@ -240,8 +242,8 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
             endYear = year1;
             endMonth = month1;
             endDay = dayOfMonth1;
-        }, year, month, dayOfMonth);
-        datePickerDialog.updateDate(((GregorianCalendar) toChange.getCalendar()).get(Calendar.YEAR), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MONTH), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.DAY_OF_MONTH));
+        }, ((GregorianCalendar) toChange.getCalendar()).get(Calendar.YEAR), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MONTH), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.DAY_OF_MONTH));
+        //datePickerDialog.updateDate(((GregorianCalendar) toChange.getCalendar()).get(Calendar.YEAR), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MONTH), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 

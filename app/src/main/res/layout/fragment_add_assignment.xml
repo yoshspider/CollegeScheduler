@@ -126,7 +126,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/datePickerButtonTask"
+        android:id="@+id/timesPickerButtonTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -135,7 +135,7 @@
         android:text="Pick Date" />
 
     <Button
-        android:id="@+id/timePickerButtonTask"
+        android:id="@+id/datesPickerButtonTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"

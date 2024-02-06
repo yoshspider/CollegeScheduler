@@ -138,22 +138,22 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/datePickerButtonTask"
+        android:id="@+id/timesPickerButtonTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="0dp"
         android:onClick="showDatePickerDialog"
-        android:text="Pick Date" />
+        android:text="Pick Time" />
 
     <Button
-        android:id="@+id/timePickerButtonTask"
+        android:id="@+id/datesPickerButtonTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="0dp"
         android:onClick="showTimePickerDialog"
-        android:text="Pick Time" />
+        android:text="Pick Date" />
 
     <Button
         android:id="@+id/save_button"

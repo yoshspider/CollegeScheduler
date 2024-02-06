@@ -100,8 +100,8 @@ public class AddTaskFragment extends Fragment {
         location_of_assignment = view.findViewById(R.id.location_of_task);
         binding.backButton.setOnClickListener(view1 -> NavHostFragment.findNavController(AddTaskFragment.this)
                 .navigate(R.id.action_addAssignmentFragment_to_FirstFragment));
-        binding.timePickerButtonTask.setOnClickListener(v -> showEndTimePickerDialog());
-        binding.datePickerButtonTask.setOnClickListener(v -> showDatePickerDialog());
+        binding.datesPickerButtonTask.setOnClickListener(v -> showEndTimePickerDialog());
+        binding.timesPickerButtonTask.setOnClickListener(v -> showDatePickerDialog());
     }
 
     /**
