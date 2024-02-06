@@ -8,7 +8,7 @@ import android.view.ViewGroup;
  * Authors: Yash Agrawal, Rishi Borra, Abby Martin
  * Version 1.09
  * Class defines the behaviors of a Class object
- * including all porameters that would normally be associated with a class
+ * including all parameters that would normally be associated with a class
  * all setters and getters, draw behavior for a listview to be able to
  * showcase all these details on a view
  */

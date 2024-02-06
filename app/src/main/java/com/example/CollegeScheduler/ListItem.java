@@ -232,7 +232,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
         bottomRightTextView.setText(values[3]);
         return view;
     }
-
     /**
      * Draws all the buttons and adds functionality
      * @param view view of item
@@ -246,10 +245,4 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
         deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
         return view;
     }
-
-
-
-
-
-
 }

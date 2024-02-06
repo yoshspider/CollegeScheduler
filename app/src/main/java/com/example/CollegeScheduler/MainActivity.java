@@ -17,17 +17,15 @@ import android.widget.ListView;
 /**
  * Authors: Yash Agrawal, Rishi Borra, Abby Martin
  * Version 1.12
- * 
+ * This defines the functionality  of navigation and all data handling
+ * This class be extended in the future to implement more databases
+ * and functionality for different items, sorts, lists, etc
  */
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-
     private ListView simpleList;
-
-    //make private with getters & setters?
     private final CollegeObjectList<ListItem> classList = new CollegeObjectList<>();
     private final CollegeObjectList<ListItem> tasksList = new CollegeObjectList<>();
     public static final CollegeObjectList<ListItem> transferList = new CollegeObjectList<>();
