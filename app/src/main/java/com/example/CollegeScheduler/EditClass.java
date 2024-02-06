@@ -185,7 +185,7 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                 hour,
                 minute,
                 false);
-        timePickerDialog.updateTime(getIntStartTime()/100,getIntStartTime() % 60 );
+        timePickerDialog.updateTime(getIntEndTime()/100,getIntEndTime() % 60 );
         timePickerDialog.show();
     }
 
