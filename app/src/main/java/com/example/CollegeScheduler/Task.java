@@ -5,7 +5,14 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import java.util.Calendar;
-
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.09
+ * Class defines the behaviors of a Task object
+ * including all parameters that would normally be associated with a task
+ * all setters and getters, draw behavior for a listview to be able to
+ * showcase all these details on a view
+ */
 public class Task extends ListItem{
     private String name;
     private Class classOfTask;
