@@ -243,6 +243,8 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
         ImageButton deleteButton = view.findViewById(R.id.delete);
         deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
+        ImageButton checkCompleteButton = view.findViewById(R.id.checkCompleteButton);
+        checkCompleteButton.setVisibility(View.GONE);
         return view;
     }
 }

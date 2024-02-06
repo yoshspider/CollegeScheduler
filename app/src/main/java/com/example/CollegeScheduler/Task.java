@@ -77,7 +77,10 @@ public class Task extends ListItem{
     public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter){
         view = super.drawButtons(view, inflater, i, adapter);
         ImageButton checkCompleteButton = view.findViewById(R.id.checkCompleteButton);
-        checkCompleteButton.setOnClickListener(buttonView -> adapter.transferItem(i));
+        checkCompleteButton.setVisibility(View.VISIBLE);
+        checkCompleteButton.setOnClickListener(
+                buttonView -> adapter.transferItem(i)
+        );
         return view;
     }
 

@@ -7,27 +7,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/toClassButton"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Go to Classes" />
 
         <Button
             android:id="@+id/toTaskButton"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Go to Tasks" />
 
         <Button
             android:id="@+id/toCompletedTaskButton"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Go to Completed Tasks" />
 
@@ -35,11 +35,40 @@
 
     <Button
         android:id="@+id/add_class"
-        android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
         android:ellipsize="none"
         android:text="Add Class"
-        app:cornerRadius="40dp"/>
+        app:cornerRadius="40dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/sort1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sort by Class Name" />
+
+        <Button
+            android:id="@+id/sort3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Sort by Priority"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/sort2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sort by Class Time" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/simpleListView"
@@ -51,49 +80,19 @@
 
     </ListView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/sort1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="70dp"
-            android:text="Sort by Class Name" />
-
-        <Button
-            android:id="@+id/sort3"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:text="Sort by Priority" />
-
-        <Button
-            android:id="@+id/sort2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="70dp"
-            android:text="Sort by Class Time" />
-
-    </LinearLayout>
-
     <Spinner
         android:id="@+id/filter_classes"
-        android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
         android:layout_weight="1"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/edit_content"
-        android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
         android:layout_weight="1"
         android:text="Edit Class"
         android:visibility="visible" />
