@@ -1,11 +1,8 @@
 package com.example.CollegeScheduler;
-
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,7 +16,7 @@ import java.util.Date;
  * Future classes can extend this in order to be able to be
  * used in our CollegeObjectList and ListView
  */
-public abstract class ListItem implements Comparable<ListItem>, Filtering {
+public abstract class ListItem implements Comparable<ListItem>, Filtering, ColorSetup, TimeConversion {
     private static int[] colors;
     private int color;
     private static int currentID  = 0;
@@ -35,18 +32,13 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
     public ListItem() {
         ID = currentID;
         if(currentID == 0) {
-            colors = new int[20];
-            for (int i = 0; i < 20; i++) {
-                colors[i] =  100*16777216 + 40 * i * 65536 + (255-i*40) * 256 + 150;
-            }
+            colors = setColors();
         }
         currentID++;
         color = colors[ID % colors.length];
         sortingMethod = 1;
         calendarDate = Calendar.getInstance();
-
     }
-
     /**
      * Sets up list item with correct time
      * @param time time as calendar object
@@ -55,7 +47,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
         this();
         this.calendarDate = time;
     }
-
     /**
      * Creates Calendar Object with given hour and minute
      * @param hour new hour
@@ -64,17 +55,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
     public void setClockTime(int hour, int minute) {
         calendarDate.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_MONTH, Calendar.DATE, hour, minute);
     }
-
-    /**
-     * shift the Calender Day by a number of days
-     * @param dayOfWeek shift days
-     */
-    public void shiftDate(int dayOfWeek) {
-        while (calendarDate.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
-            calendarDate.add(Calendar.DATE, 1);
-        }
-    }
-
     /**
      * Getter for Color
      * @return the color of the ListItem object
@@ -147,7 +127,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
         Date fullTime = calendarDate.getTime();
         DateFormat format = new SimpleDateFormat("M/d/yyyy h:mm a");
         return format.format(fullTime);
-
     }
 
     /**
@@ -165,7 +144,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
     public void setCalendar(Calendar d) {
         this.calendarDate = d;
     }
-
     /**
      * Setter for the sorting method currently used by all ListItem objects
      * @param sortingMethod the new sorting method we want to use
@@ -173,7 +151,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
     public static void setSortingMethod(int sortingMethod) {
         ListItem.sortingMethod = sortingMethod;
     }
-
     /**
      * draw screen method called to draw all components of this list item
      * @param view current view
@@ -187,32 +164,6 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
         View background = view.findViewById(R.id.backgroundView);
         background.setBackgroundColor(getColor());
         return view;
-    }
-
-    /**
-     * Convert time to correct format for display on screen
-     * @param time time in integer format
-     * @return time as formatted string
-     */
-    public String timeConverter(int time) {
-        return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
-    }
-
-
-    /**
-     * Compare method for sorting
-     * @param o the object to be compared.
-     * @return integer value to determine whether greater or lesser
-     */
-    @Override
-    public int compareTo(ListItem o) {
-        if (getSortingMethod() == 1) {
-            return nameSort.compareTo(o.getNameSort());
-        } else if(getSortingMethod() == 2) {
-            return calendarDate.compareTo(o.getCalendar());
-        } else {
-            return Integer.compare(priority, o.getPriority());
-        }
     }
     /**
      * Text information of ListItem
@@ -244,5 +195,20 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering {
         ImageButton deleteButton = view.findViewById(R.id.delete);
         deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
         return view;
+    }
+    /**
+     * Compare method for sorting
+     * @param o the object to be compared.
+     * @return integer value to determine whether greater or lesser
+     */
+    @Override
+    public int compareTo(ListItem o) {
+        if (getSortingMethod() == 1) {
+            return nameSort.compareTo(o.getNameSort());
+        } else if(getSortingMethod() == 2) {
+            return calendarDate.compareTo(o.getCalendar());
+        } else {
+            return Integer.compare(priority, o.getPriority());
+        }
     }
 }
