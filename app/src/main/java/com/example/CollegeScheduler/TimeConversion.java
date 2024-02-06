@@ -2,7 +2,7 @@ package com.example.CollegeScheduler;
 
 /**
  * Authors: Yash Agrawal, Rishi Borra, Abby Martin
- * Version 1.02
+ * Version 1.03
  * Time Conversion defines a converter for an int
  * time in military time and converts to a string
  * that includes AM, PM and a normalized time format
