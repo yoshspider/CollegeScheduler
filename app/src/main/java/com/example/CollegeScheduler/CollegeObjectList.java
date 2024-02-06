@@ -2,7 +2,18 @@ package com.example.CollegeScheduler;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.09
+ * CollegeObjectList is our own data structure that can
+ * in take any generic that implements a Comparable
+ * in order to be able to sort. This is implemented in
+ * the ClassAdapter to be able to display each item
+ * This datastructure is extendable to for any subclass
+ * that implements Comparable and so for future items
+ * such as labs, interviews, etc, this data structure
+ * can still be implemented
+ */
 public class CollegeObjectList<T extends Comparable<? super T>> {
     private ArrayList<T> itemList;
 

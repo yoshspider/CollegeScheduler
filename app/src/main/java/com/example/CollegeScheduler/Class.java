@@ -4,6 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.09
+ * Class defines the behaviors of a Class object
+ * including all porameters that would normally be associated with a class
+ * all setters and getters, draw behavior for a listview to be able to
+ * showcase all these details on a view
+ */
 public class Class extends ListItem  {
     private String className;
     private String professorName;

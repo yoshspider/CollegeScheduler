@@ -21,7 +21,13 @@ import java.util.GregorianCalendar;
 import com.example.CollegeScheduler.databinding.FragmentClassesBinding;
 
 /**
- * Home page for scheduler
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.15
+ * Classes Fragment defines the functionality for the main screen
+ * and navigation buttons to different screens and lists
+ * this is the home page and defines all the sorting,
+ * navigation, and filtering buttons.
+ *
  */
 public class ClassesFragment extends Fragment {
 

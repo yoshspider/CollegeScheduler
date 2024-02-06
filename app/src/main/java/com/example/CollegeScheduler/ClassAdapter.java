@@ -8,7 +8,16 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.12
+ * ClassAdapter defines the ListView behavior for tasks and classes
+ * but in theory this could take any type of object as long as it
+ * extends the ListItem class, making it extendable for different
+ * types of College items like labs, interviews, etc in the future
+ * This also makes use of a boolean array in order to determine
+ * which objects in the itemsList to show
+ */
 public class ClassAdapter extends BaseAdapter {
     private Context context;
     private CollegeObjectList<ListItem> itemsList;

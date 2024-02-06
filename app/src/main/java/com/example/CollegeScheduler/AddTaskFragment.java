@@ -19,6 +19,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.15
+ * AddTaskFragment defines the behavior of the Add Task Screen
+ * which intakes user input for all Task parameters
+ * in order to create a new Task Object that will be added
+ * to the ListView. One Parameter is type of task which
+ * can be defined as Assignment, Exam, or Task, but
+ * is modifiable through the Task Class to add other
+ * types of tasks
+ */
+
 public class AddTaskFragment extends Fragment {
 
     private FragmentAddAssignmentBinding binding;

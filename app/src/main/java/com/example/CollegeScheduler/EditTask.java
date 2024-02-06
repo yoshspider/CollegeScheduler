@@ -26,7 +26,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.05
+ * Edit Task defines the functionality for editing any
+ * specific task object to remove/change details
+ * as in the future, many times these details can change
+ * It will then change such features within the CollegeObjectList
+ * and update the ListView on the home page
+ */
 public class EditTask extends Fragment implements AdapterView.OnItemSelectedListener{
     private Context a;
     public void onAttach(Activity activity) {

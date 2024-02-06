@@ -16,6 +16,14 @@ import com.example.CollegeScheduler.databinding.FragmentModifyBinding;
 
 import java.util.Calendar;
 
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.21
+ * AddFragment defines the behavior of the Add Class Screen
+ * which intakes user input for all Class parameters
+ * in order to create a new Class Object that will be added
+ * to the ListView
+ */
 public class AddFragment extends Fragment {
 
     private FragmentModifyBinding binding;

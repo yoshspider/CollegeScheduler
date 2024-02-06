@@ -24,7 +24,15 @@ import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.03
+ * Edit Class defines the functionality for editing any
+ * specific class object to remove/change details
+ * as in the future, many times these details can change
+ * It will then change such features within the CollegeObjectList
+ * and update the ListView on the home page
+ */
 public class EditClass extends Fragment implements AdapterView.OnItemSelectedListener{
     private Context a;
     public void onAttach(Activity activity) {
@@ -70,35 +78,24 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         //get the spinner from the xml.
         Spinner dropdown = getView().findViewById(R.id.spinner1);
         //create a list of items for the spinner.
-
-
         //Create a list of Class objects. Based on this list, create a list of strings w/ names of classes
         // Use this list as input for the spinner. When selecting item, get index of item
-
-        //list_of_classes.add(new Class("Math", "Mcfadden", new boolean[]{true, false, true, false, true}, 700, 900, "CULC 250"));
-        //list_of_classes.add(new Class("Chemistry", "Allshouse", new boolean[]{false, true, false, true, false}, 800, 1000, "CULC 250"));
-        //list_of_classes.add(new Class("Objects and Design", "Pedro", new boolean[]{false, true, false, true, false}, 1230,1430, "HOWEY A419"));
-
         ArrayList<String> list_of_class_names = new ArrayList<>();
         for (int i = 0 ; i < list_of_classes.size() ; i++) {
             ListItem tmp = list_of_classes.getItem(i);
             System.out.println(list_of_classes.getItem(i).getClass());
             list_of_class_names.add(list_of_classes.getItem(i).toString());
         }
-
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list_of_class_names);
-        //set the spinners adapter to the previously created one.
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
-        dropdown.setOnItemSelectedListener(this);
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                @Override
                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                    itemIndex = position;
-
                    itemChanged = (Class) list_of_classes.getItem(position);
                    course_name = (EditText) getView().findViewById(R.id.course);
                    professor_name = (EditText) getView().findViewById(R.id.professor_entry);
@@ -108,11 +105,8 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                    wednesday_toggle = (ToggleButton) getView().findViewById(R.id.wednesday_toggle);
                    thursday_toggle = (ToggleButton) getView().findViewById(R.id.thursday_toggle);
                    friday_toggle = (ToggleButton) getView().findViewById(R.id.friday_toggle);
-
                    final Button startTime = (Button) getView().findViewById(R.id.startTime);
                    final Button endTime = (Button) getView().findViewById(R.id.endTime);
-
-
                    course_name.setText(itemChanged.getClassName());
                    professor_name.setText(itemChanged.getProfessorName());
                    location.setText(itemChanged.getLocation());
@@ -124,35 +118,19 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
 
                    setIntStartTime(itemChanged.getStartTime());
                    setIntEndTime(itemChanged.getEndTime());
-                   startTime.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           showStartTimePickerDialog();
-                       }
-                   });
-                   endTime.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           showEndTimePickerDialog();
-                       }
-                   });
+                   startTime.setOnClickListener(v -> showStartTimePickerDialog());
+                   endTime.setOnClickListener(v -> showEndTimePickerDialog());
 
 
                }
-
                @Override
                public void onNothingSelected(AdapterView<?> parent) {
 
                }
            });
 
-        binding.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(EditClass.this)
-                        .navigate(R.id.action_editClass_to_FirstFragment);
-            }
-        });
+        binding.backButton.setOnClickListener(view1 -> NavHostFragment.findNavController(EditClass.this)
+                .navigate(R.id.action_editClass_to_FirstFragment));
 
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,19 +142,6 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                         thursday_toggle.isChecked(),
                         friday_toggle.isChecked()
                 };
-
-//                //parse time
-//                DateFormat formatter = new SimpleDateFormat("hh:mm");
-//                String startFormatted;
-//                String endFormatted;
-//                try {
-//                    startFormatted = formatter.format(formatter.parse(startTime.getText().toString()));
-//                    endFormatted = formatter.format(formatter.parse(endTime.getText().toString()));
-//                } catch (ParseException e) {
-//                    throw new RuntimeException(e);
-//                }
-
-
                 ((Class) classActivity.getClassList().getItem(itemIndex)).setClassName(course_name.getText().toString());
                 ((Class) classActivity.getClassList().getItem(itemIndex)).setProfessorName(professor_name.getText().toString());
                 ((Class) classActivity.getClassList().getItem(itemIndex)).setMeetingDates(daysOn);

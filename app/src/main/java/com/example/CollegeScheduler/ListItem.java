@@ -10,8 +10,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-public abstract class ListItem implements Comparable<ListItem> {
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.12
+ * ListItem is an abstract class that defines the methods
+ * that subclasses should utilize in order to be drawn and
+ * to store all object details for sorting and filtering.
+ * Future classes can extend this in order to be able to be
+ * used in our CollegeObjectList and ListView
+ */
+public abstract class ListItem implements Comparable<ListItem>, Filtering {
     private static int[] colors;
     private int color;
     private static int currentID  = 0;
@@ -20,8 +28,6 @@ public abstract class ListItem implements Comparable<ListItem> {
     private String nameSort;
     private int priority;
     private Calendar calendarDate;
-
-
 
     /**
      * Default Constructor Assuming CalendarDate is Today
@@ -192,20 +198,6 @@ public abstract class ListItem implements Comparable<ListItem> {
         return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
     }
 
-    /**
-     * Draws all the buttons and adds functionality
-     * @param view view of item
-     * @param inflater inflater to reset item
-     * @param i index of item in adaptter
-     * @param adapter adapter of list
-     * @return corrected view with buttons
-     */
-    public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
-        ImageButton deleteButton = view.findViewById(R.id.delete);
-        deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
-
-        return view;
-    }
 
     /**
      * Compare method for sorting
@@ -222,7 +214,6 @@ public abstract class ListItem implements Comparable<ListItem> {
             return Integer.compare(priority, o.getPriority());
         }
     }
-
     /**
      * Text information of ListItem
      * @param view view to draw on
@@ -243,12 +234,22 @@ public abstract class ListItem implements Comparable<ListItem> {
     }
 
     /**
-     * filters out data for any adapter
-     * @param filter the tool to decide whether item shouldnt be filtered
-     * @return whether the item shouldnt be filtered
+     * Draws all the buttons and adds functionality
+     * @param view view of item
+     * @param inflater inflater to reset item
+     * @param i index of item in adaptter
+     * @param adapter adapter of list
+     * @return corrected view with buttons
      */
-    public boolean filterValue(int filter) {
-        return true;
+    public View drawButtons(View view, LayoutInflater inflater, int i, ClassAdapter adapter) {
+        ImageButton deleteButton = view.findViewById(R.id.delete);
+        deleteButton.setOnClickListener(buttonView -> adapter.remove(i));
+        return view;
     }
+
+
+
+
+
 
 }

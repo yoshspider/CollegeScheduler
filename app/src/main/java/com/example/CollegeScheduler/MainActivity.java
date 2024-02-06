@@ -14,7 +14,11 @@ import com.example.CollegeScheduler.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-
+/**
+ * Authors: Yash Agrawal, Rishi Borra, Abby Martin
+ * Version 1.12
+ * 
+ */
 
 public class MainActivity extends AppCompatActivity {
 
