@@ -5,7 +5,7 @@ package com.example.CollegeScheduler;
  * Version 1.02
  * ColorSetup is an interface that defines the list
  * of colors to choose from for items. This can be
- * overrided and implemented in different ways
+ * overriden and implemented in different ways
  */
 public interface ColorSetup {
     /**

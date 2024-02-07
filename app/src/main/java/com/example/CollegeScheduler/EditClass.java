@@ -33,13 +33,7 @@ import java.util.Calendar;
  * It will then change such features within the CollegeObjectList
  * and update the ListView on the home page
  */
-public class EditClass extends Fragment implements AdapterView.OnItemSelectedListener{
-    private Context a;
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        a = getActivity().getApplicationContext();
-    }
-
+public class EditClass extends Fragment {
     private FragmentEditClassBinding binding;
     private MainActivity classActivity;
     Context thiscontext;
@@ -60,6 +54,18 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
     private boolean[] daysOn;
     CollegeObjectList<ListItem> list_of_classes;
 
+    /**
+     * Identify activity/context and inflate view
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the view created
+     */
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -73,61 +79,16 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         return binding.getRoot();
     }
 
+    /**
+     * Set up UI and button actions
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //get the spinner from the xml.
-        Spinner dropdown = getView().findViewById(R.id.spinner1);
-        //create a list of items for the spinner.
-        //Create a list of Class objects. Based on this list, create a list of strings w/ names of classes
-        // Use this list as input for the spinner. When selecting item, get index of item
-        ArrayList<String> list_of_class_names = new ArrayList<>();
-        for (int i = 0 ; i < list_of_classes.size() ; i++) {
-            ListItem tmp = list_of_classes.getItem(i);
-            System.out.println(list_of_classes.getItem(i).getClass());
-            list_of_class_names.add(list_of_classes.getItem(i).toString());
-        }
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list_of_class_names);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdown.setAdapter(adapter);
 
-        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-               @Override
-               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                   itemIndex = position;
-                   itemChanged = (Class) list_of_classes.getItem(position);
-                   course_name = (EditText) getView().findViewById(R.id.course);
-                   professor_name = (EditText) getView().findViewById(R.id.professor_entry);
-                   location = (EditText) getView().findViewById(R.id.location_entry);
-                   monday_toggle = (ToggleButton) getView().findViewById(R.id.monday_toggle);
-                   tuesday_toggle = (ToggleButton) getView().findViewById(R.id.tuesday_toggle);
-                   wednesday_toggle = (ToggleButton) getView().findViewById(R.id.wednesday_toggle);
-                   thursday_toggle = (ToggleButton) getView().findViewById(R.id.thursday_toggle);
-                   friday_toggle = (ToggleButton) getView().findViewById(R.id.friday_toggle);
-                   final Button startTime = (Button) getView().findViewById(R.id.startTime);
-                   final Button endTime = (Button) getView().findViewById(R.id.endTime);
-                   course_name.setText(itemChanged.getClassName());
-                   professor_name.setText(itemChanged.getProfessorName());
-                   location.setText(itemChanged.getLocation());
-                   monday_toggle.setChecked(itemChanged.getMeetingDates()[0]);
-                   tuesday_toggle.setChecked(itemChanged.getMeetingDates()[1]);
-                   wednesday_toggle.setChecked(itemChanged.getMeetingDates()[2]);
-                   thursday_toggle.setChecked(itemChanged.getMeetingDates()[3]);
-                   friday_toggle.setChecked(itemChanged.getMeetingDates()[4]);
-
-                   setIntStartTime(itemChanged.getStartTime());
-                   setIntEndTime(itemChanged.getEndTime());
-                   startTime.setOnClickListener(v -> showStartTimePickerDialog());
-                   endTime.setOnClickListener(v -> showEndTimePickerDialog());
-
-
-               }
-               @Override
-               public void onNothingSelected(AdapterView<?> parent) {
-
-               }
-           });
+        setUpDropdown(getView().findViewById(R.id.spinner1));
 
         binding.backButton.setOnClickListener(view1 -> NavHostFragment.findNavController(EditClass.this)
                 .navigate(R.id.action_editClass_to_FirstFragment));
@@ -142,12 +103,12 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
                         thursday_toggle.isChecked(),
                         friday_toggle.isChecked()
                 };
-                ((Class) classActivity.getClassList().getItem(itemIndex)).setClassName(course_name.getText().toString());
-                ((Class) classActivity.getClassList().getItem(itemIndex)).setProfessorName(professor_name.getText().toString());
-                ((Class) classActivity.getClassList().getItem(itemIndex)).setMeetingDates(daysOn);
-                ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intStartTime);
-                ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intEndTime);
-                ((Class) classActivity.getClassList().getItem(itemIndex)).setLocation(location.getText().toString());
+
+                saveChanges(
+                        course_name.getText().toString(),
+                        professor_name.getText().toString(),
+                        location.getText().toString()
+                );
 
                 classActivity.getClassAdapter().updateValues();
                 NavHostFragment.findNavController(EditClass.this)
@@ -157,6 +118,45 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
 
     }
 
+    /**
+     * Assign list of classes to edit as spinner options
+     * @param spinner spinner view to set up
+     */
+    private void setUpDropdown(Spinner spinner) {
+        Spinner dropdown = spinner;
+        //create a list of items for the spinner.
+        ArrayList<String> list_of_class_names = new ArrayList<>();
+        for (int i = 0 ; i < list_of_classes.size() ; i++) {
+            ListItem tmp = list_of_classes.getItem(i);
+            System.out.println(list_of_classes.getItem(i).getClass());
+            list_of_class_names.add(list_of_classes.getItem(i).toString());
+        }
+        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list_of_class_names);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdown.setAdapter(adapter);
+
+        dropdown.setOnItemSelectedListener(new AdapterClassSelect());
+    }
+
+    /**
+     * Save edits to list of classes
+     * @param className new class name
+     * @param profName new professor name
+     * @param loc new location
+     */
+    private void saveChanges(String className, String profName, String loc) {
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setClassName(className);
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setProfessorName(profName);
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setMeetingDates(daysOn);
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intStartTime);
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intEndTime);
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setLocation(loc);
+    }
+
+    /**
+     * Open time picker for start time input
+     */
     public void showStartTimePickerDialog() {
         // Get the current time
         final Calendar c = Calendar.getInstance();
@@ -175,6 +175,9 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         timePickerDialog.show();
     }
 
+    /**
+     * Open time picker for end time input
+     */
     public void showEndTimePickerDialog() {
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -189,47 +192,108 @@ public class EditClass extends Fragment implements AdapterView.OnItemSelectedLis
         timePickerDialog.show();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
-        switch (position) {
-            case 0:
-                // Whatever you want to happen when the first item gets selected
-                break;
-            case 1:
-                // Whatever you want to happen when the second item gets selected
-                break;
-            case 2:
-                // Whatever you want to happen when the third item gets selected
-                break;
-
-        }
+    /**
+     * Getter for start time
+     * @return start time as an integer
+     */
+    public int getIntStartTime() {
+        return intStartTime;
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+    /**
+     * Setter for start time
+     * @param intStartTime the new start time
+     */
+    public void setIntStartTime(int intStartTime) {
+        this.intStartTime = intStartTime;
     }
 
+    /**
+     * Getter for end time
+     * @return end time as an integer
+     */
+    public int getIntEndTime() {
+        return intEndTime;
+    }
+
+    /**
+     * Setter for end time
+     * @param intEndTime the new end time
+     */
+    public void setIntEndTime(int intEndTime) {
+        this.intEndTime = intEndTime;
+    }
+
+    /**
+     * Assign button variables from UI elements
+     */
+    private void initializeButtons() {
+        course_name = (EditText) getView().findViewById(R.id.course);
+        professor_name = (EditText) getView().findViewById(R.id.professor_entry);
+        location = (EditText) getView().findViewById(R.id.location_entry);
+        monday_toggle = (ToggleButton) getView().findViewById(R.id.monday_toggle);
+        tuesday_toggle = (ToggleButton) getView().findViewById(R.id.tuesday_toggle);
+        wednesday_toggle = (ToggleButton) getView().findViewById(R.id.wednesday_toggle);
+        thursday_toggle = (ToggleButton) getView().findViewById(R.id.thursday_toggle);
+        friday_toggle = (ToggleButton) getView().findViewById(R.id.friday_toggle);
+    }
+
+    /**
+     * Fill existing names and settings on edit screen
+     */
+    private void populateFields() {
+        course_name.setText(itemChanged.getClassName());
+        professor_name.setText(itemChanged.getProfessorName());
+        location.setText(itemChanged.getLocation());
+        monday_toggle.setChecked(itemChanged.getMeetingDates()[0]);
+        tuesday_toggle.setChecked(itemChanged.getMeetingDates()[1]);
+        wednesday_toggle.setChecked(itemChanged.getMeetingDates()[2]);
+        thursday_toggle.setChecked(itemChanged.getMeetingDates()[3]);
+        friday_toggle.setChecked(itemChanged.getMeetingDates()[4]);
+
+        setIntStartTime(itemChanged.getStartTime());
+        setIntEndTime(itemChanged.getEndTime());
+    }
+
+    /**
+     * Removes unneeded binding reference when view destroyed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    public int getIntStartTime() {
-        return intStartTime;
+    private class AdapterClassSelect implements AdapterView.OnItemSelectedListener {
+        /**
+         * Handle class selected to edit
+         * @param parent The AdapterView where the selection happened
+         * @param view The view within the AdapterView that was clicked
+         * @param position The position of the view in the adapter
+         * @param id The row id of the item that is selected
+         */
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            itemIndex = position;
+            itemChanged = (Class) list_of_classes.getItem(position);
+            final Button startTime = (Button) getView().findViewById(R.id.startTime);
+            final Button endTime = (Button) getView().findViewById(R.id.endTime);
+
+            initializeButtons();
+            populateFields();
+
+            startTime.setOnClickListener(v -> showStartTimePickerDialog());
+            endTime.setOnClickListener(v -> showEndTimePickerDialog());
+        }
+
+        /**
+         * Required method for no item selected
+         * @param parent The AdapterView that now contains no selected item.
+         */
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
 
-    public void setIntStartTime(int intStartTime) {
-        this.intStartTime = intStartTime;
-    }
-
-    public int getIntEndTime() {
-        return intEndTime;
-    }
-
-    public void setIntEndTime(int intEndTime) {
-        this.intEndTime = intEndTime;
-    }
 }

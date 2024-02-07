@@ -1,6 +1,5 @@
 package com.example.CollegeScheduler;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -22,6 +21,7 @@ import android.widget.Spinner;
 import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
 import com.example.CollegeScheduler.databinding.FragmentEditTaskBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,14 +33,9 @@ import java.util.GregorianCalendar;
  * specific task object to remove/change details
  * as in the future, many times these details can change
  * It will then change such features within the CollegeObjectList
- * and update the ListView on the home page
+ * and update the ListView osn the home page
  */
-public class EditTask extends Fragment implements AdapterView.OnItemSelectedListener{
-    private Context a;
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        a = getActivity().getApplicationContext();
-    }
+public class EditTask extends Fragment {
 
     private FragmentEditTaskBinding binding;
     private MainActivity classActivity;
@@ -53,7 +48,6 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
     private EditText location;
     private int type;
 
-
     private int endHour;
     private int endMinute;
     private int endYear;
@@ -65,121 +59,60 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
     private int itemIndex;
     private final Calendar c = Calendar.getInstance();
 
-    CollegeObjectList<ListItem> list_of_tasks;
-    CollegeObjectList<ListItem> list_of_classes;
+    private Spinner className;
+    private Spinner taskType;
+    private Spinner taskPriority;
+    private ArrayAdapter<String> nameAdapter;
 
+    CollegeObjectList<ListItem> taskList;
+    CollegeObjectList<ListItem> classList;
+
+    /**
+     * Inflate view and assign activity variable
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the view created
+     */
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
         classActivity = (MainActivity)getActivity();
-        list_of_tasks = classActivity.getTasksList();
-        list_of_classes = classActivity.getClassList();
+        taskList = classActivity.getTasksList();
+        classList = classActivity.getClassList();
 
         thiscontext = container.getContext();
         binding = FragmentEditTaskBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
+    /**
+     * Set up UI elements and interactivity with buttons and spinners
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ArrayList<String> taskNamesList = new ArrayList<>();
+        ArrayList<String> namesFromClassList = new ArrayList<>();
+        listNames(taskNamesList, namesFromClassList);
 
-        ArrayList<String> list_of_names_tasks = new ArrayList<>();
-        ArrayList<String> list_of_names_classes = new ArrayList<>();
-        for (int i = 0 ; i < list_of_tasks.size() ; i++) {
-            list_of_names_tasks.add(((Task) list_of_tasks.getItem(i)).getOnlyName());
-            list_of_names_classes.add(((Task) list_of_tasks.getItem(i)).getTheClass().getClassName());
-        }
-        ArrayList<String> list_of_class_names_from_list_of_classes = new ArrayList<>();
-        for (int i = 0 ; i < list_of_classes.size() ; i++) {
-            list_of_class_names_from_list_of_classes.add( ((Class)list_of_classes.getItem(i)).getClassName() );
-        }
-        list_of_class_names_from_list_of_classes.add(0, "");
-        //System.out.println(list_of_names_tasks);
-        //System.out.println(list_of_names_classes);
-
-        Spinner type_of_task = getView().findViewById(R.id.taskTypeSpinner);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Task.types);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        type_of_task.setAdapter(adapter2);
-        type_of_task.setOnItemSelectedListener(this);
-
-        type_of_task.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = position;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        Spinner name_of_class = getView().findViewById(R.id.classSpinnerTask);
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list_of_class_names_from_list_of_classes);
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        name_of_class.setAdapter(adapter3);
-        name_of_class.setOnItemSelectedListener(this);
-
-        name_of_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    associatedClass = new Class();
-                } else {
-                    associatedClass = (Class) classActivity.getClassList().getItem(position-1);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        Spinner priority_of_task = getView().findViewById(R.id.prioritySpinnerTask);
-        ArrayAdapter<String> adapter4 = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Task.priorities);
-        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        priority_of_task.setAdapter(adapter4);
-        priority_of_task.setOnItemSelectedListener(this);
-
-        priority_of_task.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                priority = position;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-
-
-        Spinner specificTask = getView().findViewById(R.id.choose_task);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list_of_names_tasks);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        specificTask.setAdapter(adapter);
-        specificTask.setOnItemSelectedListener(this);
-        specificTask.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                itemIndex = position;
-
-                toChange = (Task) list_of_tasks.getItem(itemIndex);
-                name = (EditText) getView().findViewById(R.id.name_of_task);
-                location = (EditText) getView().findViewById(R.id.location_of_task);
-                name.setText(toChange.getOnlyName());
-                if (toChange.getLocation() != null) {
-                    location.setText(toChange.getLocation());
-                }
-                name_of_class.setSelection(adapter3.getPosition(toChange.getTheClass().getClassName()));
-                type_of_task.setSelection(toChange.getType());
-                priority_of_task.setSelection(toChange.getPriority());
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-
-
+        initSpinners(namesFromClassList, taskNamesList);
 
         binding.backButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Navigate back to previous screen
+             * @param view The view that was clicked.
+             */
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(EditTask.this)
@@ -188,23 +121,23 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
         });
 
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Updates task list with new data
+             * @param view The view that was clicked.
+             */
             @Override
             public void onClick(View view) {
-
-                ((Task)list_of_tasks.getItem(itemIndex)).setName(name.getText().toString());
-                ((Task)list_of_tasks.getItem(itemIndex)).setLocation(location.getText().toString());
-                ((Task)list_of_tasks.getItem(itemIndex)).setTheClass(associatedClass);
-                ((Task)list_of_tasks.getItem(itemIndex)).setPriority(priority);
-                ((Task)list_of_tasks.getItem(itemIndex)).setType(type);
-                Calendar calendar = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
-                ((Task)list_of_tasks.getItem(itemIndex)).setCalendar(calendar);
-                classActivity.getClassAdapter().updateValues();
+                saveNewData();
                 NavHostFragment.findNavController(EditTask.this)
                         .navigate(R.id.action_editTask_to_FirstFragment);
             }
         });
 
         binding.timesPickerButtonTask.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows editing task time
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 showEndTimePickerDialog();
@@ -212,27 +145,96 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
         });
 
         binding.datesPickerButtonTask.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows editing task date
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
-
-
     }
 
+    /**
+     * Gets names of tasks and classes for dropdown menus
+     * @param taskNames task ArrayList to populate
+     * @param classNames class ArrayList to populate
+     */
+    private void listNames(ArrayList<String> taskNames, ArrayList<String> classNames) {
+        for (int i = 0; i < taskList.size() ; i++) {
+            taskNames.add(((Task) taskList.getItem(i)).getOnlyName());
+        }
+        for (int i = 0; i < classList.size() ; i++) {
+            classNames.add( ((Class) classList.getItem(i)).getClassName() );
+        }
+        classNames.add(0, "");
+    }
+
+    /**
+     * Initialize spinners and assign adapters
+     * @param namesFromClassList list for class spinner options
+     * @param taskNamesList list for task spinner options
+     */
+    private void initSpinners(ArrayList<String> namesFromClassList, ArrayList<String> taskNamesList) {
+        taskType = getView().findViewById(R.id.taskTypeSpinner);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Task.types);
+        setUpSpinner(taskType, typeAdapter, new AdapterTypeSelector());
+
+        className = getView().findViewById(R.id.classSpinnerTask);
+        nameAdapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, namesFromClassList);
+        setUpSpinner(className, nameAdapter, new AdapterClassNameSelector());
+
+        taskPriority = getView().findViewById(R.id.prioritySpinnerTask);
+        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Task.priorities);
+        setUpSpinner(taskPriority, priorityAdapter, new AdapterPrioritySelector());
+
+        Spinner specificTask = getView().findViewById(R.id.choose_task);
+        ArrayAdapter<String> specificAdapter = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, taskNamesList);
+        setUpSpinner(specificTask, specificAdapter, new AdapterSpecificType());
+    }
+
+    /**
+     * Assigns adapater and listener to spinner
+     * @param spinner spinner to set up
+     * @param adapter adapter to set to spinner
+     * @param listener listener for interactivity with spinner
+     */
+    private void setUpSpinner(Spinner spinner, ArrayAdapter<String> adapter, AdapterView.OnItemSelectedListener listener) {
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(listener);
+    }
+
+    /**
+     * Update task list with data from edit screen
+     */
+    private void saveNewData() {
+        ((Task) taskList.getItem(itemIndex)).setName(name.getText().toString());
+        ((Task) taskList.getItem(itemIndex)).setLocation(location.getText().toString());
+        ((Task) taskList.getItem(itemIndex)).setTheClass(associatedClass);
+        ((Task) taskList.getItem(itemIndex)).setPriority(priority);
+        ((Task) taskList.getItem(itemIndex)).setType(type);
+        Calendar calendar = new GregorianCalendar(endYear, endMonth, endDay, endHour, endMinute);
+        ((Task) taskList.getItem(itemIndex)).setCalendar(calendar);
+        classActivity.getClassAdapter().updateValues();
+    }
+
+    /**
+     * Open time picker for task time input
+     */
     public void showEndTimePickerDialog() {
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
                 (view, hourOfDay, minuteOfDay) -> {endHour = hourOfDay; endMinute = minuteOfDay;},
                 ((GregorianCalendar) toChange.getCalendar()).get(Calendar.HOUR_OF_DAY), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MINUTE), false);
-        //timePickerDialog.updateTime(((GregorianCalendar) toChange.getCalendar()).get(Calendar.HOUR_OF_DAY), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MINUTE));
         timePickerDialog.show();
     }
 
-
-
+    /**
+     * Open time picker for task date input
+     */
     public void showDatePickerDialog() {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -243,61 +245,46 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
             endMonth = month1;
             endDay = dayOfMonth1;
         }, ((GregorianCalendar) toChange.getCalendar()).get(Calendar.YEAR), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MONTH), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.DAY_OF_MONTH));
-        //datePickerDialog.updateDate(((GregorianCalendar) toChange.getCalendar()).get(Calendar.YEAR), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.MONTH), ((GregorianCalendar) toChange.getCalendar()).get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
-        switch (position) {
-            case 0:
-                // Whatever you want to happen when the first item gets selected
-                break;
-            case 1:
-                // Whatever you want to happen when the second item gets selected
-                break;
-            case 2:
-                // Whatever you want to happen when the thrid item gets selected
-                break;
-
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
+    /**
+     * Removes unneeded binding reference when view destroyed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    //TODO: give this a better name?
-    /**
-     *
-     * @param spinner
-     * @param items
-     */
-    private void adapterParts(Spinner spinner, String[] items) {
-        ArrayAdapter<String> adapterPriority = new ArrayAdapter<>(classActivity.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
-        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapterPriority);
-    }
-
     private class AdapterTypeSelector implements AdapterView.OnItemSelectedListener {
+        /**
+         * Assigns new type to task
+         * @param parent The AdapterView where the selection happened
+         * @param view The view within the AdapterView that was clicked
+         * @param position The position of the view in the adapter
+         * @param id The row id of the item that is selected
+         */
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             type = position;
         }
+        /**
+         * Required method for no item selected
+         * @param parent The AdapterView that now contains no selected item.
+         */
         @Override
         public void onNothingSelected(AdapterView<?> parent) {}
     }
 
     private class AdapterClassNameSelector implements AdapterView.OnItemSelectedListener {
+        /**
+         * Assigns new associated class to task
+         * @param parent The AdapterView where the selection happened
+         * @param view The view within the AdapterView that was clicked
+         * @param position The position of the view in the adapter
+         * @param id The row id of the item that is selected
+         */
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             if (position == 0) {
@@ -306,19 +293,62 @@ public class EditTask extends Fragment implements AdapterView.OnItemSelectedList
                 associatedClass = (Class) classActivity.getClassList().getItem(position-1);
             }
         }
+        /**
+         * Required method for no item selected
+         * @param parent The AdapterView that now contains no selected item.
+         */
         @Override
         public void onNothingSelected(AdapterView<?> parent) {}
     }
 
     private class AdapterPrioritySelector implements AdapterView.OnItemSelectedListener {
+        /**
+         * Assigns new priority to task
+         * @param parent The AdapterView where the selection happened
+         * @param view The view within the AdapterView that was clicked
+         * @param position The position of the view in the adapter
+         * @param id The row id of the item that is selected
+         */
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             priority = position;
         }
+        /**
+         * Required method for no item selected
+         * @param parent The AdapterView that now contains no selected item.
+         */
         @Override
         public void onNothingSelected(AdapterView<?> parent) {}
     }
 
+    private class AdapterSpecificType implements AdapterView.OnItemSelectedListener {
+        /**
+         * Updates edit screen for new task selected to edit
+         * @param parent The AdapterView where the selection happened
+         * @param view The view within the AdapterView that was clicked
+         * @param position The position of the view in the adapter
+         * @param id The row id of the item that is selected
+         */
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            itemIndex = position;
 
-
+            toChange = (Task) taskList.getItem(itemIndex);
+            name = (EditText) getView().findViewById(R.id.name_of_task);
+            location = (EditText) getView().findViewById(R.id.location_of_task);
+            name.setText(toChange.getOnlyName());
+            if (toChange.getLocation() != null) {
+                location.setText(toChange.getLocation());
+            }
+            className.setSelection(nameAdapter.getPosition(toChange.getTheClass().getClassName()));
+            taskType.setSelection(toChange.getType());
+            taskPriority.setSelection(toChange.getPriority());
+        }
+        /**
+         * Required method for no item selected
+         * @param parent The AdapterView that now contains no selected item.
+         */
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {}
+    }
 }
