@@ -175,6 +175,7 @@ public class Task extends ListItem{
      */
     public void setPriority(int priority){
         this.priority = priority;
+        super.setPriority(priority);
     }
 
     /**
