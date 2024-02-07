@@ -15,7 +15,7 @@ public interface TimeConversion {
      * @return time as formatted string
      */
     default String timeConverter(int time) {
-        return String.format("%01d:%02d", (time > 1200 ? time/100 - 11 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
+        return String.format("%01d:%02d", (time >= 1300 ? time/100 - 12 : time/100), time%100)  + (time > 1200 ? " PM" : " AM");
     }
 
 }
