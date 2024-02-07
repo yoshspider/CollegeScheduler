@@ -191,7 +191,7 @@ public class AddFragment extends Fragment {
         // Create a new instance of TimePickerDialog and show it
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 getContext(),
-                (view, hourOfDay, minuteOfDay) -> intEndTime = 100 * hourOfDay + minuteOfDay,
+                (view, hourOfDay, minuteOfDay) -> intEndTime = 100 * (hourOfDay) + minuteOfDay,
                 hour,
                 minute,
                 false);

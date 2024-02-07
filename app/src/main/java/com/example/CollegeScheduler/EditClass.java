@@ -19,10 +19,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
+import com.example.CollegeScheduler.MainActivity;
 import com.example.CollegeScheduler.databinding.FragmentEditClassBinding;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Authors: Yash Agrawal, Rishi Borra, Abby Martin
@@ -53,6 +55,12 @@ public class EditClass extends Fragment {
 
     private boolean[] daysOn;
     CollegeObjectList<ListItem> list_of_classes;
+
+    private int endHour;
+    private int endMinute;
+
+    private int startHour;
+    private int startMinute;
 
     /**
      * Identify activity/context and inflate view
@@ -116,6 +124,28 @@ public class EditClass extends Fragment {
             }
         });
 
+        binding.startTime.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows editing task time
+             * @param v The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                showStartTimePickerDialog();
+            }
+        });
+
+        binding.endTime.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows editing task date
+             * @param v The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                showEndTimePickerDialog();
+            }
+        });
+
     }
 
     /**
@@ -150,7 +180,7 @@ public class EditClass extends Fragment {
         ((Class) classActivity.getClassList().getItem(itemIndex)).setProfessorName(profName);
         ((Class) classActivity.getClassList().getItem(itemIndex)).setMeetingDates(daysOn);
         ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intStartTime);
-        ((Class) classActivity.getClassList().getItem(itemIndex)).setStartTime(intEndTime);
+        ((Class) classActivity.getClassList().getItem(itemIndex)).setEndTime(intEndTime);
         ((Class) classActivity.getClassList().getItem(itemIndex)).setLocation(loc);
     }
 
@@ -170,7 +200,7 @@ public class EditClass extends Fragment {
                 hour,
                 minute,
                 false);
-        timePickerDialog.updateTime(getIntStartTime()/100,getIntStartTime() % 60 );
+        timePickerDialog.updateTime(getIntStartTime()/100,getIntStartTime() % 100 );
 
         timePickerDialog.show();
     }
@@ -188,7 +218,7 @@ public class EditClass extends Fragment {
                 hour,
                 minute,
                 false);
-        timePickerDialog.updateTime(getIntEndTime()/100,getIntEndTime() % 60 );
+        timePickerDialog.updateTime(getIntEndTime()/100,getIntEndTime() % 100 );
         timePickerDialog.show();
     }
 
@@ -282,8 +312,8 @@ public class EditClass extends Fragment {
             initializeButtons();
             populateFields();
 
-            startTime.setOnClickListener(v -> showStartTimePickerDialog());
-            endTime.setOnClickListener(v -> showEndTimePickerDialog());
+            //startTime.setOnClickListener(v -> showStartTimePickerDialog());
+            //endTime.setOnClickListener(v -> showEndTimePickerDialog());
         }
 
         /**
