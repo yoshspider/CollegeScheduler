@@ -160,14 +160,7 @@ public class Task extends ListItem{
     public void setType(int type) {
         this.type = type;
     }
-
-    /**
-     * getter for the priority of task
-     * @return task priority
-     */
-    public int getPriority() {
-        return priority;
-    }
+    
 
     /**
      * setter for the priority
