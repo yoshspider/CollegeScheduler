@@ -16,7 +16,7 @@ public interface ColorSetup {
     default int[] setColors() {
         int[] colors = new int[20];
         for (int i = 0; i < 20; i++) {
-            colors[i] =  100*16^4 + 40 * i * 16^3 + (255-i*40) * 16^2 + 150;
+            colors[i] =  100*16777216 + 40 * i * 65536 + (255-i*40) * 256 + 150;
         }
         return colors;
     }

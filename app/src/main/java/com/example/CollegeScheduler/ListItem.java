@@ -32,7 +32,7 @@ public abstract class ListItem implements Comparable<ListItem>, Filtering, Color
     public ListItem() {
         ID = currentID;
         if(currentID == 0) {
-            colors = setColors();
+           colors = setColors();
         }
         currentID++;
         color = colors[ID % colors.length];
